@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>登录 - 数据可视化系统</title>
+    <style>
+         /* 强化错误提示样式 */
+    .error-msg {
+        color: #ff4757;
+        background: rgba(255, 71, 87, 0.1);
+        padding: 12px;
+        border-radius: 4px;
+        border: 1px solid #ff4757;
+        margin: 1.5rem 0;
+        display: none;
+        position: relative;
+    }
+
+    /* 新增错误提示动画 */
+    .error-animation {
+        animation: errorShake 0.4s ease-in-out;
+    }
+
+    @keyframes errorShake {
+        0%, 100% { transform: translateX(0); }
+        25% { transform: translateX(-10px); }
+        50% { transform: translateX(10px); }
+        75% { transform: translateX(-5px); }
+    }
+
+    /* 验证码错误高亮 */
+    #captcha:invalid {
+        border-color: #ff4757 !important;
+        box-shadow: 0 0 8px rgba(255, 71, 87, 0.3);
+    }
+         /* 新增低空经济主题背景样式 */
+         .sky-container {
+            position: fixed;
+            width: 100vw;
+            height: 100vh;
+            background: linear-gradient(to bottom, #00111e 0%, #003d5e 100%);
+            overflow: hidden;
+            z-index: 0;
+        }
+
+        .cloud {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50px;
+            animation: drift linear infinite;
+        }
+
+        @keyframes drift {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100vw); }
+        }
+
+        .drone {
+            position: absolute;
+            width: 30px;
+            height: 15px;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="%2309c2ca" d="M12 2L1 21h22L12 2zm0 4l5.2 9H6.8L12 6z"/></svg>');
+            animation: fly 15s linear infinite;
+        }
+
+        @keyframes fly {
+            0% { transform: translateX(-10%) rotate(10deg); }
+            100% { transform: translateX(110%) rotate(-5deg); }
+        }
+
+        /* 战队名称样式 */
+        .team-name {
+            position: fixed;
+            bottom: 30px;
+            width: 100%;
+            text-align: center;
+            font-family: var(--tech-font);
+            color: #09c2ca;
+            font-size: 1.5rem;
+            text-shadow: 0 0 15px rgba(9, 194, 202, 0.7);
+            animation: glow 2s ease-in-out infinite;
+        }
+
+        @keyframes glow {
+            50% { 
+                text-shadow: 0 0 25px rgba(9, 194, 202, 0.9);
+                transform: scale(1.05);
+            }
+        }
+         :root {
+            --tech-font: 'Orbitron', sans-serif;
+            --main-font: 'Poppins', sans-serif;
+        }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+    background: url('images/53bg.png') no-repeat center center fixed;
+    background-size: cover;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    /* 新增滤镜增强效果 */
+    filter: saturate(1.1);
+    backdrop-filter: blur(2px);
+}
+          /* 添加半透明遮罩层 */
+          .login-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.6);
+            z-index: -1;
+            border-radius: 10px;
+        }
+ /* 动态星空背景 */
+ #stars {
+            position: fixed;
+            width: 100vw;
+            height: 100vh;
+            z-index: 0;
+        }
+
+        .star {
+            position: absolute;
+            background: #fff;
+            border-radius: 50%;
+            animation: twinkle var(--duration) infinite ease-in-out;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 1; }
+        }
+        .login-container {
+            padding: 2rem;
+            border-radius: 10px;
+            background: rgba(16, 36, 62, 0.85); /* 增加透明度 */
+            box-shadow: 0 0 40px rgba(9, 194, 202, 0.8); /* 增强发光 */
+            width: 400px;
+            position: relative;
+            z-index: 1;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(9, 194, 202, 0.3);
+        }
+
+        h2 {
+            font-family: var(--tech-font);
+            text-align: center;
+            margin-bottom: 2rem;
+            color: #09c2ca;
+            font-size: 1.8rem;
+            text-shadow: 0 0 10px rgba(9, 194, 202, 0.5);
+            letter-spacing: 2px;
+        }
+        .form-group label {
+            font-size: 1.1rem;  /* 标签字体增大 */
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #8cafc3;
+            font-family: var(--tech-font);
+            letter-spacing: 1px;
+        }
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #8cafc3;
+        }
+
+        input {
+            width: 100%;
+            padding: 1rem;
+            background: rgba(13, 26, 38, 0.8);
+            border: 1px solid #1c3d5a;
+            border-radius: 4px;
+            color: #fff;
+            font-size: 1.2rem;
+            transition: all 0.3s;
+            font-family: var(--main-font);}
+            input:focus {
+            border-color: #09c2ca;
+            box-shadow: 0 0 10px rgba(9, 194, 202, 0.3);
+            outline: none;
+        }
+        .captcha-container {
+            display: flex;
+            gap: 10px;
+        }
+
+        #captchaImg {
+            background: #fff;
+            padding: 5px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        /* 动态按钮效果 */
+        button {
+            width: 100%;
+            padding: 1rem;
+            background: linear-gradient(135deg, #09c2ca 0%, #09828e 100%);
+            border: none;
+            border-radius: 4px;
+            color: #fff;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+            font-family: var(--tech-font);
+            letter-spacing: 2px;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(9, 194, 202, 0.4);
+        }
+
+        button::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, 
+                transparent, 
+                rgba(255,255,255,0.2), 
+                transparent);
+            transform: rotate(45deg);
+            animation: shine 3s infinite;
+        }
+
+        @keyframes shine {
+            0% { left: -50%; }
+            100% { left: 150%; }
+        }
+        .error-msg {
+            color: #ff4757;
+            text-align: center;
+            margin-top: 1rem;
+            display: none;
+        }
+         /* 战队名称容器 */
+         .team-container {
+            margin-top: 2rem;
+            text-align: center;
+            padding: 1rem;
+            border-top: 1px solid rgba(9, 194, 202, 0.3);
+        }
+
+        .team-name {
+            font-family: var(--tech-font);
+            color: #09c2ca;
+            font-size: 1.4rem;
+            text-shadow: 0 0 15px rgba(9, 194, 202, 0.7);
+            animation: teamGlow 2s ease-in-out infinite;
+        }
+
+        @keyframes teamGlow {
+            50% { 
+                text-shadow: 0 0 25px rgba(9, 194, 202, 0.9);
+                transform: scale(1.05);
+            }}
+    </style>
+</head>
+<body>
+    <!-- <div id="stars"></div> -->
+    <div class="sky-container" id="sky"></div>
+    <div class="login-container">
+        <h2>枣庄低空经济监测平台</h2>
+        <form id="loginForm">
+            <div class="form-group">
+                <label>账号</label>
+                <input type="text" id="username" required>
+            </div>
+            <div class="form-group">
+                <label>密码</label>
+                <input type="password" id="password" required>
+            </div>
+            <div class="form-group">
+                <label>验证码</label>
+                <div class="captcha-container">
+                    <input type="text" id="captcha" required    style="font-size: 1.3rem;">>
+                    <canvas id="captchaImg" width="140" height="50"></canvas>
+                </div>
+            </div>
+            <button type="submit">空 域 登 录</button>
+            <div class="team-container">
+                <div class="team-name">✧ 枣职星海战队 ✧</div>
+            <div class="error-msg" id="errorMsg"></div>
+             </div>
+        </form>
+    </div>
+   
+    <script>
+        // 生成低空经济动态背景
+        function createSky() {
+            const container = document.getElementById('sky');
+            
+            // 创建云层
+            for(let i = 0; i < 8; i++) {
+                const cloud = document.createElement('div');
+                cloud.className = 'cloud';
+                cloud.style.top = Math.random() * 100 + 'vh';
+                cloud.style.width = Math.random() * 200 + 100 + 'px';
+                cloud.style.height = Math.random() * 40 + 20 + 'px';
+                cloud.style.animationDuration = Math.random() * 20 + 20 + 's';
+                container.appendChild(cloud);
+            }
+
+            // 创建无人机动画
+            for(let i = 0; i < 4; i++) {
+                const drone = document.createElement('div');
+                drone.className = 'drone';
+                drone.style.top = Math.random() * 80 + 10 + 'vh';
+                drone.style.animationDelay = Math.random() * 5 + 's';
+                container.appendChild(drone);
+            }
+
+            // 创建航线
+            const canvas = document.createElement('canvas');
+            const ctx = canvas.getContext('2d');
+            canvas.style.position = 'fixed';
+            canvas.style.top = 0;
+            canvas.style.left = 0;
+            canvas.style.zIndex = 0;
+            document.body.appendChild(canvas);
+
+            function drawRoutes() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                ctx.strokeStyle = 'rgba(9, 194, 202, 0.2)';
+                ctx.setLineDash([10, 5]);
+                
+                // 绘制航线网络
+                for(let i = 0; i < 5; i++) {
+                    ctx.beginPath();
+                    ctx.moveTo(Math.random() * canvas.width, Math.random() * canvas.height);
+                    ctx.lineTo(Math.random() * canvas.width, Math.random() * canvas.height);
+                    ctx.stroke();
+                }
+                requestAnimationFrame(drawRoutes);
+            }
+            
+            function resizeCanvas() {
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+            }
+            resizeCanvas();
+            window.addEventListener('resize', resizeCanvas);
+            drawRoutes();
+        }
+
+        createSky();
+        // 生成验证码
+        function generateCaptcha() {
+            const chars = 'ABCDEFGHJKMNPQRSTWXYZ23456789';
+            let captcha = '';
+            for(let i = 0; i < 5; i++) {  // 生成5位验证码
+                captcha += chars[Math.floor(Math.random() * chars.length)];
+            }
+            
+            const canvas = document.getElementById('captchaImg');
+            const ctx = canvas.getContext('2d');
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
+            // 绘制白色背景
+            ctx.fillStyle = '#ffffff';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            
+            // 绘制深色文字
+            ctx.font = 'bold 32px Arial';
+            ctx.fillStyle = '#09c2ca';
+            ctx.fillText(captcha, 10, 35);  // 调整文字位置
+            
+            // 添加干扰线（深色）
+            ctx.strokeStyle = '#1c3d5a';
+            ctx.lineWidth = 2;
+            for(let i = 0; i < 5; i++) {
+                ctx.beginPath();
+                ctx.moveTo(Math.random() * 140, Math.random() * 50);
+                ctx.lineTo(Math.random() * 140, Math.random() * 50);
+                ctx.stroke();
+            }
+            
+            return captcha;
+        }
+
+        let currentCaptcha = generateCaptcha();
+
+        // 刷新验证码
+        document.getElementById('captchaImg').addEventListener('click', () => {
+            currentCaptcha = generateCaptcha();
+        });
+
+        // 表单提交
+        // 修改后的表单提交逻辑
+    document.getElementById('loginForm').addEventListener('submit', (e) => {
+        e.preventDefault();
+        
+        const username = document.getElementById('username').value;
+        const password = document.getElementById('password').value;
+        const captcha = document.getElementById('captcha').value;
+        const errorMsg = document.getElementById('errorMsg');
+
+        // 重置错误提示
+        errorMsg.style.display = 'none';
+        errorMsg.classList.remove('error-animation');
+
+        // 空字段验证
+        if(!username || !password || !captcha) {
+            errorMsg.textContent = '所有字段必须填写！';
+            errorMsg.style.display = 'block';
+            errorMsg.classList.add('error-animation');
+            return;
+        }
+
+        // 验证码验证（新增详细提示）
+        if(captcha.toLowerCase() !== currentCaptcha.toLowerCase()) {
+            errorMsg.textContent = `验证码错误（正确应为：${currentCaptcha}）`;
+            errorMsg.style.display = 'block';
+            errorMsg.classList.add('error-animation');
+            
+            // 增强错误视觉效果
+            document.getElementById('captcha').style.border = '2px solid #ff4757';
+            document.getElementById('captchaImg').style.boxShadow = '0 0 10px #ff4757';
+            
+            // 自动刷新验证码前添加倒计时
+            setTimeout(() => {
+                currentCaptcha = generateCaptcha();
+                document.getElementById('captcha').style.border = '1px solid #1c3d5a';
+                document.getElementById('captchaImg').style.boxShadow = 'none';
+            }, 1500);
+            
+            return;
+        }
+
+        // 登录成功处理（示例）
+        window.location.href = 'index.html';
+        });
+    </script>
+</body>
+</html>

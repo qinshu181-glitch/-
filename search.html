@@ -1,0 +1,1629 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>枣庄低空经济智能问答平台</title>
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #0c2b5e 0%, #1a56db 100%);
+            color: #333;
+            min-height: 100vh;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 20px;
+            animation: fadeInDown 0.8s ease-out;
+        }
+        
+        .logo {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .logo-icon {
+            font-size: 42px;
+            color: #4CAF50;
+            margin-right: 15px;
+            animation: pulse 2s infinite;
+        }
+        
+        h1 {
+            font-size: 2.8rem;
+            color: white;
+            margin-bottom: 10px;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.2);
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+            color: #a0c4ff;
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+        
+        .search-section {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.25);
+            overflow: hidden;
+            margin-bottom: 40px;
+            animation: fadeInUp 0.8s ease-out;
+        }
+        
+        .search-header {
+            background: linear-gradient(90deg, #4CAF50, #2196F3);
+            padding: 25px 30px;
+            color: white;
+        }
+        
+        .search-header h2 {
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .search-header h2 i {
+            margin-right: 12px;
+            font-size: 1.5rem;
+        }
+        
+        .search-header p {
+            opacity: 0.9;
+            font-size: 1.1rem;
+        }
+        
+        .input-container {
+            padding: 30px;
+            position: relative;
+        }
+        
+        .input-wrapper {
+            position: relative;
+            margin-bottom: 20px;
+        }
+        
+        #searchInput {
+            width: 100%;
+            height: 60px;
+            padding: 0 70px 0 25px;
+            border: 2px solid #e0e0e0;
+            border-radius: 15px;
+            font-size: 1.1rem;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+        
+        #searchInput:focus {
+            outline: none;
+            border-color: #4CAF50;
+            box-shadow: 0 4px 20px rgba(76, 175, 80, 0.3);
+        }
+        
+        .search-icon {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: linear-gradient(135deg, #4CAF50, #2E7D32);
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 1.2rem;
+            box-shadow: 0 4px 15px rgba(76, 175, 80, 0.4);
+        }
+        
+        .search-icon:hover {
+            transform: translateY(-50%) scale(1.1);
+            box-shadow: 0 6px 20px rgba(76, 175, 80, 0.5);
+        }
+        
+        .suggestions {
+            width: 100%;
+            border: 1px solid #e0e0e0;
+            border-radius: 15px;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+            background: white;
+            max-height: 300px;
+            overflow-y: auto;
+            display: none;
+            z-index: 100;
+            position: absolute;
+            top: 70px;
+            left: 0;
+        }
+        
+        .suggestion-item {
+            padding: 18px 25px;
+            color: #333;
+            border-bottom: 1px solid #f5f5f5;
+            transition: all 0.2s;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            font-size: 1.1rem;
+        }
+        
+        .suggestion-item i {
+            margin-right: 12px;
+            color: #4CAF50;
+            font-size: 1.2rem;
+        }
+        
+        .suggestion-item:hover {
+            background: #f0f9ff;
+            transform: translateX(5px);
+        }
+        
+        .results-section {
+            display: none;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.25);
+            overflow: hidden;
+            margin-bottom: 40px;
+            animation: fadeIn 0.8s ease-out;
+        }
+        
+        .result-header {
+            background: linear-gradient(90deg, #2196F3, #1A56DB);
+            padding: 25px 30px;
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .result-title {
+            font-size: 1.6rem;
+            max-width: 80%;
+        }
+        
+        .result-meta {
+            font-size: 0.9rem;
+            opacity: 0.9;
+            text-align: right;
+        }
+        
+        .result-content {
+            padding: 30px;
+        }
+        
+        .answer-intro {
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #444;
+            border-left: 5px solid #4CAF50;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        }
+        
+        .answer-data {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 30px;
+            padding: 0 10px;
+        }
+        
+        .chart-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
+        }
+        
+        .chart-container {
+            min-height: 320px;
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+            transition: all 0.3s;
+            border: 1px solid #eaeaea;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .chart-container:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 30px rgba(0,0,0,0.15);
+        }
+        
+        .chart-title {
+            text-align: center;
+            margin-bottom: 15px;
+            font-size: 1.2rem;
+            color: #1A56DB;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+        
+        .chart-title i {
+            margin-right: 10px;
+            color: #4CAF50;
+        }
+        
+        .chart {
+            width: 100%;
+            height: 100%;
+            flex-grow: 1;
+        }
+        
+        .tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 20px;
+        }
+        
+        .tag {
+            display: inline-block;
+            padding: 8px 18px;
+            background: #e3f2fd;
+            border-radius: 50px;
+            font-size: 0.95rem;
+            transition: all 0.3s;
+            cursor: pointer;
+            color: #1A56DB;
+            font-weight: 500;
+        }
+        
+        .tag:hover {
+            background: #bbdefb;
+            transform: translateY(-3px);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+        
+        .loader {
+            display: none;
+            text-align: center;
+            padding: 40px 0;
+        }
+        
+        .loader-dots {
+            display: inline-block;
+            position: relative;
+            width: 80px;
+            height: 20px;
+        }
+        
+        .loader-dots div {
+            position: absolute;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background: #4CAF50;
+            animation-timing-function: cubic-bezier(0, 1, 1, 0);
+        }
+        
+        .loader-dots div:nth-child(1) {
+            left: 8px;
+            animation: loader-dots1 0.6s infinite;
+        }
+        
+        .loader-dots div:nth-child(2) {
+            left: 8px;
+            animation: loader-dots2 0.6s infinite;
+        }
+        
+        .loader-dots div:nth-child(3) {
+            left: 32px;
+            animation: loader-dots2 0.6s infinite;
+        }
+        
+        .loader-dots div:nth-child(4) {
+            left: 56px;
+            animation: loader-dots3 0.6s infinite;
+        }
+        
+        .data-box {
+            background: linear-gradient(135deg, #f1f8ff, #e3f2fd);
+            color: #155799;
+            padding: 15px 20px;
+            border-radius: 12px;
+            display: inline-block;
+            margin: 10px 5px;
+            transition: all 0.3s;
+            border-left: 4px solid #4CAF50;
+            font-weight: 500;
+        }
+        
+        .data-box:hover {
+            transform: scale(1.03);
+            box-shadow: 0 6px 15px rgba(76,175,80,0.2);
+        }
+        
+        footer {
+            text-align: center;
+            color: rgba(255, 255, 255, 0.7);
+            padding: 20px;
+            font-size: 0.95rem;
+        }
+        
+        /* Animations */
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+        
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.1);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+        
+        @keyframes loader-dots1 {
+            0% { transform: scale(0); }
+            100% { transform: scale(1); }
+        }
+        
+        @keyframes loader-dots3 {
+            0% { transform: scale(1); }
+            100% { transform: scale(0); }
+        }
+        
+        @keyframes loader-dots2 {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(24px, 0); }
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .subtitle {
+                font-size: 1rem;
+            }
+            
+            .result-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .result-meta {
+                margin-top: 10px;
+                text-align: left;
+            }
+            
+            .chart-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .input-container {
+                padding: 20px;
+            }
+            
+            #searchInput {
+                height: 50px;
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">
+                <i class="fas fa-rocket logo-icon"></i>
+                <h1>枣庄低空经济智能问答平台</h1>
+            </div>
+            <p class="subtitle">AI驱动 · 实时数据分析 · 专业决策支持 · 赋能低空经济发展</p>
+        </header>
+        
+        <section class="search-section">
+            <div class="search-header">
+                <h2><i class="fas fa-search"></i> 智能数据查询</h2>
+                <p>输入您的问题，获取枣庄低空经济领域实时数据分析报告</p>
+            </div>
+            
+            <div class="input-container">
+                <div class="input-wrapper">
+                    <input type="text" 
+                           id="searchInput"
+                           placeholder="请输入您的问题（如：锂电池型号分布、无人机飞行数据等）..."
+                           autocomplete="off">
+                    <div class="search-icon" onclick="performSearch()">
+                        <i class="fas fa-search"></i>
+                    </div>
+                    <div class="suggestions" id="suggestions"></div>
+                </div>
+                
+                <div class="tags">
+                    <div class="tag" onclick="searchTag('电池')">电池数据</div>
+                    <div class="tag" onclick="searchTag('客服云')">客服云</div>
+                    <div class="tag" onclick="searchTag('安防')">安防数据</div>
+                    <div class="tag" onclick="searchTag('物流')">物流分析</div>
+                    <div class="tag" onclick="searchTag('运维')">运维数据</div>
+                    <div class="tag" onclick="searchTag('经济影响')">经济影响</div>
+                </div>
+            </div>
+        </section>
+        
+        <div class="loader" id="loader">
+            <div class="loader-dots">
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+            <p style="margin-top: 20px; color: #4CAF50; font-weight: 500;">正在分析数据，请稍候...</p>
+        </div>
+        
+        <section class="results-section" id="resultsSection">
+            <div class="result-header">
+                <div class="result-title" id="resultTitle">数据分析结果</div>
+                <div class="result-meta">
+                    <div>数据来源：枣庄低空经济数据中心</div>
+                    <div id="updateTime"></div>
+                </div>
+            </div>
+            
+            <div class="result-content">
+                <div class="answer-intro" id="answerIntro"></div>
+                
+                <div class="answer-data" id="answerData"></div>
+                
+                <div class="chart-grid" id="chartGrid">
+                    <!-- 图表容器将由JS动态生成 -->
+                </div>
+            </div>
+        </section>
+        
+        <footer>
+            <p>枣庄低空经济智能平台 © 2023 | 数据驱动决策，科技赋能发展</p>
+            <p>实时数据更新 | 专业分析报告 | 智能决策支持</p>
+        </footer>
+    </div>
+
+    <script>
+        // 问题数据库
+        const questionDB = [
+            {
+                keywords: ['电池', '锂电池', '型号', '分布'],
+                question: "当前使用最多的锂电池型号是什么？",
+                intro: "枣庄作为低空经济示范区，在无人机电池技术应用方面有着深入的研究和实践。根据我们过去三年积累的运营数据，结合无人机实际飞行表现和电池性能测试，我们对主流锂电池型号进行了全面评估。这些数据来源于枣庄低空经济平台的实时监测系统，覆盖了超过5000架无人机的日常运行。通过分析电池的循环寿命、能量密度、低温性能和安全记录等多个维度，我们发现不同应用场景对电池性能的需求存在显著差异。物流无人机更注重续航能力，安防无人机则更看重安全性，而测绘无人机则需要高能量密度电池。这种差异化需求直接影响了市场对不同型号电池的接受程度。",
+                answer: {
+                    content: `🔋 锂电池型号分布数据分析结果：
+                        <p>基于枣庄低空经济平台2023年Q1-Q3的运营数据，我们对全市无人机使用的锂电池型号进行了全面统计：</p>
+                        <ul>
+                            <li><span class="data-box">CATL-NCM811</span> 占比38.2%，主要应用于长航时物流无人机</li>
+                            <li><span class="data-box">BYD-LFP</span> 占比28.7%，因其高安全性广泛用于城市安防无人机</li>
+                            <li><span class="data-box">Tesla-2170</span> 占比19.4%，主要应用于高端测绘无人机</li>
+                            <li>其他型号占比13.7%，包括<span class="data-box">Panasonic NCR</span>和<span class="data-box">LG Chem</span>等</li>
+                        </ul>
+                        <p>从数据可以看出，CATL-NCM811因其高能量密度（280Wh/kg）和良好的循环性能（1500次循环后容量保持率>80%）成为市场首选。</p>`,
+                    charts: [
+                        {
+                            type: 'bar',
+                            title: '各型号市场份额对比',
+                            data: {
+                                categories: ['CATL-NCM811', 'BYD-LFP', 'Tesla-2170', 'Panasonic', 'LG Chem', '其他'],
+                                values: [38.2, 28.7, 19.4, 7.2, 4.1, 2.4]
+                            }
+                        },
+                        {
+                            type: 'line',
+                            title: '季度市场份额变化趋势',
+                            data: {
+                                categories: ['2022 Q4', '2023 Q1', '2023 Q2', '2023 Q3'],
+                                values: [32.5, 35.8, 36.9, 38.2]
+                            }
+                        },
+                        {
+                            type: 'radar',
+                            title: '电池性能对比',
+                            data: {
+                                indicators: [
+                                    {name: '能量密度', max: 100},
+                                    {name: '安全性', max: 100},
+                                    {name: '循环寿命', max: 100},
+                                    {name: '低温性能', max: 100},
+                                    {name: '充电速度', max: 100}
+                                ],
+                                series: [
+                                    {
+                                        name: 'CATL-NCM811',
+                                        values: [92, 78, 88, 75, 70]
+                                    },
+                                    {
+                                        name: 'BYD-LFP',
+                                        values: [80, 95, 92, 85, 65]
+                                    }
+                                ]
+                            }
+                        }
+                    ]
+                }
+            },
+            {
+                keywords: ['客服云', '数据', '响应', '服务'],
+                question: "客服云平台的实时服务数据看板",
+                intro: "客服云作为枣庄低空经济平台的重要组成部分，承担着连接企业和用户的关键桥梁作用。通过对客服云平台过去六个月的实时监控和历史统计数据进行深度分析，我们发现在不同时段、不同渠道、不同问题类型的服务数据存在显著差异。特别是在高峰时段，系统压力明显增大，响应时间延长。我们的分析涵盖了服务响应时效、问题解决率、用户满意度等核心指标，数据来源于每天超过2000次的用户交互记录。这些数据不仅反映了当前服务质量，也为优化资源配置提供了重要依据。通过对用户咨询热点的语义分析，我们发现物流查询占比最高，其次是技术支持和账单问题。",
+                answer: {
+                    content: `📊 客服云平台实时数据（更新于${new Date().toLocaleTimeString()}）：
+                        <p>枣庄低空经济客服云平台当前运行状态：</p>
+                        <ul>
+                            <li>在线客服人员：<span class="data-box">28人</span>（早班18人，晚班10人）</li>
+                            <li>待处理工单：<span class="data-box">23件</span>（平均处理时长32分钟）</li>
+                            <li>进行中会话：<span class="data-box">57个</span>（平均响应时间9.2秒）</li>
+                            <li>用户满意度：<span class="data-box">98.7%</span>（近30天平均值）</li>
+                        </ul>
+                        <p>根据历史数据分析，高峰时段（10:00-12:00, 15:00-17:00）的咨询量是平时的2.3倍，建议增加此时段客服资源配置。</p>`,
+                    charts: [
+                        {
+                            type: 'bar',
+                            title: '各时段咨询量分布',
+                            data: {
+                                categories: ['8-10时', '10-12时', '12-14时', '14-16时', '16-18时', '18-20时'],
+                                values: [120, 280, 150, 260, 230, 180]
+                            }
+                        },
+                        {
+                            type: 'combo',
+                            title: '服务指标趋势分析',
+                            data: {
+                                categories: ['1月', '2月', '3月', '4月', '5月', '6月', '7月'],
+                                series: [
+                                    {
+                                        name: '响应时间(秒)',
+                                        type: 'line',
+                                        data: [12.5, 11.2, 10.8, 9.7, 9.2, 8.9, 8.5],
+                                        yAxisIndex: 0
+                                    },
+                                    {
+                                        name: '满意度(%)',
+                                        type: 'bar',
+                                        data: [96.2, 97.5, 97.8, 98.1, 98.5, 98.7, 98.9],
+                                        yAxisIndex: 1
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            type: 'pie',
+                            title: '问题类型分布',
+                            data: [
+                                { value: 45, name: '物流查询' },
+                                { value: 25, name: '技术支持' },
+                                { value: 15, name: '账单问题' },
+                                { value: 10, name: '服务投诉' },
+                                { value: 5, name: '其他' }
+                            ]
+                        }
+                    ]
+                }
+            },
+            {
+                keywords: ['安防', '监控', '无人机', '空域'],
+                question: "安防云平台的空域监控覆盖情况",
+                intro: "枣庄市低空经济安防体系是保障城市空域安全的重要基础设施，通过部署在全市的智能监控网络和无人机感知系统，实现了对空域的全面监控。我们的分析基于过去一年超过50万小时的监控数据，覆盖了核心商业区、物流枢纽和城市边界等重点区域。通过对监控覆盖率、事件响应时效、异常事件类型等维度的分析，我们发现核心区域的监控覆盖率已达到100%，但郊区和边界区域仍有提升空间。在异常事件处理方面，未报备飞行是最常见的问题，占总事件的55%以上。这些数据不仅反映了当前安防系统的运行状态，也为后续优化提供了重要参考。",
+                answer: {
+                    content: `🛡️ 安防云空域监控系统实时状态：
+                        <p>枣庄市低空安防系统当前覆盖情况：</p>
+                        <ul>
+                            <li>核心区域覆盖率：<span class="data-box">100%</span>（包括政府机关、交通枢纽等）</li>
+                            <li>城区覆盖率：<span class="data-box">92%</span>（居民区、商业区等）</li>
+                            <li>郊区覆盖率：<span class="data-box">78%</span>（农田、山区等）</li>
+                            <li>应急响应平均时长：<span class="data-box">3分42秒</span></li>
+                        </ul>
+                        <p>本月共处理异常事件<span class="data-box">28起</span>，其中未报备飞行15起，越界飞行8起，低空抛物5起。</p>`,
+                    charts: [
+                        {
+                            type: 'radar',
+                            title: '区域安防能力评估',
+                            data: {
+                                indicators: [
+                                    {name: '监控覆盖率', max: 100},
+                                    {name: '响应速度', max: 100},
+                                    {name: '识别准确率', max: 100},
+                                    {name: '事件处理率', max: 100},
+                                    {name: '系统稳定性', max: 100}
+                                ],
+                                series: [
+                                    {
+                                        name: '核心区',
+                                        values: [100, 98, 96, 99, 97]
+                                    },
+                                    {
+                                        name: '城区',
+                                        values: [92, 90, 88, 93, 91]
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            type: 'line',
+                            title: '月度异常事件趋势',
+                            data: {
+                                categories: ['1月', '2月', '3月', '4月', '5月', '6月', '7月'],
+                                values: [42, 38, 35, 31, 28, 25, 22]
+                            }
+                        },
+                        {
+                            type: 'pie',
+                            title: '异常事件类型分布',
+                            data: [
+                                { value: 55, name: '未报备飞行' },
+                                { value: 25, name: '越界飞行' },
+                                { value: 12, name: '低空抛物' },
+                                { value: 8, name: '其他' }
+                            ]
+                        }
+                    ]
+                }
+            },
+            {
+                keywords: ['物流', '配送', '时效', '航线'],
+                question: "物流无人机配送时效分析",
+                intro: "物流无人机配送时效是衡量低空经济效率的重要指标。通过对枣庄市37条固定航线的10万+配送记录进行分析，我们发现不同区域的配送时效存在显著差异。核心商务区的航线饱和度高达92%，导致早高峰平均延时8.7分钟；而工业园至水产市场的航线时效最优，平均仅需23分钟。气象因素对配送时效影响显著，特别是西部山区航线，受风速影响延误率高达35%。通过机器学习模型分析，我们建立了风速与延误率的强相关关系（r=0.89），为航线优化提供了数据支持。这些发现对于提升物流效率、降低运营成本具有重要意义。",
+                answer: {
+                    content: `✈️ 物流配送时效分析：
+                        <ul>
+                            <li>核心商务区航线饱和度：<span class="data-box">92%</span>（早高峰平均延时8.7分钟）</li>
+                            <li>工业园至水产市场航线时效：<span class="data-box">23分钟</span>（最优航线）</li>
+                            <li>西部山区延误率：<span class="data-box">35%</span>（主要受气象因素影响）</li>
+                            <li>冷链货物温控失效风险：风速>5m/s时<span class="data-box">增加3.8倍</span></li>
+                        </ul>`,
+                    charts: [
+                        {
+                            type: 'bar',
+                            title: '区域配送时效对比',
+                            data: {
+                                categories: ['商务区', '工业园', '农业带', '山区'],
+                                values: [45, 23, 38, 72]
+                            }
+                        },
+                        {
+                            type: 'scatter',
+                            title: '风速与延误率关系',
+                            data: [
+                                [3.2, 12], [4.1, 18], [5.3, 35], [6.1, 48], 
+                                [7.2, 62], [4.5, 22], [5.8, 41], [6.7, 53]
+                            ]
+                        },
+                        {
+                            type: 'pie',
+                            title: '货物类型分布',
+                            data: [
+                                { value: 32, name: '医疗用品' },
+                                { value: 28, name: '生鲜食品' },
+                                { value: 25, name: '工业零件' },
+                                { value: 15, name: '其他' }
+                            ]
+                        }
+                    ]
+                }
+            }, {
+                keywords: ['电池', '锂电池', '型号', '分布'],
+                question: "当前使用最多的锂电池型号是什么？",
+                intro: "枣庄作为低空经济示范区，在无人机电池技术应用方面有着深入的研究和实践。根据我们过去三年积累的运营数据，结合无人机实际飞行表现和电池性能测试，我们对主流锂电池型号进行了全面评估。这些数据来源于枣庄低空经济平台的实时监测系统，覆盖了超过5000架无人机的日常运行。通过分析电池的循环寿命、能量密度、低温性能和安全记录等多个维度，我们发现不同应用场景对电池性能的需求存在显著差异。物流无人机更注重续航能力，安防无人机则更看重安全性，而测绘无人机则需要高能量密度电池。这种差异化需求直接影响了市场对不同型号电池的接受程度。",
+                answer: {
+                    content: `
+                        <div class="data-grid">
+                            <div class="data-card">
+                                <h3><i class="fas fa-battery-full"></i> 锂电池型号分布</h3>
+                                <p>基于枣庄低空经济平台2023年Q1-Q3的运营数据，我们对全市无人机使用的锂电池型号进行了全面统计：</p>
+                                <ul>
+                                    <li><span class="data-box">CATL-NCM811</span> 占比38.2%</li>
+                                    <li><span class="data-box">BYD-LFP</span> 占比28.7%</li>
+                                    <li><span class="data-box">Tesla-2170</span> 占比19.4%</li>
+                                    <li>其他型号占比13.7%</li>
+                                </ul>
+                            </div>
+                            
+                            <div class="data-card">
+                                <h3><i class="fas fa-chart-line"></i> 性能对比</h3>
+                                <p>主要电池型号性能参数对比：</p>
+                                <table class="data-table">
+                                    <tr><th>型号</th><th>能量密度</th><th>循环寿命</th><th>安全性</th></tr>
+                                    <tr><td>CATL-NCM811</td><td>280Wh/kg</td><td>1500次</td><td>高</td></tr>
+                                    <tr><td>BYD-LFP</td><td>160Wh/kg</td><td>3000次</td><td>极高</td></tr>
+                                    <tr><td>Tesla-2170</td><td>260Wh/kg</td><td>1200次</td><td>中高</td></tr>
+                                </table>
+                            </div>
+                            
+                            <div class="data-card">
+                                <h3><i class="fas fa-thermometer-half"></i> 温度影响</h3>
+                                <p>温度对电池性能的影响：</p>
+                                <ul>
+                                    <li>低温（-10℃）容量下降<span class="data-box">25-40%</span></li>
+                                    <li>高温（40℃）寿命衰减加速<span class="data-box">3.5倍</span></li>
+                                    <li>最佳工作温度：<span class="data-box">15-25℃</span></li>
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        <p>从数据可以看出，CATL-NCM811因其高能量密度（280Wh/kg）和良好的循环性能（1500次循环后容量保持率>80%）成为市场首选，特别适用于长航时物流无人机。而BYD-LFP电池虽然能量密度较低，但安全性极高，在安防无人机领域占据主导地位。</p>
+                    `,
+                    charts: [
+                        {
+                            type: 'bar',
+                            title: '锂电池型号市场份额',
+                            data: {
+                                categories: ['CATL-NCM811', 'BYD-LFP', 'Tesla-2170', 'Panasonic', 'LG Chem', '其他'],
+                                values: [38.2, 28.7, 19.4, 7.2, 4.1, 2.4]
+                            }
+                        },
+                        {
+                            type: 'radar',
+                            title: '电池性能多维评估',
+                            data: {
+                                indicators: [
+                                    {name: '能量密度', max: 100},
+                                    {name: '安全性', max: 100},
+                                    {name: '循环寿命', max: 100},
+                                    {name: '低温性能', max: 100},
+                                    {name: '充电速度', max: 100}
+                                ],
+                                series: [
+                                    {
+                                        name: 'CATL-NCM811',
+                                        values: [92, 78, 88, 75, 70]
+                                    },
+                                    {
+                                        name: 'BYD-LFP',
+                                        values: [80, 95, 92, 85, 65]
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            type: 'line',
+                            title: '季度市场份额变化趋势',
+                            data: {
+                                categories: ['2022 Q4', '2023 Q1', '2023 Q2', '2023 Q3'],
+                                values: [32.5, 35.8, 36.9, 38.2]
+                            }
+                        }
+                    ]
+                }
+            },
+            {
+                keywords: ['电池', '寿命', '衰减', '预测'],
+                question: "锂电池寿命衰减预测模型",
+                intro: "电池寿命是影响无人机运营成本的关键因素。通过对枣庄低空经济平台收集的超过10万组电池充放电数据的分析，我们建立了电池寿命衰减预测模型。该模型考虑了充放电深度、循环次数、温度环境和充放电速率等多个变量，能够准确预测电池在不同使用条件下的寿命衰减情况。我们的研究发现，在正常使用条件下（25℃环境温度，80%放电深度），主流锂电池的平均寿命为1200次循环。但当环境温度超过35℃时，电池寿命会下降40%以上。这些发现对优化电池使用策略、降低运营成本具有重要意义。",
+                answer: {
+                    content: `
+                        <div class="data-grid">
+                            <div class="data-card">
+                                <h3><i class="fas fa-battery-quarter"></i> 衰减规律</h3>
+                                <p>不同条件下的电池衰减情况：</p>
+                                <ul>
+                                    <li>25℃标准条件：<span class="data-box">1200次</span>循环后容量保持80%</li>
+                                    <li>35℃高温条件：<span class="data-box">700次</span>循环后容量保持80%</li>
+                                    <li>-10℃低温条件：<span class="data-box">900次</span>循环后容量保持80%</li>
+                                </ul>
+                            </div>
+                            
+                            <div class="data-card">
+                                <h3><i class="fas fa-tachometer-alt"></i> 充放电影响</h3>
+                                <p>充放电策略对寿命的影响：</p>
+                                <ul>
+                                    <li>100%深度放电：寿命<span class="data-box">减少45%</span></li>
+                                    <li>快充（2C以上）：寿命<span class="data-box">减少30%</span></li>
+                                    <li>浅充放（30-70%）：寿命<span class="data-box">延长60%</span></li>
+                                </ul>
+                            </div>
+                            
+                            <div class="data-card">
+                                <h3><i class="fas fa-percentage"></i> 预测准确率</h3>
+                                <p>模型预测准确率表现：</p>
+                                <ul>
+                                    <li>1个月内衰减预测：<span class="data-box">98.2%</span></li>
+                                    <li>3个月内衰减预测：<span class="data-box">95.7%</span></li>
+                                    <li>6个月内衰减预测：<span class="data-box">92.3%</span></li>
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        <p>基于这些发现，我们建议无人机运营团队采取以下措施延长电池寿命：避免深度放电、在适宜温度环境下使用、采用智能充电策略。这些措施可将电池使用寿命平均延长40%，显著降低运营成本。</p>
+                    `,
+                    charts: [
+                        {
+                            type: 'line',
+                            title: '循环次数与容量保持率',
+                            data: {
+                                categories: ['0', '200', '400', '600', '800', '1000', '1200', '1400'],
+                                values: [100, 98, 95, 92, 88, 85, 80, 75]
+                            }
+                        },
+                        {
+                            type: 'radar',
+                            title: '衰减影响因素权重',
+                            data: {
+                                indicators: [
+                                    {name: '温度', max: 100},
+                                    {name: '充放电深度', max: 100},
+                                    {name: '充放电速率', max: 100},
+                                    {name: '循环次数', max: 100},
+                                    {name: '存储条件', max: 100}
+                                ],
+                                series: [
+                                    {
+                                        name: '影响权重',
+                                        values: [85, 78, 65, 92, 60]
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            type: 'bar',
+                            title: '不同温度下寿命对比',
+                            data: {
+                                categories: ['-10℃', '0℃', '15℃', '25℃', '35℃', '45℃'],
+                                values: [900, 1000, 1150, 1200, 700, 500]
+                            }
+                        }
+                    ]
+                }
+            },
+            {
+                keywords: ['电池', '安全', '事故', '预防'],
+                question: "锂电池安全事故分析与预防策略",
+                intro: "锂电池安全是低空经济运营的核心关注点。我们分析了枣庄低空经济平台过去三年记录的217起电池相关安全事故，发现热失控是最主要的事故类型，占总事故的68%。通过对事故数据的深度挖掘，我们发现机械损伤、过充、短路和高温环境是引发热失控的四大主要原因。特别是在夏季高温季节，电池事故发生率是其他季节的2.3倍。我们的研究团队开发了基于多传感器融合的电池安全监测系统，能够提前10-15分钟预测潜在的热失控风险，准确率达到92.5%。这些发现为制定有效的电池安全管理策略提供了科学依据。",
+                answer: {
+                    content: `
+                        <div class="data-grid">
+                            <div class="data-card">
+                                <h3><i class="fas fa-fire"></i> 事故类型分布</h3>
+                                <p>锂电池安全事故类型统计：</p>
+                                <ul>
+                                    <li>热失控：<span class="data-box">68%</span></li>
+                                    <li>外壳破裂：<span class="data-box">15%</span></li>
+                                    <li>连接器故障：<span class="data-box">10%</span></li>
+                                    <li>其他：<span class="data-box">7%</span></li>
+                                </ul>
+                            </div>
+                            
+                            <div class="data-card">
+                                <h3><i class="fas fa-temperature-high"></i> 温度影响</h3>
+                                <p>环境温度与事故率关系：</p>
+                                <ul>
+                                    <li>25℃以下：<span class="data-box">0.5起/万次飞行</span></li>
+                                    <li>25-35℃：<span class="data-box">1.2起/万次飞行</span></li>
+                                    <li>35℃以上：<span class="data-box">3.5起/万次飞行</span></li>
+                                </ul>
+                            </div>
+                            
+                            <div class="data-card">
+                                <h3><i class="fas fa-shield-alt"></i> 预防效果</h3>
+                                <p>安全措施实施效果：</p>
+                                <ul>
+                                    <li>热失控预警系统：<span class="data-box">事故减少82%</span></li>
+                                    <li>智能充电管理：<span class="data-box">事故减少65%</span></li>
+                                    <li>电池健康监测：<span class="data-box">事故减少58%</span></li>
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        <p>基于这些发现，我们制定了全面的电池安全管理策略：1) 部署电池健康监测系统；2) 高温季节调整飞行计划；3) 采用智能充电设备；4) 定期进行电池安全培训。实施这些策略后，枣庄地区的电池安全事故率下降了75%，显著提高了运营安全性。</p>
+                    `,
+                    charts: [
+                        {
+                            type: 'pie',
+                            title: '锂电池事故原因分布',
+                            data: [
+                                { value: 45, name: '机械损伤' },
+                                { value: 23, name: '过充' },
+                                { value: 18, name: '短路' },
+                                { value: 10, name: '高温环境' },
+                                { value: 4, name: '其他' }
+                            ]
+                        },
+                        {
+                            type: 'line',
+                            title: '月度事故趋势与温度关系',
+                            data: {
+                                categories: ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月'],
+                                series: [
+                                    {
+                                        name: '事故数量',
+                                        type: 'bar',
+                                        data: [8, 7, 9, 12, 18, 25, 42, 38, 22, 15, 10, 9]
+                                    },
+                                    {
+                                        name: '平均温度',
+                                        type: 'line',
+                                        data: [2, 4, 10, 16, 22, 27, 30, 29, 24, 18, 10, 4]
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            type: 'radar',
+                            title: '安全措施效果评估',
+                            data: {
+                                indicators: [
+                                    {name: '事故减少率', max: 100},
+                                    {name: '预警准确率', max: 100},
+                                    {name: '响应速度', max: 100},
+                                    {name: '成本效益', max: 100},
+                                    {name: '用户满意度', max: 100}
+                                ],
+                                series: [
+                                    {
+                                        name: '热失控预警系统',
+                                        values: [82, 92, 88, 85, 90]
+                                    },
+                                    {
+                                        name: '智能充电管理',
+                                        values: [65, 78, 75, 92, 85]
+                                    }
+                                ]
+                            }
+                        }
+                    ]
+                }
+            },
+            {
+                keywords: ['电池', '回收', '环保', '可持续发展'],
+                question: "锂电池回收利用与可持续发展",
+                intro: "随着枣庄低空经济的快速发展，退役电池的处理问题日益突出。我们分析了全市无人机电池的生命周期数据，发现目前退役电池的回收率仅为35%，大量电池未能得到妥善处理。通过建立电池全生命周期追踪系统，我们掌握了电池从生产、使用到回收的完整数据流。研究表明，合理回收的锂电池可减少75%的碳排放，回收材料可满足新电池生产40%的原料需求。我们开发了基于区块链的电池回收平台，实现了回收过程的透明化管理。同时，与本地高校合作研发的新型回收技术，使材料回收率从传统的50%提高到92%，显著提升了资源利用效率。",
+                answer: {
+                    content: `
+                        <div class="data-grid">
+                            <div class="data-card">
+                                <h3><i class="fas fa-recycle"></i> 回收现状</h3>
+                                <p>枣庄地区电池回收情况：</p>
+                                <ul>
+                                    <li>年退役电池量：<span class="data-box">12.5吨</span></li>
+                                    <li>当前回收率：<span class="data-box">35%</span></li>
+                                    <li>目标回收率：<span class="data-box">85%</span></li>
+                                </ul>
+                            </div>
+                            
+                            <div class="data-card">
+                                <h3><i class="fas fa-leaf"></i> 环保效益</h3>
+                                <p>电池回收的环保影响：</p>
+                                <ul>
+                                    <li>碳排放减少：<span class="data-box">75%</span></li>
+                                    <li>资源消耗减少：<span class="data-box">60%</span></li>
+                                    <li>土壤污染减少：<span class="data-box">90%</span></li>
+                                </ul>
+                            </div>
+                            
+                            <div class="data-card">
+                                <h3><i class="fas fa-chart-line"></i> 经济效益</h3>
+                                <p>回收利用的经济价值：</p>
+                                <ul>
+                                    <li>材料回收价值：<span class="data-box">320万元/年</span></li>
+                                    <li>处理成本节约：<span class="data-box">180万元/年</span></li>
+                                    <li>新增就业岗位：<span class="data-box">150个</span></li>
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        <p>基于这些数据，我们制定了枣庄低空经济电池回收五年规划：1) 建立覆盖全市的回收网络；2) 推广生产者责任延伸制度；3) 研发高效回收技术；4) 培育回收利用产业链。预计到2027年，电池回收率将提升至85%，创造经济效益5000万元，减少碳排放1.2万吨。</p>
+                    `,
+                    charts: [
+                        {
+                            type: 'bar',
+                            title: '年度回收量增长趋势',
+                            data: {
+                                categories: ['2022', '2023', '2024', '2025(预测)', '2026(预测)', '2027(预测)'],
+                                values: [2.8, 4.2, 6.5, 9.2, 10.8, 12.5]
+                            }
+                        },
+                        {
+                            type: 'pie',
+                            title: '回收材料利用分布',
+                            data: [
+                                { value: 45, name: '正极材料' },
+                                { value: 25, name: '负极材料' },
+                                { value: 15, name: '电解液' },
+                                { value: 10, name: '隔膜' },
+                                { value: 5, name: '外壳' }
+                            ]
+                        },
+                        {
+                            type: 'line',
+                            title: '回收率与碳排放关系',
+                            data: {
+                                categories: ['20%', '40%', '60%', '80%'],
+                                series: [
+                                    {
+                                        name: '碳排放量(吨)',
+                                        data: [1200, 900, 600, 300]
+                                    }
+                                ]
+                            }
+                        }
+                    ]
+                }
+            },
+            {
+                keywords: ['客服云', '数据', '响应', '服务'],
+                question: "客服云平台的实时服务数据看板",
+                intro: "客服云作为枣庄低空经济平台的重要组成部分，承担着连接企业和用户的关键桥梁作用。通过对客服云平台过去六个月的实时监控和历史统计数据进行深度分析，我们发现在不同时段、不同渠道、不同问题类型的服务数据存在显著差异。特别是在高峰时段，系统压力明显增大，响应时间延长。我们的分析涵盖了服务响应时效、问题解决率、用户满意度等核心指标，数据来源于每天超过2000次的用户交互记录。这些数据不仅反映了当前服务质量，也为优化资源配置提供了重要依据。通过对用户咨询热点的语义分析，我们发现物流查询占比最高，其次是技术支持和账单问题。",
+                answer: {
+                    content: `📊 客服云平台实时数据（更新于${new Date().toLocaleTimeString()}）：
+                        <p>枣庄低空经济客服云平台当前运行状态：</p>
+                        <ul>
+                            <li>在线客服人员：<span class="data-box">28人</span>（早班18人，晚班10人）</li>
+                            <li>待处理工单：<span class="data-box">23件</span>（平均处理时长32分钟）</li>
+                            <li>进行中会话：<span class="data-box">57个</span>（平均响应时间9.2秒）</li>
+                            <li>用户满意度：<span class="data-box">98.7%</span>（近30天平均值）</li>
+                        </ul>
+                        <p>根据历史数据分析，高峰时段（10:00-12:00, 15:00-17:00）的咨询量是平时的2.3倍，建议增加此时段客服资源配置。</p>`,
+                    charts: [
+                        {
+                            type: 'bar',
+                            title: '各时段咨询量分布',
+                            data: {
+                                categories: ['8-10时', '10-12时', '12-14时', '14-16时', '16-18时', '18-20时'],
+                                values: [120, 280, 150, 260, 230, 180]
+                            }
+                        },
+                        {
+                            type: 'combo',
+                            title: '服务指标趋势分析',
+                            data: {
+                                categories: ['1月', '2月', '3月', '4月', '5月', '6月', '7月'],
+                                series: [
+                                    {
+                                        name: '响应时间(秒)',
+                                        type: 'line',
+                                        data: [12.5, 11.2, 10.8, 9.7, 9.2, 8.9, 8.5],
+                                        yAxisIndex: 0
+                                    },
+                                    {
+                                        name: '满意度(%)',
+                                        type: 'bar',
+                                        data: [96.2, 97.5, 97.8, 98.1, 98.5, 98.7, 98.9],
+                                        yAxisIndex: 1
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            type: 'pie',
+                            title: '问题类型分布',
+                            data: [
+                                { value: 45, name: '物流查询' },
+                                { value: 25, name: '技术支持' },
+                                { value: 15, name: '账单问题' },
+                                { value: 10, name: '服务投诉' },
+                                { value: 5, name: '其他' }
+                            ]
+                        }
+                    ]
+                }
+            }
+        ];
+
+       // DOM元素
+        const searchInput = document.getElementById('searchInput');
+        const suggestions = document.getElementById('suggestions');
+        const resultsSection = document.getElementById('resultsSection');
+        const resultTitle = document.getElementById('resultTitle');
+        const answerIntro = document.getElementById('answerIntro');
+        const answerData = document.getElementById('answerData');
+        const updateTime = document.getElementById('updateTime');
+        const loader = document.getElementById('loader');
+        const chartGrid = document.getElementById('chartGrid');
+
+        // 显示建议
+        function showSuggestions(keyword) {
+            if (!keyword.trim()) {
+                suggestions.style.display = 'none';
+                return;
+            }
+            
+            const matches = questionDB
+                .filter(q => q.keywords.some(k => k.toLowerCase().includes(keyword.toLowerCase())))
+                .map(q => q.question);
+            
+            // 去重
+            const uniqueMatches = [...new Set(matches)];
+            
+            if (uniqueMatches.length > 0) {
+                suggestions.innerHTML = uniqueMatches.map(q => 
+                    `<div class="suggestion-item" onclick="selectSuggestion('${q}')">
+                        <i class="fas fa-search"></i> ${q}
+                    </div>`
+                ).join('');
+                suggestions.style.display = 'block';
+            } else {
+                suggestions.style.display = 'none';
+            }
+        }
+
+        // 选择建议
+        function selectSuggestion(question) {
+            searchInput.value = question;
+            suggestions.style.display = 'none';
+            performSearch();
+        }
+
+        // 标签搜索
+        function searchTag(tag) {
+            searchInput.value = tag;
+            showSuggestions(tag);
+        }
+
+        // 执行搜索
+        function performSearch() {
+            const query = searchInput.value.trim();
+            if (!query) return;
+            
+            // 显示加载动画
+            loader.style.display = 'block';
+            resultsSection.style.display = 'none';
+            
+            setTimeout(() => {
+                // 找到所有匹配的问题
+                const matches = questionDB.filter(q => 
+                    q.keywords.some(k => query.includes(k))
+                );
+                
+                if (matches.length === 0) {
+                    showNotFound();
+                    loader.style.display = 'none';
+                    return;
+                }
+                
+                // 只显示第一个匹配结果（可根据需要调整）
+                const found = matches[0];
+                
+                // 显示结果
+                resultTitle.textContent = found.question;
+                answerIntro.innerHTML = found.intro;
+                answerData.innerHTML = found.answer.content;
+                updateTime.textContent = `更新于: ${new Date().toLocaleString()}`;
+                
+                // 渲染图表
+                renderCharts(found.answer.charts);
+                
+                resultsSection.style.display = 'block';
+                loader.style.display = 'none';
+                
+                // 滚动到结果区域
+                resultsSection.scrollIntoView({ behavior: 'smooth' });
+            }, 1500);
+        }
+
+        // 渲染图表
+        function renderCharts(charts) {
+            // 清空现有图表
+            chartGrid.innerHTML = '';
+            
+            charts.forEach((chartConfig, index) => {
+                const chartId = `chart${index+1}`;
+                
+                // 创建图表容器
+                const container = document.createElement('div');
+                container.className = 'chart-container';
+                container.innerHTML = `
+                    <div class="chart-title">
+                        <i class="fas ${getChartIcon(chartConfig.type)}"></i> 
+                        ${chartConfig.title}
+                    </div>
+                    <div class="chart" id="${chartId}"></div>
+                `;
+                chartGrid.appendChild(container);
+                
+                // 渲染图表
+                const chartDom = document.getElementById(chartId);
+                const chart = echarts.init(chartDom);
+                
+                let option;
+                switch(chartConfig.type) {
+                    case 'bar':
+                        option = getBarOption(chartConfig);
+                        break;
+                    case 'line':
+                        option = getLineOption(chartConfig);
+                        break;
+                    case 'pie':
+                        option = getPieOption(chartConfig);
+                        break;
+                    case 'radar':
+                        option = getRadarOption(chartConfig);
+                        break;
+                    case 'combo':
+                        option = getComboOption(chartConfig);
+                        break;
+                    default:
+                        option = getBarOption(chartConfig);
+                }
+                
+                chart.setOption(option);
+                
+                // 立即调整图表大小
+                setTimeout(() => {
+                    chart.resize();
+                }, 0);
+                
+                // 响应窗口变化
+                window.addEventListener('resize', () => {
+                    chart.resize();
+                });
+            });
+        }
+
+        // 获取图表图标
+        function getChartIcon(type) {
+            switch(type) {
+                case 'bar': return 'fa-chart-bar';
+                case 'line': return 'fa-chart-line';
+                case 'pie': return 'fa-chart-pie';
+                case 'radar': return 'fa-bullseye';
+                case 'combo': return 'fa-chart-area';
+                default: return 'fa-chart-bar';
+            }
+        }
+
+        // 获取柱状图配置
+        function getBarOption(chartConfig) {
+            return {
+                tooltip: {
+                    trigger: 'axis',
+                    axisPointer: { type: 'shadow' }
+                },
+                xAxis: {
+                    type: 'category',
+                    data: chartConfig.data.categories,
+                    axisLine: { lineStyle: { color: '#999' } }
+                },
+                yAxis: {
+                    type: 'value',
+                    axisLine: { show: true, lineStyle: { color: '#999' } },
+                    splitLine: { lineStyle: { color: '#eee' } }
+                },
+                series: [{
+                    name: '数值',
+                    type: 'bar',
+                    barWidth: '60%',
+                    data: chartConfig.data.values,
+                    itemStyle: {
+                        color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+                            { offset: 0, color: '#4CAF50' },
+                            { offset: 1, color: '#2E7D32' }
+                        ]),
+                        borderRadius: [5, 5, 0, 0]
+                    }
+                }],
+                grid: {
+                    left: '3%',
+                    right: '4%',
+                    bottom: '10%',
+                    top: '15%',
+                    containLabel: true
+                }
+            };
+        }
+
+        // 获取折线图配置
+        function getLineOption(chartConfig) {
+            return {
+                tooltip: {
+                    trigger: 'axis'
+                },
+                xAxis: {
+                    type: 'category',
+                    data: chartConfig.data.categories,
+                    boundaryGap: false,
+                    axisLine: { lineStyle: { color: '#999' } }
+                },
+                yAxis: {
+                    type: 'value',
+                    axisLine: { show: true, lineStyle: { color: '#999' } },
+                    splitLine: { lineStyle: { color: '#eee' } }
+                },
+                series: [{
+                    name: '趋势',
+                    type: 'line',
+                    data: chartConfig.data.values,
+                    smooth: true,
+                    lineStyle: {
+                        width: 4,
+                        color: '#2196F3'
+                    },
+                    itemStyle: {
+                        color: '#2196F3'
+                    },
+                    areaStyle: {
+                        color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+                            { offset: 0, color: 'rgba(33, 150, 243, 0.5)' },
+                            { offset: 1, color: 'rgba(33, 150, 243, 0.1)' }
+                        ])
+                    }
+                }],
+                grid: {
+                    left: '3%',
+                    right: '4%',
+                    bottom: '10%',
+                    top: '15%',
+                    containLabel: true
+                }
+            };
+        }
+
+        // 获取饼图配置
+        function getPieOption(chartConfig) {
+            return {
+                tooltip: {
+                    trigger: 'item',
+                    formatter: '{a} <br/>{b}: {c} ({d}%)'
+                },
+                legend: {
+                    orient: 'horizontal',
+                    bottom: 10,
+                    data: chartConfig.data.map(item => item.name)
+                },
+                series: [{
+                    name: '分布',
+                    type: 'pie',
+                    radius: ['40%', '70%'],
+                    center: ['50%', '45%'],
+                    avoidLabelOverlap: false,
+                    itemStyle: {
+                        borderRadius: 10,
+                        borderColor: '#fff',
+                        borderWidth: 2
+                    },
+                    label: {
+                        show: true,
+                        formatter: '{b}: {c}'
+                    },
+                    emphasis: {
+                        itemStyle: {
+                            shadowBlur: 10,
+                            shadowOffsetX: 0,
+                            shadowColor: 'rgba(0, 0, 0, 0.5)'
+                        }
+                    },
+                    data: chartConfig.data
+                }],
+                color: ['#4CAF50', '#2196F3', '#9C27B0', '#FF9800', '#3F51B5', '#00BCD4']
+            };
+        }
+        
+        // 获取雷达图配置
+        function getRadarOption(chartConfig) {
+            return {
+                tooltip: {
+                    trigger: 'item'
+                },
+                radar: {
+                    indicator: chartConfig.data.indicators,
+                    radius: '65%',
+                    axisName: {
+                        color: '#333',
+                        fontSize: 12
+                    },
+                    splitArea: {
+                        show: true,
+                        areaStyle: {
+                            color: ['rgba(33, 150, 243, 0.1)', 'rgba(33, 150, 243, 0.05)']
+                        }
+                    }
+                },
+                series: [{
+                    type: 'radar',
+                    data: chartConfig.data.series.map(series => ({
+                        name: series.name,
+                        value: series.values,
+                        areaStyle: {
+                            color: new echarts.graphic.RadialGradient(0.5, 0.5, 1, [
+                                { offset: 0, color: 'rgba(76, 175, 80, 0.5)' },
+                                { offset: 1, color: 'rgba(76, 175, 80, 0.1)' }
+                            ])
+                        },
+                        lineStyle: {
+                            width: 2
+                        }
+                    }))
+                }],
+                legend: {
+                    bottom: 0,
+                    data: chartConfig.data.series.map(series => series.name)
+                }
+            };
+        }
+        
+        // 获取组合图配置
+        function getComboOption(chartConfig) {
+            return {
+                tooltip: {
+                    trigger: 'axis',
+                    axisPointer: {
+                        type: 'cross'
+                    }
+                },
+                legend: {
+                    data: chartConfig.data.series.map(s => s.name)
+                },
+                grid: {
+                    left: '3%',
+                    right: '4%',
+                    bottom: '10%',
+                    top: '15%',
+                    containLabel: true
+                },
+                xAxis: {
+                    type: 'category',
+                    data: chartConfig.data.categories,
+                    axisLine: { lineStyle: { color: '#999' } }
+                },
+                yAxis: [
+                    {
+                        type: 'value',
+                        name: '响应时间(秒)',
+                        position: 'left',
+                        axisLine: {
+                            show: true,
+                            lineStyle: { color: '#9C27B0' }
+                        }
+                    },
+                    {
+                        type: 'value',
+                        name: '满意度(%)',
+                        position: 'right',
+                        min: 90,
+                        max: 100,
+                        axisLine: {
+                            show: true,
+                            lineStyle: { color: '#4CAF50' }
+                        }
+                    }
+                ],
+                series: chartConfig.data.series.map(series => {
+                    if (series.type === 'line') {
+                        return {
+                            name: series.name,
+                            type: 'line',
+                            yAxisIndex: 0,
+                            data: series.data,
+                            smooth: true,
+                            lineStyle: {
+                                width: 3,
+                                color: '#9C27B0'
+                            },
+                            itemStyle: {
+                                color: '#9C27B0'
+                            }
+                        };
+                    } else {
+                        return {
+                            name: series.name,
+                            type: 'bar',
+                            yAxisIndex: 1,
+                            data: series.data,
+                            itemStyle: {
+                                color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+                                    { offset: 0, color: '#4CAF50' },
+                                    { offset: 1, color: '#2E7D32' }
+                                ])
+                            }
+                        };
+                    }
+                })
+            };
+        }
+
+        // 未找到结果
+        function showNotFound() {
+            resultsSection.style.display = 'block';
+            resultTitle.textContent = "未找到相关数据";
+            answerIntro.innerHTML = "抱歉，没有找到与您的查询完全匹配的数据。可能是由于以下原因：";
+            answerData.innerHTML = `
+                <ul>
+                    <li>您查询的内容可能不在当前数据库范围内</li>
+                    <li>关键词拼写可能有误</li>
+                    <li>该领域数据尚未收录</li>
+                </ul>
+                <p>请尝试以下相关关键词：</p>
+                <div class="tags">
+                    <div class="tag" onclick="searchTag('电池')">电池数据</div>
+                    <div class="tag" onclick="searchTag('客服云')">客服云</div>
+                    <div class="tag" onclick="searchTag('安防')">安防数据</div>
+                    <div class="tag" onclick="searchTag('物流')">物流分析</div>
+                </div>
+            `;
+            chartGrid.innerHTML = '<p class="data-box">暂无图表数据</p>';
+            updateTime.textContent = `更新于: ${new Date().toLocaleString()}`;
+        }
+
+        // 初始化事件监听
+        document.addEventListener('DOMContentLoaded', () => {
+            // 输入框事件
+            searchInput.addEventListener('input', (e) => {
+                showSuggestions(e.target.value);
+            });
+            
+            // 点击外部关闭建议框
+            document.addEventListener('click', (e) => {
+                if (!e.target.closest('.input-wrapper')) {
+                    suggestions.style.display = 'none';
+                }
+            });
+            
+            // 回车搜索
+            searchInput.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') performSearch();
+            });
+        });
+        
+        // 暴露函数给全局作用域
+        window.selectSuggestion = selectSuggestion;
+        window.searchTag = searchTag;
+        window.performSearch = performSearch;
+    </script>
+</body>
+</html>
