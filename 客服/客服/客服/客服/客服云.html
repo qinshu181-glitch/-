@@ -1,0 +1,1520 @@
+<!--更多资源：https://gitee.com/iGaoWei/big-data-view -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=0.9, minimum-scale=0.9, maximum-scale=0.9, user-scalable=no">
+    <meta http-equiv="refresh"> 
+    <!-- <meta content="60;url='https://gitee.com/iGaoWei/big-data-view'"> -->
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>AI客服云</title>
+    <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="css/reset.css">
+</head>
+<body>
+<div id="particles-js" class="main">
+    <div class="main_con">
+        <div class="main_top">
+            <div class="main_top_left">
+                <!-- <div class="main_top_left_top">
+                    <img src="./images/main_top_left.png"/>
+                    <div class="main_top_left_top_title">具体数据展示</div>
+                    <div class="main_top_left_top_con">
+                        <div class="main_top_left_top_con_list">
+                            <span class="main_top_left_c_l_n main_top_left_c_l_n1">444</span>
+                            <p>人工服务</p>
+                        </div>
+                        <div class="main_top_left_top_con_list">
+                            <span class="main_top_left_c_l_n main_top_left_c_l_n2">222</span>
+                            <p>智能客服</p>
+                        </div>
+                        <div class="main_top_left_top_con_list">
+                            <span class="main_top_left_c_l_n main_top_left_c_l_n3">111</span>
+                            <p>工单处理</p>
+                        </div>
+                        <div class="main_top_left_top_con_left">
+                            <div class="main_top_left_t_c_l_left">
+                                <span class="main_top_left_c_l_n main_top_left_c_l_n4">11</span>
+                                <p>应用场景</p>
+                            </div>
+                            <div class="main_top_left_t_c_l_right">
+                                <span class="main_top_left_c_l_n main_top_left_c_l_n5">22</span>
+                                <p>用户反馈</p>
+                            </div>
+                        </div>
+                        <div class="main_top_left_top_con_right main_top_left_top_con_right2">
+                            <div class="main_top_left_t_c_r_left">
+                                <span class="main_top_left_c_l_n">2</span>
+                                <p>安全系数</p>
+                            </div>
+                            <div class="main_top_left_t_c_r_right">
+                                <span class="main_top_left_c_l_n">1</span>
+                                <p>企业规划</p>
+                            </div>
+                        </div>
+                    </div>
+                </div> -->
+                <div class="main_top_left_top main_top_left_bottom" style="top: 5vh;">
+                    <img src="./images/main_top_left.png"/>
+                    <div class="main_top_left_top_title"  style="font-size: 2vh;">枣庄低空经济区域覆盖率</div>
+                    <div id="baseId" class="main_top_left_top_con" style="width:100%; height:29vh;top: 1vh;"></div>
+                </div>
+            </div>
+            <div class="main_top_middle">
+                <div class="main_top_middle_top_title">
+                    <img class="title_bg" src="./images/title_bg.png">
+                    <a href="" target="_self" class="ai-cloud-link">AI客服云</a>
+                    <a class="title_admin" href="客服云.html" target="_self"></a>
+                    <a class="title_web" href="客服云2.html" target="_self"></a>
+                </div>
+                <div class="main_top_middle_num_title">客户反馈总量</div>
+                <div class="main_top_middle_num">
+                   <!-- <div class="main_top_middle_num_list">
+                       <img src="./images/center_num.png">
+                       <p class="main_top_middle_num_list6">0</p>
+                   </div> -->
+                    <div class="main_top_middle_num_list">
+                        <img src="./images/center_num.png">
+                        <p class="main_top_middle_num_list5">5</p>
+                    </div>
+                    <div class="main_top_middle_num_list">
+                        <img src="./images/center_num.png">
+                        <p class="main_top_middle_num_list4">4</p>
+                    </div>
+                    <div class="main_top_middle_num_list">
+                        <img src="./images/center_num.png">
+                        <p class="main_top_middle_num_list3">2</p>
+                    </div>
+                    <div class="main_top_middle_num_list">
+                        <img src="./images/center_num.png">
+                        <p class="main_top_middle_num_list2">1</p>
+                    </div>
+                    <div class="main_top_middle_num_list">
+                        <img src="./images/center_num.png">
+                        <p class="main_top_middle_num_list1">8</p>
+                    </div>
+                </div>
+                <div class="main_top_middle_bottom">
+                    <div class="main_top_middle_bottom_echarts">
+                        <img src="./images/main_top_bottom.png">
+                        <div class="main_top_echarts_con">
+                            <!-- <div class="main_top_echarts_con_title">服务价值</div> -->
+                            <div class="data-labels"> <!-- 新增容器 -->
+                                <div class="label-item">
+                                    <div class="label-top">低空经济年产值</div>
+                                    <div class="label-bottom">23，000，000元</div>
+                                </div>
+                                <div class="label-item">
+                                    <div class="label-top">低空现代产业体系数</div>
+                                    <div class="label-bottom">5个</div>
+                                </div>
+                                <div class="label-item">
+                                    <div class="label-top">引进企业</div>
+                                    <div class="label-bottom">26家</div>
+                                </div>
+                                <div class="label-item">
+                                    <div class="label-top">合作企业</div>
+                                    <div class="label-bottom">84家</div>
+                                </div>
+                        </div>
+                            <div id="threeTasksId" class="main_top_echarts_pie"></div>
+                        </div>
+                    </div>
+                    <div class="main_top_middle_bottom_echarts main_top_middle_bottom_echarts_right">
+                        <img src="./images/main_top_bottom.png">
+                        <div class="main_top_echarts_con">
+                            <!-- <div class="main_top_echarts_con_title">客服服务效率</div> -->
+                            <div class="data-labels"style> <!-- 新增容器 -->
+                                <div class="label-item" >
+                                  <div class="label-top">产品平均产出量</div>
+                                  <div class="label-bottom">500件/天</div>
+                                </div>
+                                <div class="label-item" >
+                                  <div class="label-top">AI解决问题率</div>
+                                  <div class="label-bottom">40%</div>
+                                </div>
+                                <div class="label-item" >
+                                  <div class="label-top">订单问题解决率</div>
+                                  <div class="label-bottom">98%</div>
+                                </div>
+                                <div class="label-item" >
+                                  <div class="label-top">平均响应时间</div>
+                                  <div class="label-bottom">30秒/次</div>
+                                </div>
+                              </div>
+                            <div id="publicityId" class="main_top_echarts_pie"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="main_top_left main_top_right">
+                <!-- <div class="main_top_left_top">
+                    <img src="./images/main_top_left.png"/>
+                    <div class="main_top_left_top_title">公开数据展示</div>
+                    <div class="main_top_left_top_con">
+                        <div class="main_top_left_top_con_left">
+                            <span class="daysData">0</span>
+                            <p>今日公开</p>
+                        </div>
+                        <div class="main_top_left_top_con_right">
+                            <span class="weekData">0</span>
+                            <p>本周公开</p>
+                        </div>
+                        <div class="main_top_left_top_con_list">
+                            <span class="monthData">0</span>
+                            <p>本月公开</p>
+                        </div>
+                        <div class="main_top_left_top_con_list">
+                            <span class="someThing">0</span>
+                            <p>本年公开</p>
+                        </div>
+                        <div class="main_top_left_top_con_list">
+                            <span class="policyData">0</span>
+                            <p>政策解读</p>
+                        </div>
+                    </div>
+                </div> -->
+                <div class="main_top_left_top main_top_left_bottom" style="top: 6.6vh;">
+                    <img src="./images/main_top_left.png" />
+                    <div class="main_top_left_top_title"style="font-size: 2.0vh"><strong>主产品问题反馈占比</strong></div>
+                    <div id="questionId" style="width:100%; height:250px;top: -2.5vh;"class="main_top_left_top_con">
+                    </div>
+                </div>
+            </div>
+        <!-- </div>
+        <div class="main_middle">
+            <div class="main_middle_list">
+                <img src="./images/main_middle.png">
+                <div class="main_list_title main_list_title1">XXX镇</div>
+                <span class="main_list_title_num main_list_title_num1">0</span>
+            </div>
+            <div class="main_middle_list">
+                <img src="./images/main_middle.png">
+                <div class="main_list_title main_list_title2">XX镇</div>
+                <span class="main_list_title_num main_list_title_num2">0</span>
+            </div>
+            <div class="main_middle_list">
+                <img src="./images/main_middle.png">
+                <div class="main_list_title main_list_title3">XXXX</div>
+                <span class="main_list_title_num main_list_title_num3">0</span>
+            </div>
+            <div class="main_middle_list">
+                <img src="./images/main_middle.png">
+                <div class="main_list_title main_list_title4">XXXX</div>
+                <span class="main_list_title_num main_list_title_num4">0</span>
+            </div>
+            <div class="main_middle_list">
+                <img src="./images/main_middle.png">
+                <div class="main_list_title main_list_title5">XXXX</div>
+                <span class="main_list_title_num main_list_title_num5">0</span>
+            </div> -->
+        </div>
+        <div class="main_bottom">
+            <div class="main_bottom_top">
+                <div class="main_bottom_top_list">
+                    <img src="./images/main_bottopm_top1.png">
+                    <div class="main_bottom_t_l_title">重点合作企业</div>
+                    <div class="main_bottom_t_l_con" style="top: -15px">
+                        <div class="main_bottom_t_l_main">
+                            <ul>
+                                <li>
+                                    <div class="main_bottom_t_l_main_list">
+                                        <div class="main_bottom_t_list_title main_bottom_t_list_title1"> <img src="images/date-icon.png" class="date-icon" style="width: 20px; height: 20px;"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;中国移动</div>
+                                        
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="main_bottom_t_l_main_list">
+                                        <div class="main_bottom_t_list_title main_bottom_t_list_title2"><img src="images/date-icon2.png" class="date-icon" style="width: 20px; height: 20px;"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;枣庄顺诚安全技术有限公司</div>
+                                        
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="main_bottom_t_l_main_list">
+                                        <div class="main_bottom_t_list_title main_bottom_t_list_title3"> <img src="images/date-icon3.png" class="date-icon" style="width: 20px; height: 20px;"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;枣庄氢能科技有限公司</div>
+                                        
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="main_bottom_t_l_main_list">
+                                        <div class="main_bottom_t_list_title main_bottom_t_list_title4"><img src="images/date-icon4.png" class="date-icon" style="width: 20px; height: 20px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;山东航景科技有限公司</div>
+                                       
+                                    </div>
+                                </li>
+                            </ul>
+                    
+                        </div>
+                    </div>
+                </div>
+                <div class="main_bottom_top_list">
+                    <img src="./images/main_bottopm_top2.png">
+                    <div class="main_bottom_t_l_title">应用场景占比</div>
+                    <div id="departmentId" class="main_bottom_t_l_chart"></div>
+                </div>
+                <div class="main_bottom_top_list">
+                    <img src="./images/main_bottopm_top1.png">
+                    <div class="main_bottom_t_l_title">重点反馈问题</div>
+                    <div class="main_bottom_t_l_con" style="top: -15px">
+                        <div class="main_bottom_t_l_main2">
+                            <ul>
+                               <!-- 修改重点反馈问题部分的代码 -->
+                    <li>
+                      <div class="main_bottom_t_l_main_list">
+                       <div class="main_bottom_t_list_title main_bottom_polity_title1">电池快充会不会影响寿命？<span style="color: rgb(209, 245, 5);">（已解决）</span></div>
+       </div>
+</li>
+<li>
+    <div class="main_bottom_t_l_main_list">
+        <div class="main_bottom_t_list_title main_bottom_polity_title2">废旧电池怎么处理？<span style="color: rgb(209, 245, 5);">（已解决）</span></div>
+    </div>
+</li>
+<li>
+    <div class="main_bottom_t_l_main_list">
+        <div class="main_bottom_t_list_title main_bottom_polity_title3">外壳保护件如何平衡防护强度与轻量化？<span style="color:  rgb(209, 245, 5);">（已解决）</span></div>
+    </div>
+</li>
+<li>
+    <div class="main_bottom_t_l_main_list">
+        <div class="main_bottom_t_list_title main_bottom_polity_title4">外壳保护件防水失效怎么解决？<span style="color: rgb(209, 245, 5);">（已解决）</span></div>
+    </div>
+</li>
+<li>
+    <div class="main_bottom_t_l_main_list">
+        <div class="main_bottom_t_list_title main_bottom_polity_title4">外壳保护件如何适配不同电池热管理需求？<span style="color: red;">（正在解决）</span></div>
+    </div>
+</li>
+<li>
+    <div class="main_bottom_t_l_main_list">
+        <div class="main_bottom_t_list_title main_bottom_polity_title4">传感器如何提高续航？<span style="color:  rgb(209, 245, 5);">（已解决）</span></div>
+    </div>
+</li>
+<li>
+    <div class="main_bottom_t_l_main_list">
+        <div class="main_bottom_t_list_title main_bottom_polity_title4">传感器在高温环境下误报率高怎么解决？<span style="color: red;">（正在解决）</span></div>
+    </div>
+</li>
+<li>
+    <div class="main_bottom_t_l_main_list">
+        <div class="main_bottom_t_list_title main_bottom_polity_title4">碳纤维螺旋桨怎么提高续航？<span style="color:  rgb(209, 245, 5);">（已解决）</span></div>
+    </div>
+</li>
+<li>
+    <div class="main_bottom_t_l_main_list">
+        <div class="main_bottom_t_list_title main_bottom_polity_title4">碳纤维螺旋桨如何降噪？<span style="color:  rgb(209, 245, 5);">（已解决）</span></div>
+    </div>
+</li>
+<li>
+    <div class="main_bottom_t_l_main_list">
+        <div class="main_bottom_t_list_title main_bottom_polity_title4">碳纤维螺旋桨如何提高耐热？<span style="color:  rgb(209, 245, 5);">（已解决）</span></div>
+    </div>
+</li>
+<li>
+    <div class="main_bottom_t_l_main_list">
+        <div class="main_bottom_t_list_title main_bottom_polity_title4">主控芯片如何在高动态环境下实现低延迟响应？<span style="color:  rgb(209, 245, 5);">（已解决）</span></div>
+    </div>
+</li>
+<li>
+    <div class="main_bottom_t_l_main_list">
+        <div class="main_bottom_t_list_title main_bottom_polity_title4">主控芯片如何在保证性能的同时降低功耗以延长续航？<span style="color:  rgb(209, 245, 5);">（已解决）</span></div>
+    </div>
+</li>
+<li>
+    <div class="main_bottom_t_l_main_list">
+        <div class="main_bottom_t_list_title main_bottom_polity_title4">主控芯片是否支持多种通信协议以满足特定场景的互联需求？<span style="color: red;">（正在解决）</span></div>
+    </div>
+</li>
+<li>
+    <div class="main_bottom_t_l_main_list">
+        <div class="main_bottom_t_list_title main_bottom_polity_title4">电机运行时噪音大，如何解决？<span style="color:  rgb(209, 245, 5);">（已解决）</span></div>
+    </div>
+</li>
+<li>
+    <div class="main_bottom_t_l_main_list">
+        <div class="main_bottom_t_list_title main_bottom_polity_title4">电机发热严重可能是什么原因？<span style="color:  rgb(209, 245, 5);">（已解决）</span></div>
+    </div>
+</li>
+<li>
+    <div class="main_bottom_t_l_main_list">
+        <div class="main_bottom_t_list_title main_bottom_polity_title4">电机如何防止电磁干扰？<span style="color:  rgb(209, 245, 5);">（已解决）</span></div>
+    </div>
+</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="main_bottom_bottom">
+                <div class="main_bottom_b_left" style="top: 25px;">
+                    <img src="./images/main_bottom_bottom.png">
+                    <div class="main_bottom_b_title">主产品满意度</div>
+                    <div id="coverageId" class="main_bottom_b_con3" style="color: aqua;"></div>
+                </div>
+                <div class="main_bottom_b_middle1"style="top: 25px;">
+                    <img src="./images/main_bootm_middle.png">
+                    <div class="main_bottom_b_title">人工客服处理反馈数</div>
+                    <div id="contentId" class="main_bottom_b_con main_bottom_b_con2"></div>
+                </div>
+                <div class="main_bottom_b_middle2"style="top: 25px;">
+                    <img src="./images/main_bootm_middle.png">
+                    <div class="main_bottom_b_title">AI客服处理反馈数</div>
+                    <div id="publicNumId" class="main_bottom_b_con main_bottom_b_con2"></div>
+                </div>
+                <div class="main_bottom_b_right"style="top: 25px;">
+                    <img src="./images/main_bottom_bottom.png">
+                    <div class="main_bottom_b_title">售后服务满意度</div>
+                    <div id="yearsNumId" class="main_bottom_b_con"style="top:1vh,height:80%"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+
+</html>
+<script src="https://www.jq22.com/jquery/jquery-1.10.2.js"></script>
+<script src="https://www.jq22.com/jquery/echarts-4.2.1.min.js"></script>
+<script type="text/javascript" src="js/dataScoll.js"></script>
+<script type="text/javascript" src="js/digitalScroll.js"></script>
+<script type="text/javascript" src="js/jcarousellite.js"></script>
+<script type="text/javascript" src="js/particles.min.js"></script>
+<script type="text/javascript" src="js/app.js"></script>
+
+<script>
+    $(function() {
+        function apiFn() {
+            this.hostname = ""
+        }
+        // apiFn.prototype = {
+        //     Init:function() {
+        //         this.findCount()
+        //         this.otherDataFn()
+        //         this.baseInfo()
+        //         this.questionFn()
+        //         this.publicityFn()
+        //         this.threeTasksFn()
+        //         this.departmentFn()
+        //         this.guideFn()
+        //         this.policyFn()
+        //         this.coverageFn()
+        //         this.yearsNumFn()
+        //         this.contentFn()
+        //         this.publicNumFn()
+        //     },
+            
+        //     findCount:function() {
+
+        //     },
+        //     // 其他数据展示
+        //     otherDataFn:function() {
+        //         $(".daysData").addClass("counter-value").text("304")
+        //         $(".weekData").addClass("counter-value").text("2044")
+        //         $(".monthData").addClass("counter-value").text("909")
+        //         $(".someThing").addClass("counter-value").text("980")
+        //         $(".policyData").addClass("counter-value").text("200")
+        //     },
+        //     // 基础信息
+        //     baseInfo:function() {
+
+
+        //         var baseChart = echarts.init(document.getElementById('baseId'));
+        //         var charts = [
+        //             {name: "淘宝", num: 200},
+        //             {name: "拼多多", num: 300},
+        //             {name: "京东", num: 400},
+        //             {name: "其他", num: 500},
+        //             // {name: "环境与安全数据", num: 300},
+        //         ]
+        //         var color = ['rgba(100,255,249', 'rgba(100,255,249', 'rgba(100,255,249', 'rgba(100,255,249', 'rgba(100,255,249']
+
+        //         let lineY = []
+        //         for (var i = 0; i < charts.length; i++) {
+        //         var x = i
+        //         if (x > color.length - 1) {
+        //             x = color.length - 1
+        //         }
+        //         var data = {
+        //             name: charts[i].name,
+        //             color: color[x] + ')',
+        //             value: charts[i].num,
+        //             itemStyle: {
+        //             normal: {
+        //                 show: true,
+        //                 color: new echarts.graphic.LinearGradient(0, 0, 1, 0, [{
+        //                 offset: 0,
+        //                 color: color[x] + ', 0.3)'
+        //                 }, {
+        //                 offset: 1,
+        //                 color: color[x] + ', 1)'
+        //                 }], false),
+        //                 barBorderRadius: 10
+        //             },
+        //             emphasis: {
+        //                 shadowBlur: 15,
+        //                 shadowColor: 'rgba(0, 0, 0, 0.1)'
+        //             }
+        //             }
+        //         }
+        //         lineY.push(data)
+        //         }
+        //         var option= {
+        //         title: {
+        //             show: false
+        //         },
+        //         grid: {
+        //             // borderWidth: 1,
+        //             top: '10%',
+        //             left: '30%',
+        //             right: '20%',
+        //             bottom: '3%'
+        //         },
+        //         color: color,
+        //         yAxis: [{
+        //             type: 'category',
+        //             inverse: true,
+        //             axisTick: {
+        //             show: false
+        //             },
+        //             axisLine: {
+        //             show: false
+        //             },
+        //             axisLabel: {
+        //             show: false,
+        //             inside: false
+        //             },
+        //             data: charts.name
+        //         }, {
+        //             type: 'category',
+        //             inverse: true,
+        //             axisLine: {
+        //             show: false
+        //             },
+        //             axisTick: {
+        //             show: false
+        //             },
+        //             axisLabel: {
+        //             show: true,
+        //             inside: false,
+        //             textStyle: {
+        //                 color: '#38E1E1',
+        //                 fontSize: '12',
+        //             },
+        //             formatter: function (val,index) {
+        //                 return `${charts[index].num}`
+        //             }
+        //             },
+        //             splitArea: {
+        //             show: false
+        //             },
+        //             splitLine: {
+        //             show: false
+        //             },
+        //             data: charts
+        //         }],
+        //         xAxis: {
+        //             // type: 'value',
+        //             axisTick: {
+        //             show: false
+        //             },
+        //             axisLine: {
+        //             show: false
+        //             },
+        //             splitLine: {
+        //             show: false
+        //             },
+        //             axisLabel: {
+        //             show: false
+        //             }
+        //         },
+        //         series: [{
+        //             name: '',
+        //             type: 'bar',
+        //             zlevel: 2,
+        //             barWidth: '5px',
+        //             data: lineY,
+        //             animationDuration: 1500,
+        //             label: {
+        //             normal: {
+        //                 color: 'white',
+        //                 show: true,
+        //                 position: [-65, -2],
+        //                 textStyle: {
+        //                 fontSize: 12
+        //                 },
+        //                 formatter: function (a, b) {
+        //                     return a.name
+        //                 }
+        //             }
+        //             }
+        //         }],
+        //         animationEasing: 'cubicOut'
+        //         }
+        //         baseChart.setOption(option)
+               
+        //     },
+        apiFn.prototype = {
+            Init:function() {
+                this.findCount()
+                this.otherDataFn()
+                this.baseInfo()
+                this.questionFn()
+                this.publicityFn()
+                this.threeTasksFn()
+                this.departmentFn()
+                this.guideFn()
+                this.policyFn()
+                this.coverageFn()
+                this.yearsNumFn()
+                this.contentFn()
+                this.publicNumFn()
+            },
+            
+            findCount:function() {
+                // 原有空实现
+            },
+            
+            otherDataFn:function() {
+                $(".daysData").addClass("counter-value").text("304")
+                $(".weekData").addClass("counter-value").text("2044")
+                $(".monthData").addClass("counter-value").text("909")
+                $(".someThing").addClass("counter-value").text("980")
+                $(".policyData").addClass("counter-value").text("200")
+            },
+
+            // 修改后的基础信息（折线图）
+            baseInfo: function() {
+    var baseChart = echarts.init(document.getElementById('baseId'));
+    var charts = [
+        {name: "2022年", value: 4.6},
+        {name: "2023年", value: 13.5},
+        {name: "2024年", value: 25.0},
+        {name: "2025年", value: 30.0},
+    ];
+
+    var option = {
+        backgroundColor: 'transparent',
+        tooltip: {
+            trigger: 'axis',
+            formatter: '{b} : {c}%'
+        },
+        grid: {
+            left: '15%',
+            right: '10%',
+            bottom: '20%',
+            top: '17%'
+        },
+        xAxis: {
+            type: 'category',
+            data: charts.map(item => item.name),
+            axisLine: { 
+                lineStyle: { 
+                    color: '#fff' 
+                } 
+            },
+            axisLabel: { 
+                color: '#fff', 
+                fontSize: 12 
+            }
+        },
+        yAxis: {
+            type: 'value',
+            name: '覆盖率/%',
+            nameTextStyle: {
+                color: '#fff',
+                padding: [0, 0, 0, 40]
+            },
+            axisLabel: {
+                color: '#fff',
+                fontSize: 12,
+                formatter: '{value}%'
+            },
+            splitLine: { 
+                lineStyle: { 
+                    color: 'rgba(255,255,255,0.2)' 
+                } 
+            },
+            axisLine: {
+                show: true,
+                lineStyle: {
+                    color: '#fff'
+                }
+            },
+            max: 100, // 设置纵坐标最大值为100%
+            min: 0  ,  // 设置最小值为0%
+            interval: 10
+        },
+        series: [{
+            data: charts.map(item => item.value),
+            type: 'line',
+            smooth: true,
+            symbol: 'circle',
+            symbolSize: 8,
+            lineStyle: { 
+                color: '#00F7FF', 
+                width: 3 
+            },
+            areaStyle: {
+                color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+                    { offset: 0, color: 'rgba(0,247,255,0.3)' },
+                    { offset: 1, color: 'rgba(0,247,255,0)' }
+                ])
+            },
+            itemStyle: {
+                color: '#00F7FF',
+                borderColor: '#fff',
+                borderWidth: 2
+            },
+            label: {
+                show: true,
+                position: 'top',
+                color: '#fff',
+                formatter: '{c}%'
+            }
+        }]
+    };
+    
+    baseChart.setOption(option);
+    
+    // 响应式调整
+    window.addEventListener('resize', function() {
+        baseChart.resize();
+    });
+},
+            // 问题反馈类型占比
+            questionFn:function() {
+                var numArr = [
+                    {name: '电池', value: 10},
+                    {name: '外壳保护件', value: 33},
+                    {name: '红外线传感器', value: 15},
+                    {name: '碳纤维螺旋桨', value: 5},
+                    {name: '主控芯片', value: 12},
+                    {name: '无刷电机', value: 25},
+                ]
+                // for(var i = 0; i < data.list.length; i++) {
+                //     numArr.push({name: data.list[i].name,value: data.list[i].num})
+                // }
+                var datas = numArr
+                var questionChart = echarts.init(document.getElementById('questionId'));
+                var option = {
+                    title: {
+                        left: 'center'
+                    },
+                    tooltip: {
+                        trigger: 'item',
+                        formatter: '{b} : {d}%'
+                    },
+                    color:['#2E8CFF', '#FD9133','#37D2D4','#19CA88','#858FF8','yellow'],
+                    legend: {
+                        itemWidth: 10,// 标志图形的长度
+                        itemHeight: 10,// 标志图形的宽度
+                        orient: 'vertical',
+                        // left: 'right',
+                        top: '30%',
+                        x: '70%',
+                        data: datas,
+                        textStyle: { //图例文字的样式
+                            color: '#fff',
+                            fontSize: 11
+                        },
+                    },
+                    series: [
+                        {
+                            name: '问题反馈',
+                            type: 'pie',
+                            radius: '70%',
+                            center: ['40%', '60%'],
+                            animationDuration: 2500,
+                            data: datas,
+                            label: {
+                                normal: {
+                                    position: 'inner',
+                                    show : false
+                                }
+                            }
+                        }
+                    ]
+                };
+                questionChart.setOption(option)
+                
+            },
+            // 党务公开
+            publicityFn:function() {
+                var dataArr = [
+                    {name: '设备位置与轨迹', value: 300},
+                    {name: '传感器健康状况', value: 500},
+                    {name: '环境动态监测', value: 400},
+                    {name: '用户交互反馈', value: 350},
+                    // {name: '测试55', value: 363},
+                    // {name: '测试66', value: 800},
+                ]
+                // for(var i = 0; i < res.list.length; i++) {
+                //     dataArr.push({name: res.list[i].name, value: res.list[i].num})
+                // }
+
+                var publicitChart = echarts.init(document.getElementById('publicityId'));
+                var data = dataArr
+                var option = {
+                    color: ['#38EB70', '#F7E16C', '#0EFCFF', '#4D92F2', '#4D92F2'],
+                    tooltip: {
+                        trigger: 'item',
+                        formatter: '{a} <br/>{b} : {c} ({d}%)'
+                    },
+                    legend: {
+                        itemWidth: 12,// 标志图形的长度
+                        itemHeight: 12,// 标志图形的宽度
+                        orient: 'vertical',
+                        // left: 'right',
+                        top: '5%',
+                        bottom: '50%',
+                        x: '45%',
+                        textStyle: {
+                            color: '#fff',
+                            fontSize: 12,
+
+                        },
+                        data: data,
+                    },
+                    series: [
+                        // 主要展示层的
+                        {
+                            radius: ['70%', '90%'],
+                            center: ['25%', '50%'],
+                            type: 'pie',
+                            label: {
+                                normal: {
+                                    position: 'inner',
+                                    show : false
+                                }
+                            },
+                            name: "XX公开数量",
+                            data: data,
+                        },
+                        // 边框的设置
+                        {
+                            radius: ['50%', '55%'],
+                            center: ['25%', '50%'],
+                            type: 'pie',
+                            label: {
+                                normal: {
+                                    show: false
+                                },
+                                emphasis: {
+                                    show: false
+                                }
+                            },
+                            labelLine: {
+                                normal: {
+                                    show: false
+                                },
+                                emphasis: {
+                                    show: false
+                                }
+                            },
+                            animation: false,
+                            tooltip: {
+                                show: false
+                            },
+                            data: [{
+                                value: 1,
+                                itemStyle: {
+                                    color: "rgba(250,250,250,0.3)",
+                                },
+                            }],
+                        }
+                    ]
+                };
+                publicitChart.setOption(option)
+                // setInterval(function() {
+                //     publicitChart.clear()
+                //     publicitChart.setOption(option)
+                // },6000)
+            },
+            // 三务公开数量
+            // threeTasksFn:function() {
+            //     let names = "666666";
+            //     if(6 - names.length > 0) {
+            //         for(g = 0; g < 6 - names.length; g++) {
+            //             $(".main_top_middle_num_list"+(6 - g)).text('0')
+            //         }
+            //     }
+            //     for(var j = 0; j < names.length; j++) {
+            //         $(".main_top_middle_num_list"+(names.length - j)).text(names.substr(j,1))
+            //     }
+            //     var dataArr = [
+            //         {name: '实时数据', value: 300},
+            //         {name: '预测维护', value: 500},
+            //         {name: '用户洞察', value: 400},
+            //         {name: '风险决策', value: 350},
+            //         {name: '安全警告', value: 363},
+            //         // {name: '测试66', value: 800},
+            //     ]
+            //     for(var i = 1; i < dataArr.length; i++) {
+            //         $(".main_top_left_c_l_n"+i).addClass("counter-value").text(dataArr[i].value)
+            //     }
+            //     var threeTasksChart = echarts.init(document.getElementById('threeTasksId'));
+            //     var data = dataArr
+            //     var option = {
+            //         color: ['#38EB70', '#2E8CFF', '#0EFCFF', '#858FF8', '#FD9133','#F7E270'],
+            //         tooltip : {
+            //             trigger: 'item',
+            //             formatter: "{a} <br/>{b} : {c} ({d}%)"
+            //         },
+            //         legend: {
+            //             itemWidth: 15,// 标志图形的长度
+            //             itemHeight: 15,// 标志图形的宽度
+            //             orient: 'vertical',
+            //             // left: 'right',
+            //             top: '10%',
+            //             bottom: '50%',
+            //             x: '50%',
+            //             textStyle: {
+            //                 color: '#fff',
+            //                 fontSize: 12,
+
+            //             },
+            //             data: data
+            //         },
+            //         series :
+            //             {
+            //                 name:'服务价值',
+            //                 type:'pie',
+            //                 animationDuration: 1500,
+            //                 radius: ['70%', '90%'],
+            //                 center: ['25%', '50%'],
+            //                 roseType : 'radius',
+            //                 label: {
+            //                     normal: {
+            //                         position: 'inner',
+            //                         show : false
+            //                     }
+            //                 },
+            //                 data:data
+            //             }
+            //     };
+            //     threeTasksChart.setOption(option)
+                
+            // },// 服务价值占比（清空）
+threeTasksFn: function() {
+    var threeTasksChart = echarts.init(document.getElementById('threeTasksId'));
+    threeTasksChart.clear();
+},
+
+// 动态数据占比（清空）
+publicityFn: function() {
+    var publicitChart = echarts.init(document.getElementById('publicityId'));
+    publicitChart.clear();
+},
+            departmentFn: function() {
+    var dataArr = [
+        {name: '应急救援', value: 20},
+        {name: '农业植保', value: 50},
+        {name: '城市巡查', value: 10},
+        {name: '工程测绘', value: 15},
+        {name: '文旅观光', value: 5},
+    ];
+
+    var departmentChart = echarts.init(document.getElementById('departmentId'));
+    var option = {
+        color: ['#FD9133', '#47F6A2', '#37D2D4', '#3493FF','#858FF8'],
+        tooltip: {
+            trigger: 'item',
+            // 关键修改点：自定义格式化函数
+            formatter: function(params) {
+                return params.name + ': ' + params.percent + '%';
+            }
+        },
+        legend: {
+            itemWidth: 15,
+            itemHeight: 15,
+            orient: 'vertical',
+            top: '30%',
+            x: '5%',
+            textStyle: {
+                color: '#fff',
+                fontSize: 15
+            },
+            data: dataArr
+        },
+        series: [{
+            name: '应用场景公开占比',
+            type: 'pie',
+            radius: '70%',
+            center: ['76%', '52%'],
+            labelLine: {
+                normal: {
+                    lineStyle: {
+                        color: '#0EFCFF'
+                    }
+                }
+            },
+            label: {
+                normal: {
+                    formatter: '{b}',
+                    fontSize: 12,
+                    color: '#0EFCFF'
+                }
+            },
+            data: dataArr
+        }]
+    };
+
+    departmentChart.setOption(option);
+},
+            guideFn:function() {
+                $(".main_bottom_t_l_main").jCarouselLite({
+                    vertical: true,
+                    hoverPause:true,
+                    visible: 4,
+                    auto: 1000,
+                    speed: 500
+                });
+            },
+            // 政策解读
+            policyFn:function() {
+                $(".main_bottom_t_l_main2").jCarouselLite({
+                    vertical: true,
+                    hoverPause:true,
+                    visible: 4,
+                    auto: 1000,
+                    speed: 500
+                });
+            },
+            // 主要关注内容区域占比
+            // 主要关注内容区域占比
+// 主要关注内容区域占比
+coverageFn:function() {
+    var resArr = [
+        {name: '碳纤维螺旋桨（分）', value: 97},
+        {name: '电池\n（分）', value: 90},
+        {name: '主控芯片\n（分）', value: 80},
+        {name: '红外线传感器（分）', value: 75},
+        {name: '无刷电机\n（分）', value:70},
+        {name: '外壳保护件\n（分）', value: 65},
+    ]
+    
+    var coverageChart = echarts.init(document.getElementById('coverageId'));
+    var option = {
+        tooltip: {
+            trigger: 'item',
+            show: true,
+           
+        },
+        radar: {
+            radius: '70%',
+            center: ['47%', '50%'],
+            indicator: resArr.map(item => {
+                return {
+                    name: item.name,
+                    max: 100
+                }
+            }),
+            axisName: {
+                color: '#39DCF4',
+                fontSize: 12,
+                padding: [5, 5]
+            },
+            splitArea: {
+                areaStyle: {
+                    color: 'rgba(255,255,255,0)'
+                }
+            },
+            axisLine: {
+                lineStyle: {
+                    color: 'rgba(255,255,255,.2)'
+                }
+            },
+            splitLine: {
+                lineStyle: {
+                    width: 1,
+                    color: 'rgba(255,255,255,.2)'
+                }
+            },
+        },
+        series: [{
+            name: '产品满意度',
+            type: 'radar',
+            data: [{
+                value: resArr.map(item => item.value),
+                name: '满意度',
+                symbol: 'none',
+                lineStyle: {
+                    width: 2,
+                    color: '#2EEFAD'
+                },
+                areaStyle: {
+                    color: 'rgba(46,239,173,0.3)'
+                },
+                label: {
+                    show: true,
+                    formatter: function(params) {
+                        return params.value + '分';
+                    },
+                    color: '#fff',
+                    fontSize: 12
+                }
+            }]
+        }]
+    };
+    
+    coverageChart.setOption(option);
+    
+    // 响应式调整
+    window.addEventListener('resize', function() {
+        coverageChart.resize();
+    });
+},
+ 
+            yearsNumFn:function() {
+    var resArr = [
+        {name: '客\n服\n1\n组', value: 4.4},
+        {name: '客\n服\n2\n组', value: 4.3},
+        {name: '客\n服\n3\n组', value: 4.2},
+        {name: '客\n服\n4\n组', value: 4.7},
+        {name: '\nAI\n组', value: 4.9},
+    ]
+    
+    var yearsNumChart = echarts.init(document.getElementById('yearsNumId'));
+    var option = {
+        tooltip: {
+            trigger: 'axis',
+            axisPointer: { 
+                type: 'shadow',
+                shadowStyle: {
+                    color: 'rgba(150,150,150,0.1)' // 调暗阴影颜色
+                }
+            },
+            formatter: function(params) {
+                return `${params[0].name.replace(/\n/g,'')}<br/>${params[0].value}⭐`; // 去除换行符
+            }
+        },
+        xAxis: [{
+            type: 'category',
+            data: resArr.map(item => item.name),
+            axisLabel: {
+                fontSize: 14,
+                color: 'rgba(255,255,255,.7)',
+                rotate: 0, // 取消倾斜
+                interval: 0,
+                formatter: function(value) {
+                    return value; // 直接返回带换行的文本
+                },
+                rich: {
+                    a: {
+                        lineHeight: 14,
+                        verticalAlign: 'middle', // 垂直居中
+                        align: 'center',        // 水平居中
+                        width: 20               // 固定标签宽度
+                    }
+                },
+                margin: 8 // 增加标签间距
+            },
+            axisTick: {
+                show: false,
+                alignWithLabel: true
+            },
+            axisLine: { 
+                show: false,
+                lineStyle: {
+                    color: 'rgba(255,255,255,0.2)'
+                }
+            },
+        }],
+        yAxis: [{
+            type: 'value',
+            name: '平均值/⭐',
+            nameTextStyle: {
+                color: 'rgba(255,255,255,.7)',
+                fontSize: 10,
+                padding: [0, 0, 8, -40] // 调整名称位置
+            },
+            splitLine: { 
+                show: true,
+                lineStyle: { 
+                    color: ['rgba(255,255,255,0.1)'], 
+                    type: 'solid' // 改为虚线
+                }
+            },
+            axisLabel: { 
+                color: 'rgba(255,255,255,.8)', 
+                fontSize: 14,
+                margin: 6 // 增加刻度间距
+            },
+            min: 0,    // 设置最小值
+            max: 5,   // 设置最大值
+            interval: 1 // 固定刻度间隔
+        }],
+        color: ['#2E8CFF'],
+        grid: {
+            left: '22%',   // 增加左侧空间
+            right: '8%',
+            top: '18%',
+            bottom: '32%'  // 增加底部空间
+        },
+        series: [{
+            name: '满意度',
+            type: 'bar',
+            barWidth: '25%', // 加宽柱形
+            data: resArr.map(item => item.value),
+            itemStyle: { 
+                borderRadius: [4, 4, 0, 0], // 增加圆角
+                color: new echarts.graphic.LinearGradient(
+                    0, 0, 0, 1,
+                    [
+                        {offset: 0, color: '#2E8CFF'},
+                        {offset: 1, color: '#0EFCFF'}
+                    ]
+                )
+            },
+            label: {
+                show: true,
+                position: 'top',
+                color: '#0EFCFF',
+                fontSize: 12,
+                formatter: '{c}⭐',
+                distance: 12 // 增加标签距离
+            },    
+        }]
+    };
+
+    yearsNumChart.setOption(option);
+},
+            // 关注内容区域占比
+            contentFn:function() {
+    var resArr = [
+        {name: '第一季度', value: 512, trend: 6.12},
+        {name: '第二季度', value: 541, trend: 5.66},
+        {name: '第三季度', value: 563, trend: 4.07},
+        {name: '第四季度', value: 582, trend: 3.37},
+    ]
+    
+    var contentChart = echarts.init(document.getElementById('contentId'));
+    var option = {
+        tooltip: {
+            trigger: 'axis',
+            // axisPointer: { type: 'cross' },
+            formatter: function(params) {
+                return params[0].name + '<br/>' + 
+                       '处理量: ' + params[0].value + '件<br/>' +
+                       '同比增长: ' + params[1].value + '%';
+            }
+        },
+        xAxis: [{
+            type: 'category',
+            name: '时间',
+            data: resArr.map(item => item.name),
+            axisLabel: {
+                fontSize: 14,
+                color: 'rgba(255,255,255,.7)',
+            },
+            axisTick: { show: false },
+            axisLine: { show: false },
+        }],
+        yAxis: [
+            {
+                type: 'value',
+                name: '数量/件',
+                nameTextStyle: {
+                    color: 'rgba(255,255,255,.7)',
+                    fontSize: 14,
+                },
+                splitLine: { 
+                    show: true,
+                    lineStyle: { color: ['rgba(255,255,255,0.2)'] }
+                },
+                axisLabel: { 
+                    color: 'rgba(255,255,255,.8)', 
+                    fontSize: 14,
+                },
+            },
+            {
+                type: 'value',
+                name: '同比增长',
+                nameTextStyle: {
+                    color: 'rgba(255,255,255,.7)',
+                    fontSize: 14,
+                },
+                splitLine: { show: false },
+                axisLabel: { 
+                    color: 'rgba(255,255,255,.8)', 
+                    fontSize: 14,
+                    formatter: '{value}%'
+                },max:10
+            }
+        ],
+        color: ['#2E8CFF', '#FF6B6B'],
+        grid: {
+            left: '12%',
+            right: '12%',
+            top: '25%',
+            bottom: '15%'
+        },
+        series: [
+            {
+                name: '人工客服',
+                type: 'bar',
+                barWidth: '20%',
+                data: resArr.map(item => item.value),
+                itemStyle: { 
+                    borderRadius: [3, 3, 0, 0],
+                    color: new echarts.graphic.LinearGradient(
+                        0, 0, 0, 1,
+                        [
+                            {offset: 0, color: '#2E8CFF'},
+                            {offset: 1, color: '#0EFCFF'}
+                        ]
+                    )
+                },
+                label: {
+                    show: true,
+                    position: 'top',
+                    color: '#0EFCFF',
+                    fontSize: 14,
+                    formatter: '{c}件'  
+                }
+            },
+            {
+                name: '同比增长',
+                type: 'line',
+                yAxisIndex: 1,
+                symbol: 'circle',
+                symbolSize: 8,
+                lineStyle: {
+                    width: 3,
+                    color: '#FF6B6B'
+                },
+                itemStyle: {
+                    color: '#FF6B6B',
+                    borderColor: '#fff',
+                    borderWidth: 2
+                },
+                data: resArr.map(item => item.trend),
+                label: {
+                    show: false  // 这里设置为false，不显示折线上的百分比
+                }
+            }
+        ]
+    };
+    
+    contentChart.setOption(option);
+},
+            // 巡察
+           // 巡察
+           publicNumFn:function() {
+    var resArr = [
+        {name: '第一季度', value: 291, trend: 18.45},
+        {name: '第二季度', value: 350, trend: 20.27},
+        {name: '第三季度', value: 436, trend: 24.29},
+        {name: '第四季度', value: 557, trend: 28.05},
+    ]
+    
+    var publicNumChart = echarts.init(document.getElementById('publicNumId'));
+    var option = {
+        tooltip: {
+            trigger: 'axis',
+            // axisPointer: { type: 'cross' },
+            formatter: function(params) {
+                return params[0].name + '<br/>' + 
+                       '处理量: ' + params[0].value + '件<br/>' +
+                       '同比增长: ' + params[1].value + '%';
+            }
+        },
+        xAxis: [{
+            type: 'category',
+            name: '时间',
+            data: resArr.map(item => item.name),
+            axisLabel: {
+                fontSize: 14,
+                color: 'rgba(255,255,255,.7)',
+            },
+            axisTick: { show: false },
+            axisLine: { show: false },
+        }],
+        yAxis: [
+            {
+                type: 'value',
+                name: '数量/件',
+                nameTextStyle: {
+                    color: 'rgba(255,255,255,.7)',
+                    fontSize: 14,
+                },
+                splitLine: { 
+                    show: true,
+                    lineStyle: { color: ['rgba(255,255,255,0.2)'] }
+                },
+                axisLabel: { 
+                    color: 'rgba(255,255,255,.8)', 
+                    fontSize: 14,
+                },
+            },
+            {
+                type: 'value',
+                name: '同比增长',
+                nameTextStyle: {
+                    color: 'rgba(255,255,255,.7)',
+                    fontSize: 14,
+                },
+                splitLine: { show: false },
+                axisLabel: { 
+                    color: 'rgba(255,255,255,.8)', 
+                    fontSize: 14,
+                    formatter: '{value}%'
+                },max:50
+            }
+        ],
+        color: ['#FFA500', '#FF6B6B'],
+        grid: {
+            left: '12%',
+            right: '12%',
+            top: '25%',
+            bottom: '15%'
+        },
+        series: [
+            {
+                name: 'AI客服',
+                type: 'bar',
+                barWidth: '20%',
+                data: resArr.map(item => item.value),
+                itemStyle: { 
+                    borderRadius: [3, 3, 0, 0],
+                    color: new echarts.graphic.LinearGradient(
+                        0, 0, 0, 1,
+                        [
+                            {offset: 0, color: '#FFA500'},
+                            {offset: 1, color: '#FFD700'}
+                        ]
+                    )
+                },
+                label: {
+                    show: true,
+                    position: 'top',
+                    color: '#FFD700',
+                    fontSize: 14,
+                    formatter: '{c}件'  
+                }
+            },
+            {
+                name: '增长率',
+                type: 'line',
+                yAxisIndex: 1,
+                symbol: 'circle',
+                symbolSize: 8,
+                lineStyle: {
+                    width: 3,
+                    color: '#FF6B6B'
+                },
+                itemStyle: {
+                    color: '#FF6B6B',
+                    borderColor: '#fff',
+                    borderWidth: 2
+                },
+                data: resArr.map(item => item.trend),
+                label: {
+                    show: false  // 这里设置为false，不显示折线上的百分比
+                }
+            }
+        ]
+    };
+    
+    publicNumChart.setOption(option);
+}
+   
+
+
+        }
+        var start = new apiFn()
+        start.Init()
+    })
+    
+
+
+ // 客户反馈总量自动增长函数
+function autoIncrementFeedback() {
+    // 获取数字元素
+    const numElements = [
+        $('.main_top_middle_num_list1'), 
+        $('.main_top_middle_num_list2'), 
+        $('.main_top_middle_num_list3'), 
+        $('.main_top_middle_num_list4'), 
+        $('.main_top_middle_num_list5')
+    ];
+    
+    // 从localStorage加载保存的数字，如果没有则初始化为[0,0,0,0,5]
+    let numbers = JSON.parse(localStorage.getItem('feedbackNumbers')) || [5, 1, 4, 2, 7];
+    
+    // 更新显示
+    function updateDisplay() {
+        // 从右到左更新每个数字
+        for (let i = 0; i < numElements.length; i++) {
+            const element = numElements[i];
+            if (element.length > 0) {
+                const numIndex = numElements.length - 1 - i;
+                element.text(numbers[numIndex] !== undefined ? numbers[numIndex] : '0');
+            }
+        }
+        // 保存到localStorage
+        localStorage.setItem('feedbackNumbers', JSON.stringify(numbers));
+    }
+    
+    // 增加数字并处理进位
+    function incrementNumber() {
+        // 随机增加1-3
+        const increment = Math.floor(Math.random() * 3) + 1;
+        
+        // 从最后一位开始加
+        let carry = increment;
+        for (let i = numbers.length - 1; i >= 0 && carry > 0; i--) {
+            const sum = numbers[i] + carry;
+            numbers[i] = sum % 10;
+            carry = Math.floor(sum / 10);
+        }
+        
+        // 如果还有进位，在最前面添加新数字
+        if (carry > 0) {
+            numbers.unshift(carry);
+        }
+        
+        updateDisplay();
+    }
+    
+    // 重置数字
+    function resetNumbers() {
+        numbers = [5, 1, 4, 2, 7];
+        updateDisplay();
+    }
+    
+    // 鼠标左右键同时按下的检测
+    let mouseDownButtons = 0;
+    
+    $(document).on('mousedown', function(e) {
+        mouseDownButtons |= (1 << (e.which - 1));
+        
+        // 检测左右键同时按下 (左键=1, 右键=3)
+        if ((mouseDownButtons & 0b0101) === 0b0101) {
+            resetNumbers();
+        }
+    });
+    
+    $(document).on('mouseup', function(e) {
+        mouseDownButtons &= ~(1 << (e.which - 1));
+    });
+    
+    // 防止右键菜单弹出
+    $(document).on('contextmenu', function(e) {
+        if ((mouseDownButtons & 0b0101) === 0b0101) {
+            e.preventDefault();
+        }
+    });
+    
+    // 初始显示
+    updateDisplay();
+    
+    // 每20秒执行一次
+    setInterval(incrementNumber, 10000);
+}
+
+// 在文档加载完成后调用
+$(function() {
+    autoIncrementFeedback();
+});
+</script>

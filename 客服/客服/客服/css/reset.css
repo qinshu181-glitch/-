@@ -1,0 +1,694 @@
+html,
+body,
+div,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+input,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+textarea,
+article,
+aside,
+audio,
+canvas,
+figure,
+footer,
+header,
+mark,
+menu,
+nav,
+section,
+time,
+video {
+    margin : 0;
+    padding: 0;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-size  : 100%;
+    font-weight: normal
+}
+
+article,
+aside,
+dialog,
+figure,
+footer,
+header,
+hgroup,
+nav,
+section,
+blockquote {
+    display: block;
+}
+
+ul,
+ol {
+    list-style: none;
+}
+
+img {
+    border        : 0 none;
+    vertical-align: top;
+}
+
+blockquote,
+q {
+    quotes: none;
+}
+
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
+    content: none;
+}
+
+table {
+    border-collapse: collapse;
+    border-spacing : 0;
+}
+
+strong,
+em,
+i {
+    font-style : normal;
+    font-weight: normal;
+}
+
+ins {
+    text-decoration: underline;
+}
+
+del {
+    text-decoration: line-through;
+}
+
+mark {
+    background: none;
+}
+
+input::-ms-clear {
+    display: none !important;
+}
+
+body {
+    font      : 12px/1.5 \5FAE\8F6F\96C5\9ED1, \5B8B\4F53, "Hiragino Sans GB", STHeiti, "WenQuanYi Micro Hei", "Droid Sans Fallback", SimSun, sans-serif;
+    background: #fff;
+}
+
+a {
+    text-decoration: none;
+    color          : #333;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+body,
+html,
+.main {
+    width : 100%;
+    height: 100%;
+    font-size: 12px;
+}
+
+.main {
+    position       : relative;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-color: #1D2B56;
+}
+
+.nav {
+    position       : relative;
+    top            : .5vw;
+    width          : 100%;
+    height         : 5vw;
+    background     : url(../img/top.png) no-repeat;
+    background-size: 100%;
+    text-align     : center;
+    line-height    : 4vw;
+    color          : #0efcff;
+    font-size      : 1.4vw;
+    letter-spacing : .4vw;
+}
+
+.nav_btn {
+    position: absolute;
+    top     : 1.5vw;
+    width   : 100%;
+    height  : 2vw;
+}
+
+.btn_left {
+    float      : left;
+    width      : 25%;
+    margin-left: 5%;
+    height     : 100%;
+}
+
+.btn_right {
+    float       : right;
+    width       : 25%;
+    margin-right: 5%;
+    height      : 100%;
+}
+
+.btn_list {
+    position      : relative;
+    float         : left;
+    width         : 5.5vw;
+    height        : 1.6vw;
+    text-align    : center;
+    line-height   : 1.6vw;
+    font-size     : .9vw;
+    color         : #0efcff;
+    letter-spacing: .1vw;
+    cursor        : pointer;
+}
+
+.btn_left a,
+.btn_right a {
+    display: inline-block;
+}
+
+.btn_left a:nth-child(2) {
+    margin: 0 .6vw;
+}
+
+.btn_left a:nth-child(4) {
+    margin-left: .6vw;
+}
+
+.btn_right a:nth-child(2) {
+    margin: 0 .6vw;
+}
+
+.btn_right a:nth-child(4) {
+    margin-left: .6vw;
+}
+
+.btn_list:before {
+    content  : '';
+    position : absolute;
+    top      : 0;
+    right    : 0;
+    bottom   : 0;
+    left     : 0;
+    border   : 1px solid #6176AF;
+    transform: skewX(-38deg);
+}
+
+.btn_list:hover::before {
+    border-color: #0efcff;
+    box-shadow  : 1px 1px 3px 1px #0efcff inset;
+}
+
+.listActive:before {
+    border-color: #0efcff;
+    box-shadow  : 1px 1px 3px 1px #0efcff inset;
+}
+
+.content {
+    position     : relative;
+    width        : 97%;
+    height       : 87%;
+    margin       : auto;
+    /* background: white; */
+}
+
+.baseBox {
+    position     : relative;
+    float        : left;
+    width        : 48.8%;
+    height       : 32.3%;
+    border       : 1px solid #6176AF;
+    background   : rgba(11, 21, 44, 0.60);
+    border-radius: 5px;
+}
+
+.baseHeightBox {
+    height: 100%;
+}
+
+.baseCenterBox {
+    margin: 1.5% 0;
+}
+
+.leftBox {
+    float        : left;
+    height       : 100%;
+    width        : 34.5%;
+    /* background: yellow; */
+}
+
+.rightBox {
+    float : left;
+    height: 100%;
+    width : 34.5%;
+}
+
+.centerBox {
+    position     : relative;
+    float        : left;
+    width        : 30%;
+    height       : 100%;
+    margin       : 0 .5%;
+    /* background: red; */
+}
+
+.marginLeft {
+    margin-left: 1.5%;
+}
+
+/* 边框描边 */
+.leftTopLine1 {
+    position  : absolute;
+    top       : 0;
+    left      : -1px;
+    height    : 1vw;
+    width     : 2px;
+    background: #0efcff;
+}
+
+.leftTopLine2 {
+    position  : absolute;
+    top       : -1px;
+    left      : 0;
+    height    : 2px;
+    width     : 1vw;
+    background: #0efcff;
+}
+
+.rightTopLine1 {
+    position  : absolute;
+    top       : 0;
+    right     : -1px;
+    height    : 1vw;
+    width     : 2px;
+    background: #0efcff;
+}
+
+.rightTopLine2 {
+    position  : absolute;
+    top       : -1px;
+    right     : 0;
+    height    : 2px;
+    width     : 1vw;
+    background: #0efcff;
+}
+
+.leftBottomLine1 {
+    position  : absolute;
+    bottom    : 0;
+    left      : -1px;
+    height    : 1vw;
+    width     : 2px;
+    background: #0efcff;
+}
+
+.leftBottomLine2 {
+    position  : absolute;
+    bottom    : -1px;
+    left      : 0;
+    height    : 2px;
+    width     : 1vw;
+    background: #0efcff;
+}
+
+.rightBottomLine1 {
+    position  : absolute;
+    bottom    : 0;
+    right     : -1px;
+    height    : 1vw;
+    width     : 2px;
+    background: #0efcff;
+}
+
+.rightBottomLine2 {
+    position  : absolute;
+    bottom    : -1px;
+    right     : 0;
+    height    : 2px;
+    width     : 1vw;
+    background: #0efcff;
+}
+
+.boxTitle {
+    font-size  : 1vw;
+    color      : #0efcff;
+    width      : 80%;
+    margin-left: .8vw;
+    margin-top : .5vw;
+}
+
+.left {
+    float: left;
+}
+
+.right {
+    font: right;
+}
+/*// */
+/*// */
+/*// */
+
+/* 视频新加 */
+.video-js .vjs-control {
+    width: 1vw !important;
+}
+.vjs-volume-panel {
+    display: none !important;
+}
+.vjs-live-display {
+    display: none !important;
+}
+.vjs-audio-button{
+    display: none !important;
+}
+
+
+
+
+
+
+
+
+
+
+.guide-image {
+    width: 1em;
+    height: 1em;
+    object-fit: contain;  /* 保持标识完整显示 */
+    background: #f5f5f5;  /* 为透明背景图片添加底色 */
+    padding: 1em;         /* 增加留白防止文字裁剪 */
+    border-radius: 1em;
+    border: 1em solid #ddd;
+}
+
+
+/* 禁止“已发展企业”和“反馈问题”区域的文本选中 */
+.main_bottom_t_l_title, 
+.main_top_middle_num_title,
+.main_bottom_t_l_main ul li,
+.main_bottom_polity_title1,
+.main_bottom_polity_title2,
+.main_bottom_polity_title3,
+.main_bottom_polity_title4 {
+    -webkit-user-select: none;  /* Chrome/Safari/Opera */
+    -moz-user-select: none;     /* Firefox */
+    -ms-user-select: none;      /* IE/Edge */
+    user-select: none;          /* Standard syntax */
+}
+
+/* 超链接样式 */
+.ai-cloud-link {
+    color: #fff;                /* 文字颜色 */
+    text-decoration: none;      /* 移除下划线 */
+    margin-left: 10px;          /* 调整与图片的间距 */
+    transition: opacity 0.3s;   /* 悬停渐变效果 */
+}
+
+.ai-cloud-link:hover {
+    opacity: 0.8;               /* 悬停时透明度变化 */
+}
+
+
+
+.question-container {
+    padding: 15px;
+    position: relative;
+}
+
+.question-item {
+    background: rgba(46, 140, 255, 0.15);
+    border-radius: 8px;
+    padding: 12px;
+    margin: 10px 0;
+    cursor: pointer;
+    transition: all 0.3s;
+    position: relative;
+}
+
+.question-item:hover {
+    background: rgba(46, 140, 255, 0.25);
+    transform: translateX(5px);
+}
+
+/* 反馈按钮 */
+.feedback-btns {
+    position: absolute;
+    right: 15px;
+    bottom: 8px;
+    display: none;
+}
+
+.question-item:hover .feedback-btns {
+    display: block;
+}
+
+.btn-yes, .btn-no {
+    border: none;
+    padding: 4px 12px;
+    border-radius: 4px;
+    margin-left: 8px;
+    cursor: pointer;
+}
+
+.btn-yes {
+    background: #52c41a;
+    color: white;
+}
+
+.btn-no {
+    background: #ff4d4f;
+    color: white;
+}
+
+/* 答案框 */
+.answer-box {
+    padding: 20px;
+    background: rgba(255,255,255,0.1);
+    border-radius: 8px;
+}
+
+.answer-box h4 {
+    color: #0EFCFF;
+    margin-bottom: 10px;
+}
+
+
+
+
+.qna-container {
+    height: 200px; /* 根据格子高度调整 */
+    position: relative;
+    overflow: hidden;
+}
+
+.qna-wrapper {
+    transition: transform 0.3s;
+    will-change: transform;
+}
+
+.question-item {
+    height: 60px; /* 固定高度 */
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    transition: all 0.3s;
+}
+
+.question-text {
+    flex: 1;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* 滚动指示器 */
+.scroll-indicator {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0,0,0,0.5);
+    border-radius: 12px;
+    padding: 5px;
+}
+
+.arrow-up, .arrow-down {
+    color: #fff;
+    cursor: pointer;
+    padding: 5px;
+    opacity: 0.7;
+    transition: all 0.3s;
+}
+
+.arrow-up:hover, .arrow-down:hover {
+    opacity: 1;
+    transform: scale(1.2);
+}
+
+.arrow-up.disabled, .arrow-down.disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+}
+
+/* 响应式调整 */
+@media (max-height: 800px) {
+    .qna-container {
+        height: 160px;
+    }
+    .question-item {
+        height: 50px;
+    }
+}
+
+
+
+.platform-feedback {
+    padding: 1rem;  /* 减少内边距 */
+    background: inherit;  /* 继承原有背景色 */
+    box-shadow: none;    /* 移除阴影 */
+}
+
+.feedback-grid {
+    gap: 1rem;  /* 缩小网格间隙 */
+}
+
+.feedback-item {
+    padding: 1rem;       /* 减少内边距 */
+    min-height: 12px;   /* 缩小最小高度 */
+    border-radius: 6px;  /* 微调圆角 */
+}
+
+.metric-header {
+    padding-bottom: 0.5rem;
+    margin-bottom: 0.8rem;
+}
+
+.platform {
+    font-size: 1rem;    /* 缩小平台名称 */
+    letter-spacing: normal;
+}
+
+.top-value {
+    font-size: 1.8rem;  /* 缩小数值显示 */
+    padding: 0.3rem 0;
+}
+
+.bottom-label {
+    font-size: 0.85rem; /* 缩小说明文字 */
+    padding-top: 0.3rem;
+}
+
+/* 保持原有颜色配置 */
+.color-wechat { background: linear-gradient(135deg, #07c160 0%, #059c4c 100%); }
+.color-dingtalk { background: linear-gradient(135deg, #0084ff 0%, #0066cc 100%); }
+.color-weibo { background: linear-gradient(135deg, #e6162d 0%, #c20d22 100%); }
+.color-email { background: linear-gradient(135deg, #6633ff 0%, #4d2db7 100%); }
+
+/* 响应式调整 */
+@media (max-width: 768px) {
+    .feedback-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .top-value { font-size: 1.6rem; }
+}
+
+@media (max-width: 480px) {
+    .feedback-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+
+
+
+
+.data-labels {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+    margin-top: 20px;
+  }
+  
+  .label-item {
+    background: linear-gradient(
+      to right,
+      var(--color) 4px,
+      rgba(var(--color), 0.1) 4px
+    );
+    padding: 12px;
+    border-radius: 4px;
+  }
+  
+  .label-top {
+    color: #09d8eb;
+    font-size: 1.8vh;
+    margin-bottom: px;
+  }
+  
+  .label-bottom {
+    color: hsl(73, 91%, 54%);
+    font-size: 1.6vh;
+    font-weight: bold;
+  }
+  
+  /* 保持原有图表容器尺寸 */
+  .echarts-box {
+    height: 32vh;
+    margin-top: 2.0vh; /* 添加间距 */
+  }
+
+  .label-item:nth-child(1) { background-color: rgba(0, 247, 255, 0.2); }
+
+.label-item:nth-child(2) { background-color: rgba(71, 246, 162, 0.2); }
+
+.label-item:nth-child(3) { background-color: rgba(255, 165, 0, 0.2); }
+
+.label-item:nth-child(4) { background-color: rgba(255, 85, 85, 0.2); }
+
+
+
+
+#baseId {
+    width: 100%;
+    height: 300px; /* 或根据你的需要调整高度 */
+    margin-top: 0%;
+}
+
+
+
+

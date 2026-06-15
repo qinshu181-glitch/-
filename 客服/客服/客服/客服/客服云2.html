@@ -1,0 +1,733 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=0.9, minimum-scale=0.9, maximum-scale=0.9, user-scalable=no">
+    <meta http-equiv="refresh"> 
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>AI客服云</title>
+    <link rel="stylesheet" href="css/cindex.css">
+    <link rel="stylesheet" href="css/creset.css">
+    <style>
+    </style>
+</head>
+<body>
+    <div id="particles-js" class="main">
+        <div class="main_con">
+            <div class="main_top">
+                <!-- 左边4个框架 -->
+                <div class="side-frames main_top_left">
+                    <div class="side-frame">
+                        <div class="radar-title"><br><br><br><br>电<br>池</div>
+                        <div id="radarChart1" class="radar-chart"></div>
+                    </div>
+                    <div class="side-frame">
+                        <div class="radar-title"><br><br>红<br>外<br>线<br>传<br>感<br>器</div>
+                        <div id="radarChart2" class="radar-chart"></div>
+                    </div>
+                    <div class="side-frame">
+                        <div class="radar-title"><br><br><br>主<br>控<br>芯<br>片</div>
+                        <div id="radarChart3" class="radar-chart"></div>
+                    </div>
+                    <div class="side-frame1"><div style="color: white; text-align: center; padding: 10px; font-size: 1.6vh;">
+                        <span style="color: #4ad2ff;">客服经理</span> <br>
+                        <span style="color:aqua;">邮箱：</span> 2223262@qq.com<br>
+                        <span style="color:aqua;">电话：</span> 12121313133<br>
+                        <span style="color:aqua;">传真：</span> 24523167
+                    </div></div>
+                </div>
+                
+                <div class="main_top_middle">
+                    <div class="main_top_middle_top_title">
+                        <img class="title_bg" src="./images/title_bg.png">
+                        <a href="" target="_self" class="ai-cloud-link">AI客服云</a>
+                        <a class="title_admin" href="客服云.html" target="_self"></a>
+                        <a class="title_web" href="客服云2.html" target="_self"></a>
+                    </div>
+                    
+                    <!-- 折线图容器 -->
+                    <div id="lineChart" class="chart-container"></div>
+                    
+                    <!-- 精确对齐的数据表格 -->
+                    <div class="empty-frame">
+                        <div class="metrics-header">
+                            <span>产品</span>
+                            <span>年销量</span>
+                            <span>年增长率</span>
+                            <span>好评度</span>
+                        </div>
+                        
+                        <div class="metrics-data" id="metricsData">
+                            <!-- 数据将通过JavaScript动态生成 -->
+                        </div>
+                    </div>
+                </div>
+                
+               <!-- 右边4个框架 -->
+<div class="side-frames main_top_right">
+    <div class="side-frame">
+        <div id="radarChart5" class="radar-chart"></div>
+        <div class="radar-title-right"><br><br><br>无<br>刷<br>电<br>机</div>
+    </div>
+    <div class="side-frame">
+        <div id="radarChart6" class="radar-chart"></div>
+        <div class="radar-title-right"><br><br>碳<br>纤<br>维<br>螺<br>旋<br>桨</div>
+    </div>
+    <div class="side-frame">
+        <div id="radarChart7" class="radar-chart"></div>
+        <div class="radar-title-right"><br><br><br>外<br>壳<br>保<br>护<br>件</div>
+    </div>
+    <div class="side-frame1"><div style="color: white; text-align: center; padding: 10px; font-size: 1.6vh;">
+        <span style="color: #4ad2ff;">公司</span><br>
+        <span style="color:aqua;">邮箱：</span> 2216222@qq.com<br>
+        <span style="color:aqua;">电话：</span> 12121313133<br>
+        <span style="color:aqua;">传真：</span> 22422352
+    </div></div>
+</div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://www.jq22.com/jquery/jquery-1.10.2.js"></script>
+    <script src="https://www.jq22.com/jquery/echarts-4.2.1.min.js"></script>
+    <script type="text/javascript" src="js/dataScoll.js"></script>
+    <script type="text/javascript" src="js/digitalScroll.js"></script>
+    <script type="text/javascript" src="js/jcarousellite.js"></script>
+    <script type="text/javascript" src="js/particles.min.js"></script>
+    <script type="text/javascript" src="js/app.js"></script>
+
+    <script>
+        // 产品数据
+        const products = [
+            { name: "TATTU系列 1300mAh 14.8V", sales: 1842, growth: "+12.5%", rating: 98 },
+            { name: "TATTU系列 1550mAh 14.8V", sales: 932, growth: "+8.3%", rating: 95 },
+            { name: "DJI智能电池 PH4-5350mAh-15.2V", sales: 1205, growth: "+15.2%", rating: 97 },
+            { name: "DJI智能电池 PH4-5870mAh-15.2V", sales: 756, growth: "+22.1%", rating: 96 },
+            { name: "红外线传感器", sales: 1532, growth: "+5.7%", rating: 94 },
+            { name: "主控芯片", sales: 876, growth: "+18.3%", rating: 97 },
+            { name: "无刷电机", sales: 1024, growth: "+9.2%", rating: 95 },
+            { name: "碳纤维螺旋桨", sales: 689, growth: "+14.7%", rating: 96 },
+            { name: "外壳保护件", sales: 1120, growth: "+11.2%", rating: 97 },
+            { name: "农用无人机", sales: 465, growth: "+17.8%", rating: 98 },
+            { name: "载人无人机", sales: 286, growth: "+17.6%", rating: 94 },
+            { name: "航拍无人机", sales: 524, growth: "+7.8%", rating: 93},
+            { name: "安防无人机", sales: 199, growth: "+5.9%", rating: 96 },
+            { name: "测绘无人机", sales: 150, growth: "+6.8%", rating: 95 }
+        ];
+
+        // 格式化数字，添加千位分隔符
+        function formatNumber(num) {
+            return num.toLocaleString();
+        }
+
+        // 渲染产品数据
+        function renderProductData() {
+            const container = document.getElementById('metricsData');
+            container.innerHTML = '';
+            
+            // 创建数据容器
+            const dataContainer = document.createElement('div');
+            dataContainer.className = 'data-container';
+            container.appendChild(dataContainer);
+            
+            // 生成HTML - 确保与标题相同的列结构
+            dataContainer.innerHTML = products.map(item => `
+                <div class="data-row">
+                    <span>${item.name}</span>
+                    <span>${formatNumber(item.sales)}</span>
+                    <span>${item.growth}</span>
+                    <span>${item.rating}%</span>
+                </div>
+            `).join('');
+            
+            // 滑动相关变量
+            let isDragging = false;
+            let startY = 0;
+            let scrollTop = 0;
+            let currentPosition = 0;
+            const rowHeight = 30;
+            const visibleRows = 5; // 可视区域显示的行数
+            const maxPosition = Math.max(0, (products.length - visibleRows) * rowHeight);
+            
+            // 更新位置函数
+            function updatePosition(newPosition) {
+                // 限制滑动范围
+                newPosition = Math.max(0, Math.min(newPosition, maxPosition));
+                
+                // 确保不会滑动到最后一个文本之后
+                const maxAllowedPosition = (products.length - visibleRows-1.5) * rowHeight;
+                if (maxAllowedPosition > 0) {
+                    newPosition = Math.min(newPosition, maxAllowedPosition);
+                } else {
+                    newPosition = 0; // 如果数据不足以填满可视区域，则不允许滑动
+                }
+                
+                currentPosition = newPosition;
+                dataContainer.style.transform = `translateY(-${currentPosition}px)`;
+            }
+            
+            // 平滑滑动到目标位置
+            function smoothScrollTo(targetPosition) {
+                // 计算最大允许位置
+                const maxAllowedPosition = (products.length - visibleRows) * rowHeight;
+                
+                // 确保目标位置不超过最大允许位置
+                if (maxAllowedPosition > 0) {
+                    targetPosition = Math.min(targetPosition, maxAllowedPosition);
+                } else {
+                    targetPosition = 0;
+                }
+                
+                dataContainer.style.transition = 'transform 0.3s ease-out';
+                updatePosition(targetPosition);
+                
+                // 移除过渡效果，以便下次拖动时立即响应
+                setTimeout(() => {
+                    dataContainer.style.transition = 'none';
+                }, 300);
+            }
+            
+            // 鼠标拖动滑动功能
+            container.addEventListener('mousedown', (e) => {
+                isDragging = true;
+                startY = e.pageY - container.offsetTop;
+                scrollTop = currentPosition;
+                container.classList.add('grabbing');
+                e.preventDefault();
+            });
+            
+            document.addEventListener('mousemove', (e) => {
+                if (!isDragging) return;
+                
+                const y = e.pageY - container.offsetTop;
+                const walk = (y - startY) * 2; // 乘以2增加滑动灵敏度
+                updatePosition(scrollTop - walk);
+            });
+            
+            document.addEventListener('mouseup', () => {
+                if (!isDragging) return;
+                
+                isDragging = false;
+                container.classList.remove('grabbing');
+                
+                // 计算最近的整行位置
+                const targetRow = Math.round(currentPosition / rowHeight);
+                smoothScrollTo(targetRow * rowHeight);
+            });
+            
+            // 鼠标滚轮滑动功能
+            container.addEventListener('wheel', (e) => {
+                e.preventDefault();
+                
+                // 根据滚轮方向计算新的位置
+                const delta = e.deltaY > 0 ? rowHeight : -rowHeight;
+                const newPosition = currentPosition + delta;
+                
+                // 平滑滚动到新位置
+                smoothScrollTo(newPosition);
+            });
+            
+            // 防止拖动时选中文本
+            container.addEventListener('selectstart', (e) => {
+                if (isDragging) {
+                    e.preventDefault();
+                }
+            });
+        }
+        
+        // 初始化雷达图
+        function initRadarCharts() {
+            // 雷达图1 - 电池
+            const radarChart1 = echarts.init(document.getElementById('radarChart1'));
+            radarChart1.setOption({
+                backgroundColor: 'transparent',
+                tooltip: {
+        show: true  // 恢复提示框（默认值）
+    },
+                radar: {
+                    indicator: [
+                        { name: '续航力\n（分）', max: 100},
+                        { name: '耐用性\n（分）', max:100},
+                        { name: '充电速度\n（分）', max: 100},
+                        { name: '安全性\n（分）', max: 100},
+                        { name: '供能性\n（分）', max: 100}
+                    ],
+                    radius: '60%',
+                    splitNumber: 4,
+                    axisName: {
+                        color: '#fff',
+                        fontSize: 10
+                    },
+                    splitLine: {
+                        lineStyle: {
+                            color: 'rgba(255, 255, 255, 0.2)'
+                        }
+                    },
+                    splitArea: {
+                        show: false
+                    },
+                    axisLine: {
+                        lineStyle: {
+                            color: 'rgba(255, 255, 255, 0.2)'
+                        }
+                    }
+                },
+                series: [{
+                    name: '客服服务质量',
+                    type: 'radar',
+                    silent: false,
+                    data: [{
+                        value: [96, 88, 95, 90, 93],
+                        name: '电池',
+                        areaStyle: {
+                            color: 'rgba(74, 210, 255, 0.4)'
+                        },
+                        lineStyle: {
+                            width: 2,
+                            color: '#4ad2ff'
+                        },
+                        itemStyle: {
+                            color: '#4ad2ff'
+                        }
+                    }]
+                }]
+            });
+            
+            // 雷达图2 - 红外线
+            const radarChart2 = echarts.init(document.getElementById('radarChart2'));
+            radarChart2.setOption({
+                backgroundColor: 'transparent',
+                tooltip: {
+        show: true  // 恢复提示框（默认值）
+    },
+                radar: {
+                    indicator: [
+                        { name: '环境适用率\n（分）', max: 100},
+                        { name: '灵敏度\n（分）', max: 100},
+                        { name: '探测距离\n（分）', max:100},
+                        { name: '响应时间\n（分）', max: 100},
+                        { name: '温度检测\n（分）', max: 100}
+                    ],
+                    radius: '60%',
+                    splitNumber: 4,
+                    axisName: {
+                        color: '#fff',
+                        fontSize: 10
+                    },
+                    splitLine: {
+                        lineStyle: {
+                            color: 'rgba(255, 255, 255, 0.2)'
+                        }
+                    },
+                    splitArea: {
+                        show: false
+                    },
+                    axisLine: {
+                        lineStyle: {
+                            color: 'rgba(255, 255, 255, 0.2)'
+                        }
+                    }
+                },
+                series: [{
+                    name: '产品性能指标',
+                    type: 'radar',
+                    silent: false,
+                    data: [{
+                        value: [85, 92, 88, 90, 95],
+                        name: '红外线传感器',
+                        areaStyle: {
+                            color: 'rgba(255, 184, 0, 0.4)'
+                        },
+                        lineStyle: {
+                            width: 2,
+                            color: '#ffb800'
+                        },
+                        itemStyle: {
+                            color: '#ffb800'
+                        }
+                    }]
+                }]
+            });
+            
+            // 雷达图3 - 用户满意度
+            const radarChart3 = echarts.init(document.getElementById('radarChart3'));
+            radarChart3.setOption({
+                backgroundColor: 'transparent',
+               tooltip: {
+        show: true  // 恢复提示框（默认值）
+    },
+                radar: {
+                    indicator: [
+                        { name: '算力大小\n（分）', max: 100},
+                        { name: '兼容性\n（分）', max: 100},
+                        { name: '延迟性\n（分）', max: 100},
+                        { name: '内存大小\n（分）', max: 100},
+                        { name: '安全性\n（分）', max: 100}
+                    ],
+                    radius: '60%',
+                    splitNumber: 4,
+                    axisName: {
+                        color: '#fff',
+                        fontSize: 10
+                    },
+                    splitLine: {
+                        lineStyle: {
+                            color: 'rgba(255, 255, 255, 0.2)'
+                        }
+                    },
+                    splitArea: {
+                        show: false
+                    },
+                    axisLine: {
+                        lineStyle: {
+                            color: 'rgba(255, 255, 255, 0.2)'
+                        }
+                    }
+                },
+                series: [{
+                    name: '用户满意度',
+                    type: 'radar',
+                    silent: false,
+                    data: [{
+                        value: [90, 88, 85, 92, 89],
+                        name: '主控芯片',
+                        areaStyle: {
+                            color: 'rgba(255, 255, 92, 0.4)'
+                        },
+                        lineStyle: {
+                            width: 2,
+                            color: 'yellow'
+                        },
+                        itemStyle: {
+                            color: 'yellow'
+                        }
+                    }]
+                }]
+            });
+            
+            // 雷达图5 - 无刷电机
+            const radarChart5 = echarts.init(document.getElementById('radarChart5'));
+            radarChart5.setOption({
+                backgroundColor: 'transparent',
+                tooltip: {
+        show: true  // 恢复提示框（默认值）
+    },
+                radar: {
+                    indicator: [
+                        { name: '撒热性能\n（分）', max: 100},
+                        { name: '噪音控制\n（分）', max: 100},
+                        { name: '稳定性\n（分）', max: 100},
+                        { name: '响应速度\n（分）', max: 100},
+                        { name: '精度控制\n（分）', max: 100}
+                    ],
+                    radius: '60%',
+                    splitNumber: 4,
+                    axisName: {
+                        color: '#fff',
+                        fontSize: 10
+                    },
+                    splitLine: {
+                        lineStyle: {
+                            color: 'rgba(255, 255, 255, 0.2)'
+                        }
+                    },
+                    splitArea: {
+                        show: false
+                    },
+                    axisLine: {
+                        lineStyle: {
+                            color: 'rgba(255, 255, 255, 0.2)'
+                        }
+                    }
+                },
+                series: [{
+                    name: '销售业绩',
+                    type: 'radar',
+                    silent: false,
+                    data: [{
+                        value: [95, 88, 75, 90, 85],
+                        name: '无刷电机',
+                        areaStyle: {
+                            color: 'rgba(92, 255, 92, 0.4)'
+                        },
+                        lineStyle: {
+                            width: 2,
+                            color: '#5cff5c'
+                        },
+                        itemStyle: {
+                            color: '#5cff5c'
+                        }
+                    }]
+                }]
+            });
+            
+            // 雷达图6 - 技术支持
+            const radarChart6 = echarts.init(document.getElementById('radarChart6'));
+            radarChart6.setOption({
+                backgroundColor: 'transparent',
+                tooltip: {
+        show: true  // 恢复提示框（默认值）
+    },
+                radar: {
+                    indicator: [
+                        { name: '耐腐蚀性\n（分）', max: 100},
+                        { name: '强度大小\n（分）', max: 100},
+                        { name: '可恢复性\n（分）', max: 100},
+                        { name: '重量大小\n（分）', max: 100},
+                        { name: '噪音控制\n（分）', max:100}
+                    ],
+                    radius: '60%',
+                    splitNumber: 4,
+                    axisName: {
+                        color: '#fff',
+                        fontSize: 10
+                    },
+                    splitLine: {
+                        lineStyle: {
+                            color: 'rgba(255, 255, 255, 0.2)'
+                        }
+                    },
+                    splitArea: {
+                        show: false
+                    },
+                    axisLine: {
+                        lineStyle: {
+                            color: 'rgba(255, 255, 255, 0.2)'
+                        }
+                    }
+                },
+                series: [{
+                    name: '技术支持',
+                    type: 'radar',
+                    silent: false,
+                    data: [{
+                        value: [90, 92, 95, 88, 85],
+                        name: '碳纤维螺旋桨',
+                        areaStyle: {
+                            color: 'rgba(184, 92, 255, 0.4)'
+                        },
+                        lineStyle: {
+                            width: 2,
+                            color: '#b85cff'
+                        },
+                        itemStyle: {
+                            color: '#b85cff'
+                        }
+                    }]
+                }]
+            });
+            
+            // 雷达图7 - 外壳保护件
+            const radarChart7 = echarts.init(document.getElementById('radarChart7'));
+            radarChart7.setOption({
+                backgroundColor: 'transparent',
+                tooltip: {
+        show: true  // 恢复提示框（默认值）
+    },
+                radar: {
+                    indicator: [
+                        { name: '防腐蚀性\n（分）', max: 100},
+                        { name: '刚度大小\n（分）', max: 100},
+                        { name: '耐温性\n（分）', max: 100},
+                        { name: '散热处理\n（分）', max: 100},
+                        { name: '抗冲击性\n（分）', max: 100}
+                    ],
+                    radius: '60%',
+                    splitNumber: 4,
+                    axisName: {
+                        color: '#fff',
+                        fontSize: 10
+                    },
+                    splitLine: {
+                        lineStyle: {
+                            color: 'rgba(255, 255, 255, 0.2)'
+                        }
+                    },
+                    splitArea: {
+                        show: false
+                    },
+                    axisLine: {
+                        lineStyle: {
+                            color: 'rgba(255, 255, 255, 0.2)'
+                        }
+                    }
+                },
+                series: [{
+                    name: '市场竞争力',
+                    type: 'radar',
+                    silent: false,
+                    data: [{
+                        value: [85, 90, 80, 88, 92],
+                        name: '外壳保护件',
+                        areaStyle: {
+                            color: 'rgba(255, 92, 184, 0.4)'
+                        },
+                        lineStyle: {
+                            width: 2,
+                            color: '#ff5cb8'
+                        },
+                        itemStyle: {
+                            color: '#ff5cb8'
+                        }
+                    }]
+                }]
+            });
+            
+            // 窗口大小变化时重新调整雷达图大小
+            window.addEventListener('resize', function() {
+                radarChart1.resize();
+                radarChart2.resize();
+                radarChart3.resize();
+                radarChart5.resize();
+                radarChart6.resize();
+                radarChart7.resize();
+            });
+        }
+        
+       // 初始化树状图（柱状图）
+    $(document).ready(function() {
+        var myChart = echarts.init(document.getElementById('lineChart'));
+        
+        var option = {
+            backgroundColor: 'transparent',
+            tooltip: {
+                trigger: 'axis',
+                formatter: function(params) {
+                    var result = params[0].axisValue + '<br/>';
+                    params.forEach(function(item) {
+                        if (item.seriesName === '新增客户') {
+                            result += item.marker + ' ' + item.seriesName + ': ' + item.value + '位<br/>';
+                        } else {
+                            result += item.marker + ' ' + item.seriesName + ': ' + item.value + '%<br/>';
+                        }
+                    });
+                    return result;
+                },
+                axisPointer: {
+                    type: 'none',
+                    crossStyle: {
+                        color: '#999'
+                    }
+                }
+            },
+            legend: {
+                data: ['新增客户', '年复购率', '年客户增长率'],
+                textStyle: {
+                    color: '#fff'
+                }
+            },
+            grid: {
+                left: '3%',
+                right: '4%',
+                bottom: '3%',
+                containLabel: true
+            },
+            xAxis: {
+                type: 'category',
+                data: ['第一季度', '第二季度', '第三季度', '第四季度'],
+                axisLine: {
+                    lineStyle: {
+                        color: '#fff'
+                    }
+                },
+                axisLabel: {
+                    color: '#fff'
+                },
+                axisPointer: {
+                    type: 'shadow'
+                }
+            },
+            yAxis: [
+                {
+                    type: 'value',
+                    name: '新增客户',
+                    min: 0,
+                    max: 300,
+                    axisLine: {
+                        lineStyle: {
+                            color: '#4ad2ff'
+                        }
+                    },
+                    axisLabel: {
+                        color: '#fff',
+                        formatter: '{value}位'
+                    },
+                    splitLine: {
+                        lineStyle: {
+                            color: 'rgba(255, 255, 255, 0.1)'
+                        }
+                    }
+                },
+                {
+                    type: 'value',
+                    name: '百分比',
+                    min: 0,
+                    max: 100,
+                    axisLine: {
+                        lineStyle: {
+                            color: '#ffb800'
+                        }
+                    },
+                    axisLabel: {
+                        color: '#fff',
+                        formatter: '{value}%'
+                    },
+                    splitLine: {
+                        show: false
+                    }
+                }
+            ],
+            series: [
+                {
+                    name: '新增客户',
+                    type: 'bar',
+                    barWidth: '15%',
+                    data: [160, 130, 200, 160],
+                    itemStyle: {
+                        color: 'aqua'
+                    }
+                },
+                {
+                    name: '年复购率',
+                    type: 'line',
+                    yAxisIndex: 1,
+                    data: [50, 46, 39, 60],
+                    itemStyle: {
+                        color: '#ffb800'
+                    },
+                    lineStyle: {
+                        width: 3
+                    },
+                    symbol: 'circle',
+                    symbolSize: 8
+                },
+                {
+                    name: '年客户增长率',
+                    type: 'line',
+                    yAxisIndex: 1,
+                    data: [20, 40, 35, 14],
+                    itemStyle: {
+                        color: '#ff5cb8'
+                    },
+                    lineStyle: {
+                        width: 3
+                    },
+                    symbol: 'circle',
+                    symbolSize: 8
+                }
+            ]
+        };
+        
+        myChart.setOption(option);
+        
+        window.addEventListener('resize', function() {
+            myChart.resize();
+        });
+
+        renderProductData();
+        initRadarCharts();
+    });
+    </script>
+</body>
+</html>
