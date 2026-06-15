@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+	<meta content="always" name="referrer" />
+	<title>物流云</title>
+	<link rel="stylesheet" type="text/css" href="./static/css/home.css" />
+	<link rel="stylesheet" type="text/css" href="./static/css/swiper.min.css" />
+	<style>
+		*{}
+		body {
+			width: 16rem;
+			height: 9rem;
+			background: url(./static/images/bg1.jpg) center 0 no-repeat #0f102b;
+			background-size: contain;
+		}
+	</style>
+	<style>
+    /* 新增切换按钮样式 */
+    .switch-btn {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        padding: 8px 15px;
+        background: #f93b08;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        z-index: 999;
+    }
+    .switch-btn:hover {
+        background: #ff5722;
+    }
+</style>
+	<style>
+		/* 新增样式 */
+		.part5 dd small-text {
+			font-size: 10px !important; 
+			font-size: 12px !important;  /* 调整为更小的字号 */
+			line-height: 1.2;            /* 可选：调整行高 */
+			display: block;              /* 确保换行显示 */
+		}
+	</style>
+	<script type="text/javascript" src="./static/js/jquery.min.js"></script>
+	<script type="text/javascript" src="./static/js/swiper.min.js"></script>
+	<script type="text/javascript" src="./static/js/echarts.min.js"></script>
+	<script type="text/javascript" src="./static/js/china.js"></script>
+	<!--滚动条美化-->
+	<script type="text/javascript" src="./static/js/jquery.nicescroll.js"></script>
+	<!--滚动插件-->
+	<script type="text/javascript" src="./static/js/jquery.vticker-min.js"></script>
+	<script type="text/javascript" src="./static/js/bigdata.js"></script>
+	<script type="text/javascript">
+
+		var paramData = {"studentType":''};
+		var studentType = "";
+
+		$(function(){
+			regData();
+			// originRegisterRate();
+			studentRegisterTime();
+			map();
+			stuNation();
+			affairNum();
+			studentAge();
+			studentBedData();
+			setInterval(getServerDate,1000);
+			setInterval(regData,1000*10);
+			setInterval(studentRegisterTime,1000*10);
+			setInterval(map,1000*10);
+			setInterval(stuNation,1000*10);
+			setInterval(affairNum,1000*10);
+			setInterval(studentAge,1000*10);
+			// setInterval(selectCollege,1000*30);
+			setInterval(studentBedData,1000*10);
+		})
+	</script>
+	<script type="text/javascript">
+		/*
+          useREM.resize() 立即刷新
+          useREM.set({max: 400000}) 设置参数，并立即刷新
+                 max - 最大宽度
+                 min - 最小宽度
+                 num - 块数
+                 delay - 事件触发resize的时间间隔*/
+		(function() {
+			var timer, style = document.head.appendChild(document.createElement("style"));
+
+			var useREM = window.useREM = Object.create({
+				resize: function() {
+					var config = this.config;
+					this.size = Math.max(config.min, Math.min(config.max, document.documentElement.clientWidth)) / config.num;
+					style.innerHTML = "html{font-size: " + this.size + "px !important;}"
+					return this;
+				},
+				set: function(newConfig) {
+					if (newConfig) {
+						for (var a in newConfig) {
+							if (this.config.hasOwnProperty(a)) {
+								this.config[a] = newConfig[a];
+							}
+						}
+					}
+					this.resize();
+					return this;
+				}
+			}, {
+				size: {
+					value: 20,
+					writable: true,
+					configurable: false,
+					enumerable: true
+				},
+				config: {
+					value: {
+						max: 400000,
+						min: 300,
+						num: 16,
+						delay: 50
+					},
+					writable: false,
+					configurable: false,
+					enumerable: true
+				}
+			});
+			addEventListener("resize", function() {
+				clearTimeout(timer);
+				timer = setTimeout(this.resize.bind(this), this.config.delay);
+			}.bind(useREM));
+
+			useREM.set();
+
+			window.onload=window.onresize=function(){
+				useREM.resize();
+			}
+
+		})();
+		$(document).ready(function(){
+			/*趋势图轮播*/
+			var myswiper = new Swiper('.swiper-container', {
+				effect: 'coverflow',
+				grabCursor: true,
+				slidesPerView: '4',
+				autoplay: true,
+				initialSlide:0,
+				loop:true,
+				autoplay:{
+					disableOnInteraction: false,//默认true
+					delay:2000
+				},
+				coverflowEffect: {
+					rotate: -25,
+					stretch: 0,
+					// depth: 120,
+					modifier: 1,
+					slideShadows : false
+				},
+				pagination: {
+					el: '.swiper-pagination',
+				},
+				navigation: {
+					nextEl: '.swiper-button-next',
+					prevEl: '.swiper-button-prev',
+				}
+			});
+			/* $(".J_page1").hide();
+            $(".J_page2").show(); */
+				setInterval(function(){
+				if($(".J_page1").is(':visible')){
+					$(".J_page1").hide();
+					$(".J_page2").fadeIn('slow', function() {
+
+					});
+				}else{
+					$(".J_page2").hide();
+					$(".J_page1").fadeIn('slow', function() {});
+				}
+
+			},1000*60);
+
+		});
+			function togglePages() {
+				if($(".J_page1").is(':visible')) {
+					$(".J_page1").hide();
+					$(".J_page2").fadeIn('slow');
+				} else {
+					$(".J_page2").hide();
+					$(".J_page1").fadeIn('slow');
+				}
+			}
+		;
+	</script>
+	<style>html{font-size: 115.9375px !important;}</style>
+</head>
+<body>
+<input type="hidden" id="school" value="上海" />
+<a href="../index.html" class="anim-link"><div class="g-title">
+	物流云
+</div>
+<div class="g-sub-title">
+	<div class="time" id="time">
+		<script>
+			// 新增时间格式化函数
+			function getServerDate() {
+				const weekDays = ["星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六"];
+				const date = new Date();
+				const year = date.getFullYear();
+				const month = (date.getMonth() + 1).toString().padStart(2, '0');
+				const day = date.getDate().toString().padStart(2, '0');
+				const week = weekDays[date.getDay()];
+				const hours = date.getHours().toString().padStart(2, '0');
+				const minutes = date.getMinutes().toString().padStart(2, '0');
+				const seconds = date.getSeconds().toString().padStart(2, '0');
+				
+				document.getElementById("time").innerHTML = 
+					`${year}-${month}-${day} ${week} ${hours}:${minutes}:${seconds}`;
+			}
+			
+			// 在原有定时器中取消注释并添加时间更新
+			$(function(){
+				// 取消这行的注释
+				setInterval(getServerDate,1000);
+				// 其他原有代码...
+				getServerDate(); // 立即执行一次初始化
+			})
+			</script>
+	</div>实时订单量
+	<em id="factTotalNum">9832</em>单
+</div>
+<div class="g-grid-a g-total-data">
+	<a class="g-block"> 发出数量 <span id="totalNum">8000</span> </a>
+	<a class="g-block"> 退货率 <span id="totalNumRate">2.5%</span> </a>
+</div>
+<div class="g-left left-wrap">
+	<div class="g-box J_page1">
+		<div class="box-title">
+			<img src="./static/images/img7.png" />
+		</div>
+		<!-- <div class="box-content">
+			<div class="g-grid-a part1">
+				<a class="g-block" id="bd1" href="https://gitee.com/iGaoWei/big-data-view" onclick="hqbdzbqk(this.id);"> <em id="manNumsRate">99%</em> <span>男生</span> <label id="factMan">男生报到5717/5774人</label> </a>
+				<a class="g-block" id="bd0" href="https://gitee.com/iGaoWei/big-data-view" onclick="hqbdzbqk(this.id);"> <em id="womanNumsRate">98.9%</em> <span>女生</span> <label id="factWoman">女生报到4313/4357人</label> </a>
+			</div> -->
+			
+		<div class="item-box part2">
+			<div class="item-title">
+				热门配送区域
+			</div>
+			<div class="item-content">
+				<dl id="originRegisterRate">
+					<dd id="上海" style="cursor:pointer;" href="https://gitee.com/iGaoWei/big-data-view" onclick="hqsyyxrs(this.id);">
+						<label>上海</label>
+						<span class="line"><span style="width: 95.3%"></span></span>680单
+					</dd>
+					<dd id="北京" style="cursor:pointer;" href="https://gitee.com/iGaoWei/big-data-view" onclick="hqsyyxrs(this.id);">
+						<label>北京</label>
+						<span class="line"><span style="width: 93.7%"></span></span>331单
+					</dd>
+					<dd id="河北" style="cursor:pointer;" href="https://gitee.com/iGaoWei/big-data-view" onclick="hqsyyxrs(this.id);">
+						<label>河北</label>
+						<span class="line"><span style="width: 90.6%"></span></span>290单
+					</dd>
+					<dd id="山西" style="cursor:pointer;" href="https://gitee.com/iGaoWei/big-data-view" onclick="hqsyyxrs(this.id);">
+						<label>山西</label>
+						<span class="line"><span style="width: 88.7%"></span></span>235单
+					</dd>
+					<dd id="山东" style="cursor:pointer;" href="https://gitee.com/iGaoWei/big-data-view" onclick="hqsyyxrs(this.id);">
+						<label>山东</label>
+						<span class="line"><span style="width: 87.3%"></span></span>219单
+					</dd>
+					<dd id="河南" style="cursor:pointer;" href="https://gitee.com/iGaoWei/big-data-view" onclick="hqsyyxrs(this.id);">
+						<label>河南</label>
+						<span class="line"><span style="width: 82%"></span></span>210单
+					</dd>
+					<dd id="四川" style="cursor:pointer;" href="https://gitee.com/iGaoWei/big-data-view" onclick="hqsyyxrs(this.id);">
+						<label>四川</label>
+						<span class="line"><span style="width: 81.1%"></span></span>181单
+					</dd>
+					<dd id="浙江" style="cursor:pointer;" href="https://gitee.com/iGaoWei/big-data-view" onclick="hqsyyxrs(this.id);">
+						<label>浙江</label>
+						<span class="line"><span style="width: 80.1%"></span></span>172单
+					</dd>
+					
+				</dl>
+			</div>
+		</div>
+	</div>
+	<div class="g-box J_page2 hide">
+		<div class="box-title">
+			<img src="./static/images/img15.png" />
+		</div>
+		<!-- <div class="box-content">
+			<div class="g-grid-a part1">
+				<a class="g-block" id="rz1" href="https://gitee.com/iGaoWei/big-data-view" onclick="hqbdzbqk(this.id);"> <em id="manNumsRate2">99%</em> <span>男生</span> <label id="factMan2">男生报到5717/5774人</label> </a>
+				<a class="g-block" id="rz0" href="https://gitee.com/iGaoWei/big-data-view" onclick="hqbdzbqk(this.id);"> <em id="womanNumsRate2">98.9%</em> <span>女生</span> <label id="factWoman2">女生报到4313/4357人</label> </a>
+			</div> -->
+			<div class="item-box part6">
+				<div class="item-title">
+					各零件出货量占比
+				</div>
+				<div class="item-content" id="stuNation" _echarts_instance_="ec_1680574754438" style="-webkit-tap-highlight-color: transparent; user-select: none; position: relative;">
+					<div style="position: relative; overflow: hidden; width: 367px; height: 288px; padding: 0px; margin: 0px; border-width: 0px;">
+						<canvas data-zr-dom-id="zr_0" width="367" height="288" style="position: absolute; left: 0px; top: 0px; width: 367px; height: 288px; user-select: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); padding: 0px; margin: 0px; border-width: 0px;"></canvas>
+					</div>
+					<div></div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="g-left center-wrap">
+	<div class="J_page1">
+		<h2>实时物流覆盖网络</h2>
+		<div class="map-box" id="map" _echarts_instance_="ec_1680574754437" style="-webkit-tap-highlight-color: transparent; user-select: none; position: relative;">
+			<div style="position: relative; overflow: hidden; width: 656px; height: 499px; padding: 0px; margin: 0px; border-width: 0px; cursor: default;">
+				<canvas data-zr-dom-id="zr_0" width="656" height="499" style="position: absolute; left: 0px; top: 0px; width: 656px; height: 499px; user-select: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); padding: 0px; margin: 0px; border-width: 0px;"></canvas>
+				<canvas data-zr-dom-id="zr_2" width="656" height="499" style="position: absolute; left: 0px; top: 0px; width: 656px; height: 499px; user-select: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); padding: 0px; margin: 0px; border-width: 0px;"></canvas>
+			</div>
+			<div style="position: absolute; display: none; border-style: solid; white-space: nowrap; z-index: 9999999; transition: left 0.2s cubic-bezier(0.23, 1, 0.32, 1) 0s, top 0.2s cubic-bezier(0.23, 1, 0.32, 1) 0s; background-color: rgba(50, 50, 50, 0.7); border-width: 0px; border-color: rgb(51, 51, 51); border-radius: 4px; color: rgb(255, 255, 255); font: 14px / 21px &quot;Microsoft YaHei&quot;; padding: 5px; left: 166px; top: 90px;">
+				生产单数
+				<br />新疆: 55
+			</div>
+		</div>
+	</div>
+	<div class="J_page2 hide">
+		<div class="item-box table-box part7">
+			<img src="./static/images/img19.png" class="title"/>
+			<ul class="g-clear item-content" style="margin-bottom: 0;" id="part7">
+				<li class="item-sub-title"><span>产品名</span><span>总产值</span><span>次品</span><span>次品率</span></li>
+			</ul>
+			<div class="J_Box1" style="height: 3.3rem;overflow: hidden;">
+				<ul class="g-clear item-content" id="collegeMessage">
+					<li id="9999" href="https://gitee.com/iGaoWei/big-data-view" style="cursor:pointer;" onclick="hvzybdsj(this.id)"><span>电池</span><span>4444</span><span>12</span><span>0.1%</span></li>
+					<li id="0117" href="https://gitee.com/iGaoWei/big-data-view" style="cursor:pointer;" onclick="hvzybdsj(this.id)"><span>加速度计</span><span>77777</span><span>335</span><span>0.5%</span></li>
+					<li id="0123" href="https://gitee.com/iGaoWei/big-data-view" style="cursor:pointer;" onclick="hvzybdsj(this.id)"><span>电机</span><span>29999</span><span>158</span><span>0.1%</span></li>
+					<li id="0103" href="https://gitee.com/iGaoWei/big-data-view" style="cursor:pointer;" onclick="hvzybdsj(this.id)"><span>主控芯片</span><span>59999</span><span>472</span><span>0.1%</span></li>
+					<li id="0106" href="https://gitee.com/iGaoWei/big-data-view" style="cursor:pointer;" onclick="hvzybdsj(this.id)"><span>非承重支架</span><span>47399</span><span>241</span><span>0.9%</span></li>
+					<li id="0107" href="https://gitee.com/iGaoWei/big-data-view" style="cursor:pointer;" onclick="hvzybdsj(this.id)"><span>螺旋桨</span><span>50799</span><span>396</span><span>0.45%</span></li>
+					<li id="0109" href="https://gitee.com/iGaoWei/big-data-view" style="cursor:pointer;" onclick="hvzybdsj(this.id)"><span>外壳</span><span>43699</span><span>155</span><span>0.9%</span></li>
+					<li id="0102" href="https://gitee.com/iGaoWei/big-data-view" style="cursor:pointer;" onclick="hvzybdsj(this.id)"><span>传感器（红外）</span><span>63999</span><span>569</span><span>0.5%</span></li>
+					<li id="0108" href="https://gitee.com/iGaoWei/big-data-view" style="cursor:pointer;" onclick="hvzybdsj(this.id)"><span>起落架</span><span>539999</span><span>453</span><span>0.4%</span></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="g-right right-wrap">
+	<div class="g-box J_page1">
+		<div class="box-title">
+			<img src="./static/images/img13.png" />
+		</div>
+		<div class="box-content">
+			<div class="item-box part3">
+				<div class="item-title">
+					各时段生产单数
+				</div>
+				<div class="item-content" id="registerDate" _echarts_instance_="ec_1680574754435" style="-webkit-tap-highlight-color: transparent; user-select: none; position: relative;">
+					<div style="position: relative; overflow: hidden; width: 410px; height: 217px; padding: 0px; margin: 0px; border-width: 0px; cursor: default;">
+						<canvas data-zr-dom-id="zr_0" width="410" height="217" style="position: absolute; left: 0px; top: 0px; width: 410px; height: 217px; user-select: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); padding: 0px; margin: 0px; border-width: 0px;"></canvas>
+					</div>
+					<div style="position: absolute; display: none; border-style: solid; white-space: nowrap; z-index: 9999999; transition: left 0.4s cubic-bezier(0.23, 1, 0.32, 1) 0s, top 0.4s cubic-bezier(0.23, 1, 0.32, 1) 0s; background-color: rgba(50, 50, 50, 0.7); border-width: 0px; border-color: rgb(51, 51, 51); border-radius: 4px; color: rgb(255, 255, 255); font: 14px / 21px &quot;Microsoft YaHei&quot;; padding: 5px; left: 69px; top: 21.7px;">
+						08:00
+						<br />
+						<span style="display:inline-block;margin-right:5px;border-radius:10px;width:10px;height:10px;background-color:#f93b08;"></span>生成单数: 200
+					</div>
+				</div>
+			</div>
+			<div class="item-box part4">
+				<div class="item-title">
+					各时段出货率
+				</div>
+				<div class="item-content" id="registerDateRate" _echarts_instance_="ec_1680574754436" style="-webkit-tap-highlight-color: transparent; user-select: none; position: relative;">
+					<div style="position: relative; overflow: hidden; width: 403px; height: 217px; padding: 0px; margin: 0px; border-width: 0px;">
+						<canvas data-zr-dom-id="zr_0" width="403" height="217" style="position: absolute; left: 0px; top: 0px; width: 403px; height: 217px; user-select: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); padding: 0px; margin: 0px; border-width: 0px;"></canvas>
+					</div>
+					<div></div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="g-box J_page2 hide">
+		<div class="box-title">
+			<img src="./static/images/img16.png" />
+		</div>
+		<div class="box-content">
+			<div class="g-grid-d part8" id="affairWork">
+				<a class="g-block"><img src="./static/images/img0.png" /></a>
+				<a class="g-block" id="14344620382430" style="cursor:pointer;" href="https://gitee.com/iGaoWei/big-data-view" onclick="selectAffairNumByYx(this.id)">AI<em>实时</em><span>出货量</span></a>
+			</div>
+			<div class="item-box part9">
+				<div class="item-title">
+					零件出货统计
+				</div>
+				<div class="item-content" id="sutdentAge" _echarts_instance_="ec_1680574754439" style="-webkit-tap-highlight-color: transparent; user-select: none;">
+					<div style="position: relative; overflow: hidden; width: 370px; height: 140px; padding: 0px; margin: 0px; border-width: 0px;">
+						<canvas data-zr-dom-id="zr_0" width="370" height="140" style="position: absolute; left: 0px; top: 0px; width: 370px; height: 140px; user-select: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); padding: 0px; margin: 0px; border-width: 0px;"></canvas>
+					</div>
+				</div>
+			</div>
+			<div class="item-box table-box part10">
+				<div class="item-title">
+					产品销售量前四
+				</div>
+				<ul class="g-clear item-content" style="margin-bottom: 0;">
+					<li class="item-sub-title"><span>序号</span>    <span>    公司</span><span>        </span><span>满意度</span></li>
+				</ul>
+				<div class="item-content">
+					<ul class="g-clear" id="majorMessage">
+						<li><span><img src="./static/images/num1.png" /></span><span> 北京航景创新</span><span> </span><span>100%</span></li>
+						<li><span><img src="./static/images/num2.png" /></span><span>山东新航空经济</span><span> </span><span>100%</span></li>
+						<li><span><img src="./static/images/num3.png" /></span><span>滕州市交法低空产业发展</span><span>  </span><span>100%</span></li>
+						<li><span><img src="./static/images/num4.png" /></span><span>协氢（枣庄）氢能科技</span><span>  </span><span>100%</span></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="clear"></div>
+<div class="part5" id="registerStudentMessage">
+	<div class="swiper-container swiper-container-coverflow swiper-container-3d swiper-container-horizontal" style="cursor: grab;">
+		<div class="swiper-wrapper" style="transition-duration: 0ms; transform: translate3d(-3093.75px, 0px, 0px); perspective-origin: 3781.25px 50%;">
+			<div class="swiper-slide swiper-slide-duplicate swiper-slide-duplicate-next" data-swiper-slide-index="6" style="width: 343.75px; transition-duration: 0ms; transform: translate3d(0px, 0px, -1050px) rotateX(0deg) rotateY(-262.5deg); z-index: -10;">
+				<dl font-size=7px>
+					<dt>
+						发出产品1
+					<dd>
+					锂电池 TATTU系列‌
+					</dd>
+					<dd class="small-text">
+					高能量密度、轻便
+					存在自燃风险，需特殊保护电路‌
+					</dd>
+				</dl>
+			</div>
+			<div class="swiper-slide swiper-slide-duplicate" data-swiper-slide-index="7" style="width: 343.75px; transition-duration: 0ms; transform: translate3d(0px, 0px, -949.927px) rotateX(0deg) rotateY(-237.482deg); z-index: -8;">
+				<dl>
+					<dt>
+						发出产品2
+					<dd>
+					锂电池 
+					</dd>
+					<dd class="small-text">
+					高能量密度、轻便
+					存在自燃风险，需特殊保护电路‌
+					</dd>
+				</dl>
+			</div>
+			<div class="swiper-slide swiper-slide-duplicate" data-swiper-slide-index="8" style="width: 343.75px; transition-duration: 0ms; transform: translate3d(0px, 0px, -849.855px) rotateX(0deg) rotateY(-212.464deg); z-index: -7;">
+				<dl>
+					<dt>
+						发出产品3
+					<dd>
+					锂电池
+					</dd>
+					<dd class="small-text">
+					高能量密度、轻便
+					存在自燃风险，需特殊保护电路‌
+					</dd>
+				</dl>
+			</div>
+			<div class="swiper-slide swiper-slide-duplicate" data-swiper-slide-index="9" style="width: 343.75px; transition-duration: 0ms; transform: translate3d(0px, 0px, -750.073px) rotateX(0deg) rotateY(-187.518deg); z-index: -7;">
+				<dl>
+					<dt>
+						发出产品4
+					<dd>
+					锂电池
+					</dd>
+					<dd class="small-text">
+					高能量密度、轻便
+					存在自燃风险，需特殊保护电路‌
+					</dd>
+				</dl>
+			</div>
+			<div class="swiper-slide" data-swiper-slide-index="0" style="width: 343.75px; transition-duration: 0ms; transform: translate3d(0px, 0px, -650px) rotateX(0deg) rotateY(-162.5deg); z-index: -6;">
+				<dl>
+					<dt>
+						锂电池
+					<dd>
+					TATTU系列 1300mAh 14.8V
+					</dd>
+					<dd class="small-text">
+						
+						
+					</dd>
+				</dl>
+			</div>
+			<div class="swiper-slide" data-swiper-slide-index="1" style="width: 343.75px; transition-duration: 0ms; transform: translate3d(0px, 0px, -549.927px) rotateX(0deg) rotateY(-137.482deg); z-index: -4;">
+				<dl>
+					<dt>
+						锂电池
+					<dd>
+					TATTU系列 1550mAh 14.8V
+					</dd>
+					<dd class="small-text">
+						
+					</dd>
+				</dl>
+			</div>
+			<div class="swiper-slide" data-swiper-slide-index="2" style="width: 343.75px; transition-duration: 0ms; transform: translate3d(0px, 0px, -449.855px) rotateX(0deg) rotateY(-112.464deg); z-index: -3;">
+				<dl>
+					<dt>
+						锂电池
+					<dd>
+					DJI智能电池 PH4-5350mAh-15.2V
+					</dd>
+					<dd class="small-text">
+					
+					</dd>
+				</dl>
+			</div>
+			<div class="swiper-slide" data-swiper-slide-index="3" style="width: 343.75px; transition-duration: 0ms; transform: translate3d(0px, 0px, -350.073px) rotateX(0deg) rotateY(-87.5182deg); z-index: -3;">
+				<dl>
+					<dt>
+						锂电池
+					<dd>
+						DJI智能电池 PH4-5870mAh-15.2V
+					</dd>
+					<dd class="small-text">
+					
+					</dd>
+				</dl>
+			</div>
+			<div class="swiper-slide swiper-slide-prev" data-swiper-slide-index="4" style="width: 343.75px; transition-duration: 0ms; transform: translate3d(0px, 0px, -250px) rotateX(0deg) rotateY(-62.5deg); z-index: -2;">
+				<dl>
+					<dt>
+						氢燃料电池
+					<dd>
+						DJI FlyCart 30氢能版
+					</dd>
+					<dd class="small-text">
+						
+					</dd>
+				</dl>
+			</div>
+			<div class="swiper-slide swiper-slide-active" data-swiper-slide-index="5" style="width: 343.75px; transition-duration: 0ms; transform: translate3d(0px, 0px, -149.927px) rotateX(0deg) rotateY(-37.4818deg); z-index: 0;">
+				<dl>
+					<dt>
+						镍氢电池
+					<dd>
+						NIMH
+					</dd>
+					<dd class="small-text">
+						
+					</dd>
+				</dl>
+			</div>
+			<div class="swiper-slide swiper-slide-active" data-swiper-slide-index="5" style="width: 343.75px; transition-duration: 0ms; transform: translate3d(0px, 0px, -149.927px) rotateX(0deg) rotateY(-37.4818deg); z-index: 0;">
+				<dl>
+					<dt>
+						铅酸电池
+					<dd>
+						SLA
+					</dd>
+					<dd class="small-text">
+						
+					</dd>
+				</dl>
+			</div>
+		</div>
+		<div class="swiper-pagination swiper-pagination-bullets">
+			<span class="swiper-pagination-bullet"></span>
+			<span class="swiper-pagination-bullet"></span>
+			<span class="swiper-pagination-bullet"></span>
+			<span class="swiper-pagination-bullet"></span>
+			<span class="swiper-pagination-bullet"></span>
+			<span class="swiper-pagination-bullet swiper-pagination-bullet-active"></span>
+			<span class="swiper-pagination-bullet"></span>
+			<span class="swiper-pagination-bullet"></span>
+			<span class="swiper-pagination-bullet"></span>
+			<span class="swiper-pagination-bullet"></span>
+		</div>
+		<span class="swiper-notification" aria-live="assertive" aria-atomic="true"></span>
+		<span class="swiper-notification" aria-live="assertive" aria-atomic="true"></span>
+	</div>
+	<div class="swiper-button-prev" tabindex="0" role="button" aria-label="Previous slide"></div>
+	<div class="swiper-button-next" tabindex="0" role="button" aria-label="Next slide"></div>
+</div>
+</body>
+
+<script>
+
+
+
+</script>
+
+
+</html>
