@@ -1,581 +1,254 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-    <link rel="stylesheet" href="./css/style.css">
-</head>
+<!doctype html>
+<meta charset="utf-8">
+<link href="css/style.css" rel="stylesheet" type="text/css" media="all" />
+<script src="js/jquery-3.2.0.min.js" charset="utf-8" type="text/javascript"></script>
+<script src="js/echarts.min.js" charset="utf-8" type="text/javascript"></script>
+<script src="js/utils.js" charset="utf-8" type="text/javascript"></script>
 
 <body>
-    <div class="global-loader">
-    <div class="loader-container">
-        <div class="satellite-loader">
-            <div class="orbit"></div>
-            <div class="core"></div>
-            <div class="satellite"></div>
-            <div class="signal"></div>
-        </div>
-        <div class="loading-text">系统初始化中...</div>
-        <div class="progress-bar">
-            <div class="progress"></div>
-        </div>
-        <!-- 新增动态文字 -->
-        <div class="loading-subtext">正在连接枣庄空域管理平台...</div>
-    </div>
-</div>
-<header>
-    <h1><span>枣庄低空经济智能监测平台</span></h1>
-    <p class="dynamic-date">
-        <span>京沪廊道节点城市 | 鲁南经济圈核心 | 空域试点城市</span>  <!-- 地理定位 -->
-    </p>
-</header>
-
-    <div class="main">
-        <!-- top5 -->
-        <div class="top5">
-            <div class="top5-title" style="font-size:0.8em;margin-bottom:8px">
-                <!-- <span>低空经济全域监测中枢</span> -->
-                <span style="font-size:1.2em" >实时数据看板</span>
-            </div>
-            <div class="top5-content">
+    <div class="wpbox">
+        <div class="bnt">
+            <div class="topbnt_left fl">
                 <ul>
-                   <!-- 修改后核心产业指标 -->
-<li class="dynamic-data" data-scene="锂电池" data-target="24" data-unit="单">
-    <div class="cicle" ></div>
-    <div class="li-content" style="font-size:0.5em">
-        <span style="font-size:1.4em">▶ 📊低空物流订单量</span>
-        <span style="font-size:1.4em">24单</span>
-        <!-- <span>能量密度300Wh/kg</span> -->
-    </div>
-</li>
-
-<li class="dynamic-data" data-scene="无人机" data-target="50"data-unit="次">
-    <div class="cicle" ></div>
-    <div class="li-content" style="font-size:0.5em">
-        <span style="font-size:1.4em">▶ 📈服务需求量</span>
-        <span style="font-size:1.4em">50次</span>
-        <!-- <span>载荷500kg</span> -->
-    </div>
-</li>
-
-<li class="dynamic-data" data-scene="巡检" data-target="98.6"data-unit="%">
-    <div class="cicle" ></div>
-    <div class="li-content" style="font-size:0.5em">
-        <span style="font-size:1.4em">▶ ✅园区设备健康度</span>
-        <span style="font-size:1.4em">98.6%</span>
-        <!-- <span>20万亩覆盖</span> -->
-    </div>
-</li>
-
-<li class="dynamic-data" data-scene="光芯" data-target="92.5"data-unit="%">
-    <div class="cicle" ></div>
-    <div class="li-content" style="font-size:0.5em">
-        <span style="font-size:1.4em">▶ ⚡云平台效能指数</span>
-       <span style="font-size:1.4em">92.5%</span>
-        <!-- <span>精度0.005°</span> -->
-    </div>
-</li>
-
-<!-- <li class="dynamic-data" data-scene="空管" data-target="99.8"data-unit="%">
-    <div class="cicle" style="background:#E91E63"></div>
-    <div class="li-content" style="font-size:0.5em">
-        <span>▶ 5G空管平台</span>
-        <span>可用率99.8%</span>
-        <span>延迟＜15ms</span>
-    </div>
-</li> -->
+                    <!-- <li class="active"><a href="https://gitee.com/iGaoWei/big-data-view">警情警力</a></li> -->
+                    <!-- <li><a href="https://gitee.com/iGaoWei/big-data-view">智慧物业</a></li>
+                    <li><a href="https://gitee.com/iGaoWei/big-data-view">智慧停车</a></li>
+                    <li><a href="https://gitee.com/iGaoWei/big-data-view">智慧门禁</a></li> -->
                 </ul>
             </div>
-            <!-- <div class="top5-title">
-                <span>枣庄市低空经济综合发展趋势</span>
-                 <div class="time-period">
-                <div class="period-btn active" data-range="all">2023-2030</div>
-                <div class="period-btn" data-range="2023-2025">2023-2025</div>
-                <div class="period-btn" data-range="2025-2030">2025-2030</div>
+            <a href="../index.html" class="anim-link"><h1 class="tith1 fl">枣庄低空经济AI安防云</h1></a></span>
+            <div class=" fr topbnt_right">
+                <ul>
+                    <!-- <li><a href="https://gitee.com/iGaoWei/big-data-view">智慧安防</a></li>
+                    <li><a href="https://gitee.com/iGaoWei/big-data-view">社区电商</a></li>
+                    <li class="active"><a href="https://gitee.com/iGaoWei/big-data-view">数据分析</a></li> -->
+                </ul>
+                </ul>
             </div>
         </div>
-        
-        <div class="chart-container" id="main-chart">
-            <div class="prediction-notice">虚线部分表示2026-2030年预测数据</div>
-            <div class="actual-notice">实线部分表示2023-2025年实际/规划数据</div>
+        <!-- bnt end -->
+        <div class="left1">
+            <div class="aleftboxttop">
+                <h2 class="tith2">智慧园区流量统计</h2>
+                <div class="lefttoday_tit" style=" height:8%">
+                    <p class="fl">地区：枣庄市薛城区XX园区</p>·
+                    <p class="fr">时间段：2025年</p>
+                </div>
+                <div class="lefttoday_number">
+                    <div class="widget-inline-box text-center fl">
+                        <p class="ce1">驶入<br>车流量</p>
+                        <h1 class="ceeb1fd">174辆</h3>
+
+                    </div>
+                    <div class="widget-inline-box text-center fl">
+                        <p class="ce1">驶出<br>车流量</p>
+                        <h1 class="c24c9ff">123辆</h3>
+                            <!-- <h4 class="text-muted pt6">环比<img src="img/icondown.png" height="16" />3%</h4> -->
+                    </div>
+                    <div class="widget-inline-box text-center fl">
+                        <p class="ce1">流入<br>客流量</p>
+                        <h1 class="cffff00">236人</h3>
+                            <!-- <h4 class="text-muted pt6">环比<img src="img/icondown.png" height="16" />3%</h4> -->
+                    </div>
+                    <div class="widget-inline-box text-center fl">
+                        <p class="ce1">流出<br>客流量</p>
+                        <h1 class="c11e2dd">214人</h3>
+                            <!-- <h4 class="text-muted pt6">环比<img src="img/icondown.png" height="16" />3%</h4> -->
+                    </div>
+                </div>
+                <!-- lefttoday_number end -->
+            </div>
+            <div class="aleftboxtmidd">
+                <h2 class="tith2">智慧违规警告统计</h2>
+                <div class="lefttoday_tit height ht">
+                    <p class="fl">地区：枣庄市薛城区XX园区</p>
+                    <p class="fr">时间段：2025年</p>
+                </div>
+                <div id="aleftboxtmidd" class="aleftboxtmiddcont"></div>
+            </div>
+            <div class="aleftboxtbott">
+                <h2 class="tith2">智慧人流量峰值分析</h2>
+                <div class="lefttoday_tit height">
+                    <p class="fl">地区：枣庄市薛城区XX园区</p>
+                    <p class="fr">时间段：2025年</p>
+                </div>
+                <div id="aleftboxtbott" class="aleftboxtbott_cont"></div>
+            </div>
         </div>
-        
-        <div class="legend-container">
-            <div class="legend-item">
-                <div class="legend-color" style="background-color: #5470c6;"></div>
-                <span>经济规模（亿元）</span>
+        <!--  left1 end -->
+        <div class="mrbox">
+            <div class="mrbox_topmidd" style="width: 69%;">
+                <div class="amiddboxttop">
+                    <h2 class="tith2 pt1">园区监控</h2>
+                    <div class="amiddboxttop_map" style="">
+                        <span class="camera_l" style=" top:34%;left:32%"></span>
+                        <span class="camera_l" style=" top:10%;left:10%"></span>
+                        <span class="camera_l" style=" top:5%;left:40%"></span>
+                        <span class="camera_l" style=" top:10%;left:50%"></span>
+                        <span style=" top:30%;left:75%"></span>
+                        <span style=" top:5%;left:92%"></span>
+                        <span style=" top:40%;left:83%"></span>
+                    </div>
+                </div>
+                <!--  amiddboxttop end-->
+                <div class="amidd_bott">
+                    <div class="amiddboxtbott1 fl">
+                        <h2 class="tith2 pt1">智慧异常事件处理分析</h2>
+                        <div id="amiddboxtbott1" class="amiddboxtbott1content"></div>
+                    </div>
+
+                    <div class="amiddboxtbott2 fl">
+                        <h2 class="tith2 pt1">智慧车流量峰值分析</h2>
+                        <div id="amiddboxtbott2" class="amiddboxtbott2content"></div>
+                    </div>
+                </div>
+                <!-- amidd_bott end -->
             </div>
-            <div class="legend-item">
-                <div class="legend-color" style="background-color: #91cc75;"></div>
-                <span>GDP占比（%）</span>
+            <!-- mrbox_top end -->
+            <div class="mrbox_top_right">
+                <div class="arightboxtop">
+                    <h2 class="tith2">智慧停车</h2>
+                    <div class="lefttoday_tit">
+                        <p class="fl">地区：枣庄市薛城区XX园区</p>
+                        <p class="fr">时间段：2025年</p>
+                    </div>
+                    <div class="zhtc_table_title">
+                        <div>车牌</div>
+                        <!-- 车牌 -->
+                        <div>进/出场时间</div>
+                        <!-- 进场时间 -->
+                        <div>图片</div>
+                        <!-- 图片 -->
+                        <div>类型</div>
+                        <!-- 车辆类型 -->
+                    </div>
+                    <div id="zhtc_table" class="left2_table">
+                        <ul>
+                            <li>
+                                <p class="fl"><b>园区A区</b>
+                                </p>
+                                <div class="zhtc_table_li_content">
+                                    <div>鲁D09B12</div>
+                                    <div>2020-06-17 <br /> 17:09:40</div>
+                                    <div><img width="80" src="img/carLicensePlate/琼A180Q8.jpg" /></div>
+                                    <div>固定车（离）</div>
+                                </div>
+                            </li>
+                            <li class="bg">
+                                <p class="fl"><b>园区A区</b>
+                                </p>
+                                <div class="zhtc_table_li_content">
+                                    <div>鲁D9T528</div>
+                                    <div>2020-06-17 <br /> 17:09:40</div>
+                                    <div><img width="80" src="img/carLicensePlate/甘A9T528.jpg" /></div>
+                                    <div>临时车（进）</div>
+                                </div>
+                            </li>
+                            <li>
+                                <p class="fl"><b>园区A区</b>
+                                </p>
+                                <div class="zhtc_table_li_content">
+                                    <div>鲁D17J18</div>
+                                    <div>2020-06-17 <br /> 17:09:40</div>
+                                    <div><img width="80" src="img/carLicensePlate/甘A17J18.jpg" /></div>
+                                    <div>固定车（进）</div>
+                                </div>
+                            </li>
+                            <li class="bg">
+                                <p class="fl"><b>园区A区</b>
+                                </p>
+                                <div class="zhtc_table_li_content">
+                                    <div>鲁D17J18</div>
+                                    <div>2020-06-17 <br /> 17:09:40</div>
+                                    <div><img width="80" src="img/carLicensePlate/甘A17J18 (1).jpg" /></div>
+                                    <div>临时车（进）</div>
+                                </div>
+                            </li>
+                            <li>
+                                <p class="fl"><b>园区A区</b>
+                                </p>
+                                <div class="zhtc_table_li_content">
+                                    <div>鲁D17A35</div>
+                                    <div>2020-06-17 <br /> 17:09:40</div>
+                                    <div><img width="80" src="img/carLicensePlate/甘A17M35.jpg" /></div>
+                                    <div>固定车（离）</div>
+                                </div>
+                            </li>
+                            <li class="bg">
+                                <p class="fl"><b>园区A区</b>
+                                </p>
+                                <div class="zhtc_table_li_content">
+                                    <div>鲁D076A6</div>
+                                    <div>2020-06-17 <br /> 17:09:40</div>
+                                    <div><img width="80" src="img/carLicensePlate/甘A076A6.jpg" /></div>
+                                    <div>临时车（离）</div>
+                                </div>
+                            </li>
+                            <li>
+                                <p class="fl"><b>园区A区</b>
+                                </p>
+                                <div class="zhtc_table_li_content">
+                                    <div>鲁D76L77</div>
+                                    <div>2020-06-17 <br /> 17:09:40</div>
+                                    <div><img width="80" src="img/carLicensePlate/甘A76L77.jpg" /></div>
+                                    <div>临时车（离）</div>
+                                </div>
+                            </li>
+                            <li class="bg">
+                                <p class="fl"><b>园区A区</b>
+                                </p>
+                                <div class="zhtc_table_li_content">
+                                    <div>鲁D096R2</div>
+                                    <div>2020-06-17 <br /> 17:09:40</div>
+                                    <div><img width="80" src="img/carLicensePlate/甘A096R2.jpg" /></div>
+                                    <div>临时车（进）</div>
+                                </div>
+                            </li>
+                            <li>
+                                <p class="fl"><b>园区A区</b>
+                                </p>
+                                <div class="zhtc_table_li_content">
+                                    <div>鲁D497D9</div>
+                                    <div>2020-06-17 <br /> 17:09:40</div>
+                                    <div><img width="80" src="img/carLicensePlate/甘A497D9.jpg" /></div>
+                                    <div>固定车（离）</div>
+                                </div>
+                            </li>
+
+
+                        </ul>
+                    </div>
+
+                </div>
+                <div class="arightboxbott">
+                    <h2 class="tith2 ">智慧摄像头覆盖率分析</h2>
+                    <div class="lefttoday_tit">
+                        <p class="fl">地区：枣庄市薛城区XX园区</p>
+                    </div>
+                    <div id="arightboxbott" class="arightboxbottcont"></div>
+                </div>
             </div>
-            </div> -->
-            <div class="dashboard-container" style="height:420px;width: 600px;">
-        <div class="chart-header">
-            <div class="chart-title">
-                <span >枣庄市低空经济综合发展趋势</span>
-            </div>
-            <div class="time-period">
-                <div class="period-btn active" data-range="all">2023-2030</div>
-                <div class="period-btn" data-range="2023-2025">2023-2025</div>
-                <div class="period-btn" data-range="2025-2030">2025-2030</div>
-            </div>
+            <!-- mrbox_top_right end -->
         </div>
-        
-        <div class="chart-container" id="main-chart">
-            <div class="prediction-notice">虚线部分表示预测数据</div>
-            <div class="actual-notice">实线部分表示实际/规划数据</div>
-        </div>
-        
-        <div class="legend-container">
-            <div class="legend-item">
-                <div class="legend-color" style="background-color: #5470c6;"></div>
-                <span>经济规模（亿元）</span>
-            </div>
-            <div class="legend-item">
-                <div class="legend-color" style="background-color: #91cc75;"></div>
-                <span>GDP占比（%）</span>
-            </div>
-        </div>
+
     </div>
-        </div>
-        <!-- 销售总额 -->
-        <!-- 修改位置：class="total" 内的四个数据模块 -->
-<!-- 修改位置：class="total"下的四个data模块 -->
-<div class="total">
-    <div class="data1">
-        <span>年度低空物流订单量</span>
-        <p class="counter" data-target="2498">0</p>  <!-- 物流云数据 -->
-    </div>
-    <div class="data2">
-        <span>年度服务请求量</span>
-        <p class="counter" data-target="28651">0</p>  <!-- 客服云数据 -->
-    </div>
-    <div class="data3">
-        <span>园区设备健康度</span>
-        <p class="counter-percent" data-target="98.3">0%</p>  <!-- 运维云数据 -->
-    </div>
-    <div class="data4">
-        <span>全年违规事件处理</span>
-        <p class="counter" data-target="32">0</p>  <!-- 安防云数据 -->
-    </div>
-    <!-- AI调度覆盖率改为空域调度覆盖率 -->
-    <div class="sphere">
-        <div class="sphere-bg"></div>
-        <div class="sum">
-            <!-- <span style="font-size:0.9em">氢能转化效率</span> -->
-         <!-- 修改HTML -->
-<!-- <p class="counter-percent hydrogen-efficiency" data-target="63.5">0%</p> -->
-        </div>
     </div>
 
-            <div class="cicle3"></div>
-            <div class="cicle4"></div>
-            <div class="cicle5"></div>
-            <div class="cicle6"></div>
-            <div class="cicle7"></div>
-            <div class="cicle8 rotating-container">
-                <span><a href="../AI安防云/index.html" class="anim-link">AI安防云</a></span>
-            </div>
-            <div class="cicle9 rotating-container">
-                <span><a href="../智能物流云/center_test.html" class="anim-link">AI物流云</a></span>
-            </div>
-            <div class="cicle10 rotating-container">
-                <span><a href="../客服云/llll.html" class="anim-link">AI客服云</a></span>
-            </div>
-            <div class="cicle11 rotating-container">
-                <span><a href="../AI运维云/page/index.html" class="anim-link">AI运维云</a></span>
-            </div>
-        </div>
-        <!-- 会销分析 -->
-        <div id="sceneRealTime" class="scene-real-time" style="position: relative; z-index: 999;"></div>
-        <!-- 修改位置：class="analyse-title" 及下方内容 -->
-<!-- 修改位置：class="analyse"下的标题和内容 -->
-<!-- 修改后 -->
-<div class="analyse">
-    <div class="analyse-title" style="font-size:0.9em">
-        <span>三企聚力，枣庄低空启航</span>
-    </div>
-    <ul>
-        <li>
-            <img src="./images/core_icon.png" class="core-icon">
-            <div class="content-wrapper">
-                <h5 style="font-size:0.85em">氢能动力核心</h5>
-                <span class="company" style="font-size:0.75em">协氢（枣庄）氢能科技有限公司</span>
-                <em style="font-size:0.6em">年产1.2万套|市占率21%</em>
-            </div>
-        </li>
-        <li>
-            <img src="./images/wing1_icon.png" class="wing1-icon">
-            <div class="content-wrapper">
-                <h5 style="font-size:0.85em">高端制造翼</h5>
-                <span class="company" style="font-size:0.75em">山东航景创新科技有限公司</span>
-                <em style="font-size:0.6em">月交付400架 | 续航5h</em>
-            </div>
-        </li>
-        <li>
-            <img src="./images/wing2_icon.png" class="wing2-icon">
-            <div class="content-wrapper">
-                <h5 style="font-size:0.85em">智慧服务翼</h5>
-                <span class="company" style="font-size:0.75em">枣庄顺诚智能科技有限公司</span>
-                <em style="font-size:0.6em">周服务920单 | 98.5%准确率</em>
-            </div>
-        </li>
-    </ul>
-           
-    <!-- 修改后的AI小人链接 -->
-<div class="ai-assistant">
-    <a href="./search.html" class="ai-avatar">
-        <img src="images/ai-avatar.png" alt="AI助手">
-    </a>
-</div><!-- <div class="execution">
-                <div class="title">运行指标</div>
-                <div class="waterChart1">
-                    <div class="chart-title">设备在线率</div>
-                    <div class="chart1"></div>
-                </div>
-                <div class="waterChart2">
-                    <div class="chart-title">任务成功率</div>
-                    <div class="chart2"></div>
-                </div>
-            </div> -->
-        </div>
-        <!-- 鞋服配销售分析 -->
-      <!-- 修改位置：class="sale" 内的三个li -->
-       
-      <div class="sale">
-        <ul>
-            <li>
-                <div class="showImg">
-                    <!-- <img src="./images/drone.png" > -->
-                </div>
-                <div class="data">
-                    <!-- <span>新技术</span> -->
-                    <!-- <span>12,000套</span> -->
-                </div>
-                <div class="shoeChart"></div>
-            </li>
-            <li>
-                <div class="showImg">
-                    <!-- <img src="./images/helicopter.png" > -->
-                </div>
-                <div class="data">
-                    <!-- <span>研发投入</span> -->
-                    <!-- <span>3,600架</span> -->
-                </div>
-                <div class="clothesChart"></div>
-            </li>
-            <li>
-                <div class="showImg">
-                    <!-- <img src="./images/sensor.png" > -->
-                </div>
-                <div class="data">
-                    <!-- <span>外地市场</span> -->
-                    <!-- <span>2,400套</span> -->
-                </div>
-                <div class="mzChart"></div>
-            </li>
-        </ul>
-    </div>
-        <!-- 折线图 -->
-       <div class="lineChart" style="height:400px;width: 600px;">
-    <div class="chart-title">多维度数据监控</div>
-    <div id="combinedChart" style="height:200px"></div>
-        </div>
-    </div>
+    <script type="text/javascript" src="js/违规警告.js"></script>
 
-    <!-- 底部模块 -->
-    <div class="bottom">
-        <h5><span>技术支持单位</span></h5>
-    <p>协氢科技 | 航景无人机 | 顺诚智能 | 中国移动5G专网</p>  <!-- 枣庄入选企业 -->
-    </div>
-    <!-- 在body结束前添加高度撑开元素 -->
-<div class="height-keeper" style="height: 60px"></div>
+    <script type="text/javascript" src="js/人流量.js"></script>
+
+    <script type="text/javascript" src="js/突发事件.js"></script>
+
+    <script type="text/javascript" src="js/车流量.js"></script>
+
+    <script type="text/javascript" src="js/摄像头.js"></script>
+
+    <script type="text/javascript" src="js/moment.min.js"></script>
+    <script type="text/javascript" src="js/智慧停车.js"></script>
+
+
 
 </body>
-<script src="./js/jquery-1.11.0.min.js"></script>
-<script src="./js/echarts.min.js"></script>
-<script src="./node_modules/echarts-liquidfill/dist/echarts-liquidfill.min.js"></script>
-<script src="./js/main.js"></script>
-<script>
-        // 初始化ECharts实例
-        const chartDom = document.getElementById('main-chart');
-        const myChart = echarts.init(chartDom);
-        
-        // 合理的经济数据（符合枣庄实际情况）
-        const years = ['2023', '2024', '2025', '2026', '2027', '2028', '2029', '2030'];
-        
-        // 经济规模数据（控制在10亿以内）
-        const economicData = [1.2, 1.8, 2.5, 3.8, 5.2, 6.5, 7.8, 9.0];
-        
-        // GDP占比数据（更符合实际情况）
-        const gdpPercentage = [0.4, 0.6, 0.9, 1.4, 1.9, 2.3, 2.7, 3.1];
-        
-        // 当前显示的数据范围（默认全部）
-        let currentRange = 'all';
-        
-        // 图表配置
-        const option = {
-            tooltip: {
-                trigger: 'axis',
-                backgroundColor: 'rgba(15, 38, 72, 0.95)',
-                borderColor: '#0d6efd',
-                borderWidth: 1,
-                padding: 15,
-                textStyle: {
-                    color: '#d1e8ff',
-                    fontSize: 14
-                },
-                axisPointer: {
-                    type: 'shadow',
-                    shadowStyle: {
-                        color: 'rgba(64, 158, 255, 0.15)'
-                    },
-                    lineStyle: {
-                        color: '#0d6efd',
-                        width: 2
-                    }
-                },
-                formatter: function(params) {
-                    const year = params[0].name;
-                    const isPrediction = parseInt(year) > 2025;
-                    
-                    let html = `<div style="font-size:16px;color:#4da6ff;margin-bottom:10px;border-bottom:1px solid rgba(100,150,255,0.3);padding-bottom:8px;">
-                        ${year}年枣庄低空经济数据 ${isPrediction ? '<span style="color:#ffc107;">(预测)</span>' : '<span style="color:#198754;">(实际)</span>'}
-                    </div>`;
-                    
-                    params.forEach(param => {
-                        const seriesName = param.seriesName;
-                        let icon = '📊';
-                        
-                        if (seriesName.includes('经济规模')) icon = '💰';
-                        else if (seriesName.includes('GDP占比')) icon = '📈';
-                        
-                        let unit = seriesName.includes('GDP占比') ? '%' : '亿元';
-                        
-                        html += `
-                            <div style="margin:12px 0;display:flex;align-items:center;">
-                                <div style="font-size:18px;margin-right:10px;">${icon}</div>
-                                <div style="flex:1;">${seriesName}:</div>
-                                <div style="font-weight:bold;color:#ffdf5d;">${param.value}${unit}</div>
-                            </div>
-                        `;
-                    });
-                    
-                    // 添加数据说明
-                    html += `<div style="margin-top:12px;font-size:0.9rem;color:#94bfff;padding-top:8px;border-top:1px solid rgba(100,150,255,0.3);">
-                        ${isPrediction ? '注：2026-2030年数据为专家预测值' : '注：2023-2025年为实际及规划数据'}
-                    </div>`;
-                    
-                    return html;
-                }
-            },
-            legend: {
-                data: ['经济规模', 'GDP占比'],
-                bottom: 10,
-                textStyle: {
-                    color: '#a4cfff'
-                }
-            },
-            grid: {
-                left: '3%',
-                right: '4%',
-                bottom: '15%',
-                top: '18%',
-                containLabel: true
-            },
-            xAxis: {
-                type: 'category',
-                data: years,
-                axisLine: {
-                    lineStyle: {
-                        color: '#4c7dca'
-                    }
-                },
-                axisLabel: {
-                    color: '#94bfff',
-                    fontSize: 12
-                },
-                axisTick: {
-                    alignWithLabel: true,
-                    lineStyle: {
-                        color: 'rgba(100, 150, 255, 0.2)'
-                    }
-                },
-                splitLine: {
-                    show: false
-                }
-            },
-            yAxis: [
-                {
-                    type: 'value',
-                    name: '亿元',
-                    nameTextStyle: {
-                        color: '#8cc5ff',
-                        padding: [0, 0, 0, -50]
-                    },
-                    max: 10,
-                    splitLine: {
-                        lineStyle: {
-                            color: 'rgba(100, 150, 255, 0.1)'
-                        }
-                    },
-                    axisLine: {
-                        show: false
-                    },
-                    axisLabel: {
-                        color: '#94bfff',
-                        formatter: '{value}'
-                    }
-                },
-                {
-                    type: 'value',
-                    name: '%',
-                    nameTextStyle: {
-                        color: '#8cc5ff',
-                        padding: [0, 0, 0, 35]
-                    },
-                    max: 3.5,
-                    min: 0,
-                    interval: 0.5,
-                    splitLine: {
-                        show: false
-                    },
-                    axisLine: {
-                        show: false
-                    },
-                    axisLabel: {
-                        color: '#94bfff',
-                        formatter: '{value}%'
-                    }
-                }
-            ],
-            series: [
-                {
-                    name: '经济规模',
-                    type: 'bar',
-                    barWidth: '18%',
-                    itemStyle: {
-                        color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
-                            { offset: 0, color: '#3d74ff' },
-                            { offset: 1, color: '#3a56b8' }
-                        ]),
-                        borderRadius: [6, 6, 0, 0]
-                    },
-                    emphasis: {
-                        itemStyle: {
-                            shadowColor: 'rgba(77, 125, 253, 0.8)',
-                            shadowBlur: 12
-                        }
-                    },
-                    data: economicData.map((value, idx) => {
-                        return {
-                            value: value,
-                            // 2026年后的数据添加特殊标记
-                            itemStyle: {
-                                opacity: idx > 2 ? 0.7 : 1
-                            }
-                        };
-                    })
-                },
-                {
-                    name: 'GDP占比',
-                    type: 'line',
-                    yAxisIndex: 1,
-                    symbol: 'diamond',
-                    symbolSize: 12,
-                    lineStyle: {
-                        width: 4,
-                        // 2023-2025年使用实线，2026-2030年使用虚线
-                        type: function(idx) {
-                            return idx < 3 ? 'solid' : 'dashed';
-                        },
-                        color: '#66d37e'
-                    },
-                    itemStyle: {
-                        color: function(idx) {
-                            return idx < 3 ? '#198754' : '#ffc107';
-                        },
-                        borderWidth: 2,
-                        borderColor: '#fff'
-                    },
-                    data: gdpPercentage.map((value, idx) => {
-                        return {
-                            value: value,
-                            itemStyle: {
-                                borderColor: idx < 3 ? '#198754' : '#ffc107'
-                            }
-                        };
-                    })
-                }
-            ],
-            animation: true,
-            animationDuration: 1500,
-            animationEasing: 'cubicOut'
-        };
-        
-        // 应用初始配置
-        myChart.setOption(option);
-        
-        // 响应窗口大小变化
-        window.addEventListener('resize', function() {
-            myChart.resize();
-        });
-        
-        // 时间选择功能
-        document.querySelectorAll('.period-btn').forEach(button => {
-            button.addEventListener('click', function() {
-                // 更新UI状态
-                document.querySelectorAll('.period-btn').forEach(btn => btn.classList.remove('active'));
-                this.classList.add('active');
-                
-                // 获取选择的时间范围
-                const range = this.dataset.range;
-                currentRange = range;
-                
-                // 更新图表数据
-                updateChartByRange();
-            });
-        });
-        
-        // 根据选择的时间范围更新图表
-        function updateChartByRange() {
-            let startIndex = 0;
-            let endIndex = years.length - 1;
-            
-            // 根据选择的时间范围调整显示的年份
-            if (currentRange === '2023-2025') {
-                // 2023-2025
-                startIndex = 0;
-                endIndex = 2;
-            } else if (currentRange === '2025-2030') {
-                // 2025-2030
-                startIndex = 2;
-                endIndex = 7;
-            }
-            
-            // 更新X轴数据
-            const visibleYears = years.slice(startIndex, endIndex + 1);
-            
-            // 更新系列数据
-            const newSeries = option.series.map(series => {
-                return {
-                    ...series,
-                    data: series.data.slice(startIndex, endIndex + 1)
-                };
-            });
-            
-            // 应用更新
-            myChart.setOption({
-                xAxis: {
-                    data: visibleYears
-                },
-                series: newSeries
-            });
-        }
-    </script>
 
 </html>
